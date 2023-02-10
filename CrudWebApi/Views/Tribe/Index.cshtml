@@ -1,0 +1,106 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+
+}
+<form-group>
+    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#createModal">Gumawa</button>
+</form-group>
+
+
+
+
+
+<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create Deparment</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="SaveRequest">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" name="Name" id="Name" value="" required>
+                    </div>
+                    <button class="btn btn-primary btn-sm" id="btnsubmit" type="submit">Save</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@*CREATE ADD MEMBER SAVING*@
+
+<script>
+    $(function () {
+        $("#SaveRequest").validate({
+            rules: {
+                Name: {
+                    required: true,
+                },
+            },
+            messages: {
+                Name: {
+                    required: "Please Select a fssafas",
+                },
+            },
+            submitHandler: function () {
+                if ($("#SaveRequest").valid()) {
+                    var valdata = $("#SaveRequest").serialize();
+                    $('#createModal').modal('hide');
+                    $.ajax({
+                        url: '/api/savetribe/postsavetribe/',
+                        type: "POST",
+                        dataType: 'json',
+                        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                        data: valdata,
+                    });
+                    setTimeout(function () {
+                        toastr.success('Save Tribe Successfully');
+                        setTimeout(function () {
+                            location.reload();
+                        }, 2000)
+                    }, 1500);
+                }
+            }
+        });
+    });
+</script>
+
+
+<script>
+    $(document).ready(function () {
+    
+        //$("#btnsubmit").click(function (e) {
+        //    e.preventDefault();
+        //    //Serialize the form datas.
+        //    var valdata = $("#SaveRequest").serialize();
+        //    $('#createModal').modal('hide');
+
+        //    //to get alert popup
+        //    $.ajax({
+        //        url: '/api/savetribe/postsavetribe',
+        //        type: "POST",
+        //        dataType: 'json',
+        //        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+        //        data: valdata,
+        //    });
+        //    setTimeout(function () {
+        //        alert("created")
+        //        setTimeout(function () {
+        //            location.reload();
+        //        }, 1000)
+        //    }, 1000);
+        //});
+    });
+</script>
