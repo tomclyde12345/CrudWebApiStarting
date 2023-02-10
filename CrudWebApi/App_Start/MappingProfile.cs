@@ -14,6 +14,8 @@ namespace CrudWebApi.App_Start
         public MappingProfile()
         {
             Mapper.CreateMap<SampleTribe, TribeDTO>().ReverseMap();
+            Mapper.CreateMap<SampleRole, RoleDTO>().ReverseMap();
+            Mapper.CreateMap<SampleUser, AccountDTO>().ReverseMap();
         }
     }
 }

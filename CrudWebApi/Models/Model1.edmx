@@ -4,7 +4,14 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="WebapidbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="WebapidbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="SampleRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="100" />
+        </EntityType>
         <EntityType Name="SampleTribe">
           <Key>
             <PropertyRef Name="Id" />
@@ -12,11 +19,40 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="SampleUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="200" />
+          <Property Name="FilePath" Type="nvarchar(max)" />
+          <Property Name="RoleID" Type="int" />
+        </EntityType>
+        <Association Name="FK_SampleUser_SampleRole">
+          <End Role="SampleRole" Type="Self.SampleRole" Multiplicity="0..1" />
+          <End Role="SampleUser" Type="Self.SampleUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SampleRole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SampleUser">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="WebapidbModelStoreContainer">
+          <EntitySet Name="SampleRole" EntityType="Self.SampleRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SampleTribe" EntityType="Self.SampleTribe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SampleUser" EntityType="Self.SampleUser" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_SampleUser_SampleRole" Association="Self.FK_SampleUser_SampleRole">
+            <End Role="SampleRole" EntitySet="SampleRole" />
+            <End Role="SampleUser" EntitySet="SampleUser" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="WebapidbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -29,7 +65,46 @@
         </EntityType>
         <EntityContainer Name="WebapidbEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="SampleTribes" EntityType="Self.SampleTribe" />
+          <EntitySet Name="SampleRoles" EntityType="WebapidbModel.SampleRole" />
+          <EntitySet Name="SampleUsers" EntityType="WebapidbModel.SampleUser" />
+          <AssociationSet Name="FK_SampleUser_SampleRole" Association="WebapidbModel.FK_SampleUser_SampleRole">
+            <End Role="SampleRole" EntitySet="SampleRoles" />
+            <End Role="SampleUser" EntitySet="SampleUsers" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="SampleRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="RoleName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SampleUsers" Relationship="WebapidbModel.FK_SampleUser_SampleRole" FromRole="SampleRole" ToRole="SampleUser" />
+        </EntityType>
+        <EntityType Name="SampleUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="FilePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RoleID" Type="Int32" />
+          <NavigationProperty Name="SampleRole" Relationship="WebapidbModel.FK_SampleUser_SampleRole" FromRole="SampleUser" ToRole="SampleRole" />
+        </EntityType>
+        <Association Name="FK_SampleUser_SampleRole">
+          <End Type="WebapidbModel.SampleRole" Role="SampleRole" Multiplicity="0..1" />
+          <End Type="WebapidbModel.SampleUser" Role="SampleUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SampleRole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SampleUser">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -41,6 +116,27 @@
               <MappingFragment StoreEntitySet="SampleTribe">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SampleRoles">
+            <EntityTypeMapping TypeName="WebapidbModel.SampleRole">
+              <MappingFragment StoreEntitySet="SampleRole">
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SampleUsers">
+            <EntityTypeMapping TypeName="WebapidbModel.SampleUser">
+              <MappingFragment StoreEntitySet="SampleUser">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

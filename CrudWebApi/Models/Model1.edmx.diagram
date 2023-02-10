@@ -6,6 +6,9 @@
     <edmx:Diagrams>
       <Diagram DiagramId="20fc740717a44288849e2a6d58b6878d" Name="Diagram1">
         <EntityTypeShape EntityType="WebapidbModel.SampleTribe" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebapidbModel.SampleRole" Width="1.5" PointX="3.375" PointY="1.375" />
+        <EntityTypeShape EntityType="WebapidbModel.SampleUser" Width="1.5" PointX="5.625" PointY="1" />
+        <AssociationConnector Association="WebapidbModel.FK_SampleUser_SampleRole" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

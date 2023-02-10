@@ -26,5 +26,7 @@ namespace CrudWebApi.Models
         }
     
         public virtual DbSet<SampleTribe> SampleTribes { get; set; }
+        public virtual DbSet<SampleRole> SampleRoles { get; set; }
+        public virtual DbSet<SampleUser> SampleUsers { get; set; }
     }
 }
