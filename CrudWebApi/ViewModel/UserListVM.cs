@@ -3,18 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace CrudWebApi.DTO
+namespace CrudWebApi.ViewModel
 {
-    public class AccountDTO
+    public class UserListVM
     {
-
-        public HttpPostedFileBase[] files { get; set; }
         public string Email { get; set; }
         public string Name { get; set; }
         public string FilePath { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
-        public int RoleID{ get; set; }
+        public string RoleID { get; set; }
         public int Id { get; set; }
     }
 }

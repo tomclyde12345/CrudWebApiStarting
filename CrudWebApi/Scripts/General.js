@@ -6,6 +6,7 @@ function CreateTribe() {
                 required: true,
             },
         },
+        errorClass: "validationerror",
         messages: {
             Name: {
                 required: "Please Select a fssafas",
@@ -70,6 +71,18 @@ function CreateRole() {
 
 
 function CreateAccount() {
+
+
+    $.ajax({
+        type: 'GET',
+        url: '/api/roledata/getroledata',
+        success: function (data) {
+            $.each(data, function (index, value) {
+                $('select[name=roleId]').append('<option value="' + value.id + '">' + value.roleName + '</option>');
+            })
+        }
+    });
+
     $("#createaccount").validate({
         rules: {
             Name: {
@@ -83,9 +96,15 @@ function CreateAccount() {
             },
             Password: {
                 required: true,
+                regex: ("(?=.*?[0-9])(?=.*?[A-Z])(?=.*?[#?!@$%^&*\\-_]).{8,}$")
+            },
+            roleId: {
+                required: true,
+               
             },
 
         },
+        errorClass: "validationerror",
         messages: {
             Name: {
                 required: "Please Input a Name",
@@ -97,7 +116,11 @@ function CreateAccount() {
                 required: "Please Input a Username",
             },
             Password: {
-                required: "Please Input a Pssword",
+                required: "Please Input a Password",
+                regex: "At least 1 Uppercase,1 Lowercase,1 Special Character, 1 Numeric Character and Minimum of 8 Characters"
+            },
+            roleId: {
+                required: "Please Select a Role",
             },
         },
         submitHandler: function () {
@@ -119,6 +142,53 @@ function CreateAccount() {
                 }, 1500);
             }
         }
+    });
+
+    $("#usertable").DataTable({
+        "ajax": {
+            "url": "/Account/GetUserDatatable",
+            "type": "POST",
+            "datatype": "json", dataSrc: "data"
+        },
+
+        "processing": "true",
+        "serverSide": "true",
+        "serverSide": "true",
+        "order": [[1, "desc"]],
+
+        "columns": [
+            {
+                "data": "Id", "name": "Id", "className": "hideThis"
+            },
+            {
+                "data": "Name", "name": "Name",
+            },
+            {
+                "data": "Email", "name": "Email"
+            },
+
+
+            {
+                "data": "UserName", "name": "UserName"
+            },
+
+
+            {
+                "data": "RoleID", "name": "RoleID"
+            },
+        ],
+
+
+        "processing": "true",
+        "language": {
+            "processing": "processing... please wait"
+        },
+
+        "fnInitComplete": function (oSettings, json) {
+          
+        }
+
+
     });
 }
 
