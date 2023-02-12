@@ -83,6 +83,9 @@ function CreateAccount() {
         }
     });
 
+
+
+
     $("#createaccount").validate({
         rules: {
             Name: {
@@ -144,6 +147,83 @@ function CreateAccount() {
         }
     });
 
+
+
+    //GET DATA FOR MOREDETAILS RESIDENCE
+    $('#usertable').on('click', '.edit', function () {
+        var id = $(this).attr('data-id');
+        var url = '/api/editaccount/geteditaccount/' + id;
+      /*    toastr.success(id);*/
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function (data) {
+                $('#editAccountModal').modal('show');
+                $('#editaccount').find('input[name="id"]').val(data.id);
+                $('#editaccount').find('input[name="name"]').val(data.name);
+                $('#editaccount').find('input[name="userName"]').val(data.userName);
+                $('#editaccount').find('input[name="email"]').val(data.email);
+
+            }
+        })
+    });
+
+
+    /* SAVING EDIT  TRIBE IN HOUSEHOLDLIST*/
+    $("#editaccount").validate({
+        rules: {
+            name: {
+                required: true,
+            },
+            userName: {
+                required: true,
+            },
+            email: {
+                required: true,
+            },
+
+        },
+        errorClass: "tomerror",
+        messages: {
+            name: {
+                required: "Please Enter Your Name",
+            },
+            userName: {
+                required: "Please Enter Your Username",
+            },
+            email: {
+                required: "Please Enter Your Email",
+            },
+
+        },
+        submitHandler: function () {
+            if ($("#editaccount").valid()) {
+                var valdata = $("#editaccount").serialize();
+                $('#editAccountModal').modal('hide');
+                $.ajax({
+                    url: '/api/savingeditaccount/postsavingeditaccount/' + id,
+                    type: "POST",
+                    dataType: 'json',
+                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                    data: valdata,
+                });
+                setTimeout(function () {
+                    toastr.success('EDIT SUCCESSFULLY');
+                    setTimeout(function () {
+                        location.reload();
+                    }, 2000)
+                }, 1500);
+            }
+        }
+    });
+
+
+
+
+
+
+
+
     $("#usertable").DataTable({
         "ajax": {
             "url": "/Account/GetUserDatatable",
@@ -196,6 +276,9 @@ function CreateAccount() {
 
 
     });
+
+
+
 }
 
 

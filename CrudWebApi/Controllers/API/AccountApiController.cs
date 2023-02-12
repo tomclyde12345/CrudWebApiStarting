@@ -69,5 +69,44 @@ namespace CrudWebApi.Controllers.API
             var datatable = Db.SampleUsers.ToList().Select(Mapper.Map<SampleUser, AccountDTO>);
             return Ok(datatable);
         }
+
+        //GET DATA ONLY FOR EDIT ACCOUNT
+        [HttpGet]
+        [Route("api/editaccount/geteditaccount/{id}")]
+        public IHttpActionResult GetDataEditAccount(int id)
+        {
+            var editaccount = Db.SampleUsers.SingleOrDefault(c => c.Id == id);
+            return Ok(Mapper.Map<SampleUser, AccountDTO>(editaccount));
+        }
+
+        //EDIT METHOD FOR  SAVING  EDIT ACCOUNT
+
+        [HttpPost]
+        [Route("api/savingeditaccount/postsavingeditaccount/{id}")]
+        public IHttpActionResult EditAccount(AccountDTO editaccountDTO)
+        {
+
+
+            if (ModelState.IsValid)
+            {
+                var accountdt = Db.SampleUsers.Single(c => c.Id == editaccountDTO.Id);
+
+                accountdt.Id = editaccountDTO.Id;
+                accountdt.Name = editaccountDTO.Name;
+                accountdt.UserName = editaccountDTO.UserName;
+                accountdt.Email = editaccountDTO.Email;
+
+
+
+            }
+
+            Db.SaveChanges();
+
+
+            return Ok();
+
+        }
+
+
     }
 }
