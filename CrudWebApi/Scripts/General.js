@@ -176,6 +176,12 @@ function CreateAccount() {
             {
                 "data": "RoleID", "name": "RoleID"
             },
+            {
+                "data": null,
+                'render': function (data, type, full, meta) {
+                    return '<button  class=\'btn btn-success btn-sm  edit \' data-id = ' + data.Id + ' > Edit <span class="feather icon-edit f-20" >  </span></button>'
+                }
+            },
         ],
 
 

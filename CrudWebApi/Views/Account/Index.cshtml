@@ -1,7 +1,7 @@
 ﻿
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-
+   
 }
 
 <br />
@@ -39,13 +39,16 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="name">UserName</label>
-                                <input type="text" class="form-control" name="UserName" id="UserName" value="" required>
+                                <input type="text" class="form-control" name="UserName" id="UserName" value="" onchange="UserCheck()" required>
+                                <p id="Status" />
                             </div>
 
                             <div class="form-group">
                                 <label for="name">Password</label>
                                 <input type="password" class="form-control" name="Password" id="Password" value="" required>
+
                             </div>
+
 
                             <div class="form-group">
                                 <label for="RoleID">Role</label>
@@ -84,19 +87,46 @@
             <tr>
                 @*<th>Id</th>*@
                 <th class="bg-primary text-white" style="display:none;">Id</th>
-                <th class="bg-primary text-white">name</th>
-                <th class="bg-primary text-white">email</th>
-                <th class="bg-primary text-white">userName</th>
-                <th class="bg-primary text-white">roleID Number</th>
+                <th class="bg-primary text-white">NAME</th>
+                <th class="bg-primary text-white">EMAIL</th>
+                <th class="bg-primary text-white">USERNAME</th>
+                <th class="bg-primary text-white">ROLE</th>
+                <th class="bg-primary text-white">ACTION</th>
 
             </tr>
         </thead>
     </table>
 </div>
 
-
 <script>
     $(window).ready(function () {
         CreateAccount();
     });
 </script>
+
+
+@*check username exist*@
+<script>
+    function UserCheck() {
+        $("#Status").html("Checking...");
+        $.post("@Url.Action("CheckUsernameAvailability", "Account")",
+
+            {
+                userdata: $("#UserName").val()
+            },
+        function (data) {
+            if (data == 0) {
+                $("#Status").html('<font color="Green">Available !. you can take it.</font>');
+                $("#UserName").css("border-color", "Green");
+
+            }
+            else {
+                $("#Status").html('<font color="Red">That name is taken.Try Another.</font>');
+                $("#UserName").css("border-color", "Red");
+            }
+        });
+    }
+
+
+</script>
+

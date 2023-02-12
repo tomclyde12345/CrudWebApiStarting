@@ -40,13 +40,17 @@ namespace CrudWebApi.Controllers
             {
                 IQueryable<SampleUser> userlist = Db.SampleUsers;
 
+                //SHOWING FILTER DATA BASE ON ROLE ID  DEPENDENT IN LOGIN ID
+                var sess_id = (int)Session["LoginID"];
 
-                userlist = (IQueryable<SampleUser>)Db.SampleUsers;
+                if ((int)Session["Role_Id"] != 1)
+                {
+                    userlist = userlist.Where(d => d.Id == sess_id);
+                }
+                //
+
 
                 int totalrows = userlist.Count();
-
-
-
 
                 if (!string.IsNullOrEmpty(searchValue))//FILTER SEARCH
                 {
@@ -84,11 +88,26 @@ namespace CrudWebApi.Controllers
 
                 return Json(new { data = HouseholdVM, draw = Request["draw"], recordsTotal = totalrows, recordsFiltered = totalrowsafterfiltering }, JsonRequestBehavior.AllowGet);
 
-
-
             }
+
+
         }
-    }
+
+        public JsonResult CheckUsernameAvailability(string userdata)
+        {
+            System.Threading.Thread.Sleep(200);
+            var SeachData = Db.SampleUsers.Where(x => x.UserName == userdata).SingleOrDefault();
+            if (SeachData != null)
+            {
+                return Json(1);
+            }
+            else
+            {
+                return Json(0);
+            }
+
+        }
+      }
 
 
 }
