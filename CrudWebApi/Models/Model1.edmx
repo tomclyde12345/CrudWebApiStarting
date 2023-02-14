@@ -19,6 +19,15 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="SampleUpload">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FilePath" Type="nvarchar(max)" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="100" />
+          <Property Name="AccountId" Type="int" />
+        </EntityType>
         <EntityType Name="SampleUser">
           <Key>
             <PropertyRef Name="Id" />
@@ -28,9 +37,20 @@
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
           <Property Name="UserName" Type="nvarchar" MaxLength="50" />
           <Property Name="Password" Type="nvarchar" MaxLength="200" />
-          <Property Name="FilePath" Type="nvarchar(max)" />
           <Property Name="RoleID" Type="int" />
         </EntityType>
+        <Association Name="FK_SampleUpload_SampleUser">
+          <End Role="SampleUser" Type="Self.SampleUser" Multiplicity="0..1" />
+          <End Role="SampleUpload" Type="Self.SampleUpload" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SampleUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SampleUpload">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SampleUser_SampleRole">
           <End Role="SampleRole" Type="Self.SampleRole" Multiplicity="0..1" />
           <End Role="SampleUser" Type="Self.SampleUser" Multiplicity="*" />
@@ -46,7 +66,12 @@
         <EntityContainer Name="WebapidbModelStoreContainer">
           <EntitySet Name="SampleRole" EntityType="Self.SampleRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SampleTribe" EntityType="Self.SampleTribe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SampleUpload" EntityType="Self.SampleUpload" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SampleUser" EntityType="Self.SampleUser" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_SampleUpload_SampleUser" Association="Self.FK_SampleUpload_SampleUser">
+            <End Role="SampleUser" EntitySet="SampleUser" />
+            <End Role="SampleUpload" EntitySet="SampleUpload" />
+          </AssociationSet>
           <AssociationSet Name="FK_SampleUser_SampleRole" Association="Self.FK_SampleUser_SampleRole">
             <End Role="SampleRole" EntitySet="SampleRole" />
             <End Role="SampleUser" EntitySet="SampleUser" />
@@ -56,6 +81,14 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="WebapidbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="SampleRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SampleUsers" Relationship="WebapidbModel.FK_SampleUser_SampleRole" FromRole="SampleRole" ToRole="SampleUser" />
+        </EntityType>
         <EntityType Name="SampleTribe">
           <Key>
             <PropertyRef Name="Id" />
@@ -64,21 +97,28 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityContainer Name="WebapidbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="SampleRoles" EntityType="Self.SampleRole" />
           <EntitySet Name="SampleTribes" EntityType="Self.SampleTribe" />
-          <EntitySet Name="SampleRoles" EntityType="WebapidbModel.SampleRole" />
+          <EntitySet Name="SampleUploads" EntityType="WebapidbModel.SampleUpload" />
           <EntitySet Name="SampleUsers" EntityType="WebapidbModel.SampleUser" />
           <AssociationSet Name="FK_SampleUser_SampleRole" Association="WebapidbModel.FK_SampleUser_SampleRole">
             <End Role="SampleRole" EntitySet="SampleRoles" />
             <End Role="SampleUser" EntitySet="SampleUsers" />
           </AssociationSet>
+          <AssociationSet Name="FK_SampleUpload_SampleUser" Association="WebapidbModel.FK_SampleUpload_SampleUser">
+            <End Role="SampleUser" EntitySet="SampleUsers" />
+            <End Role="SampleUpload" EntitySet="SampleUploads" />
+          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="SampleRole">
+        <EntityType Name="SampleUpload">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="RoleName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="SampleUsers" Relationship="WebapidbModel.FK_SampleUser_SampleRole" FromRole="SampleRole" ToRole="SampleUser" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FilePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FileName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AccountId" Type="Int32" />
+          <NavigationProperty Name="SampleUser" Relationship="WebapidbModel.FK_SampleUpload_SampleUser" FromRole="SampleUpload" ToRole="SampleUser" />
         </EntityType>
         <EntityType Name="SampleUser">
           <Key>
@@ -89,9 +129,9 @@
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="FilePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="RoleID" Type="Int32" />
           <NavigationProperty Name="SampleRole" Relationship="WebapidbModel.FK_SampleUser_SampleRole" FromRole="SampleUser" ToRole="SampleRole" />
+          <NavigationProperty Name="SampleUploads" Relationship="WebapidbModel.FK_SampleUpload_SampleUser" FromRole="SampleUser" ToRole="SampleUpload" />
         </EntityType>
         <Association Name="FK_SampleUser_SampleRole">
           <End Type="WebapidbModel.SampleRole" Role="SampleRole" Multiplicity="0..1" />
@@ -105,12 +145,32 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SampleUpload_SampleUser">
+          <End Type="WebapidbModel.SampleUser" Role="SampleUser" Multiplicity="0..1" />
+          <End Type="WebapidbModel.SampleUpload" Role="SampleUpload" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SampleUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SampleUpload">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="WebapidbModelStoreContainer" CdmEntityContainer="WebapidbEntities">
+          <EntitySetMapping Name="SampleRoles">
+            <EntityTypeMapping TypeName="WebapidbModel.SampleRole">
+              <MappingFragment StoreEntitySet="SampleRole">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="SampleTribes">
             <EntityTypeMapping TypeName="WebapidbModel.SampleTribe">
               <MappingFragment StoreEntitySet="SampleTribe">
@@ -119,10 +179,12 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="SampleRoles">
-            <EntityTypeMapping TypeName="WebapidbModel.SampleRole">
-              <MappingFragment StoreEntitySet="SampleRole">
-                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <EntitySetMapping Name="SampleUploads">
+            <EntityTypeMapping TypeName="WebapidbModel.SampleUpload">
+              <MappingFragment StoreEntitySet="SampleUpload">
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -131,7 +193,6 @@
             <EntityTypeMapping TypeName="WebapidbModel.SampleUser">
               <MappingFragment StoreEntitySet="SampleUser">
                 <ScalarProperty Name="RoleID" ColumnName="RoleID" />
-                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Email" ColumnName="Email" />

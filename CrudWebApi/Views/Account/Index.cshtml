@@ -4,17 +4,21 @@
 
 }
 
+
+
+@*BUTTON ONLY CLICK START CREATE ACCOUNT *@
 <br />
 <form-group>
     <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#createModal">CREATE ACCOUNT</button>
 </form-group>
 
+<!---->
 
 
 
 
 
-
+@*CREATE ACCOUNT IN MODAL *@
 <div id="createModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
@@ -25,7 +29,7 @@
                 <h4 class="modal-title">Create Account</h4>
             </div>
             <div class="modal-body">
-                <form id="createaccount">
+                <form id="createaccount" enctype="multipart/form-data">
 
                     <div class="form-group" style="display:none;">
                         <label for="name">Id</label>
@@ -42,8 +46,13 @@
                             <input type="text" class="form-control" name="UserName" id="UserName" value="" onchange="UserCheck()" required>
                             <p id="Status" />
                         </div>
+                        <div class="form-group">
+                            <label for="name">Image</label>
+                            <input type="file" class="form-control" id="FilePath" name="FilePath" accept="image/*" />
+                            <input type="hidden" class="form-control" name="FileName" id="FileName">
+                        </div>
                     </div>
-                  
+
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="name">Email</label>
@@ -81,8 +90,6 @@
 </div>
 
 
-
-
 @*EDIT ACCOUNT IN MODAL*@
 <div id="editAccountModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -115,10 +122,10 @@
                             <input type="text" class="form-control" name="userName" id="userName" value="" />
                         </div>
                     </div>
-                        <div class="text-center">
+                    <div class="text-center">
 
-                            <button class="btn btn-primary btn-sm" id="btnsubmit" type="submit">Save</button>
-                        </div>
+                        <button class="btn btn-primary btn-sm" id="btnsubmit" type="submit">Save</button>
+                    </div>
 
 
                 </form>
@@ -132,6 +139,39 @@
 </div>
 
 
+
+@*DELETE ACCOUNT IN MODAL *@
+<div class="modal fade" id="deleteAccountModal">
+    <div class="modal-dialog modal-m modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="card-title d-flex justify-content-between modal-title" style="padding:0;">Delete Account</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form id="deleteaccount">
+                <div class="modal-body">
+                    <h5 class="card-subtitle">Are you sure you want to Delete This Account ?</h5>
+                </div>
+                <div class="modal-footer coolTZ">
+                    <input type="hidden" name="DeleteAccountId" id="DeleteAccountId" />
+
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">CLOSE</button>
+                    <a href="#" class="btn btn-success" id="btnAccounteDelete">CONFIRM</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+@*DATATABLES *@
 <div class="col-md-12">
     <br />
     <table id="usertable" class="table table-condensed" style="width:100%;background-color:whitesmoke;">
@@ -146,11 +186,19 @@
                 <th class="bg-primary text-white">USERNAME</th>
                 <th class="bg-primary text-white">ROLE</th>
                 <th class="bg-primary text-white">ACTION</th>
+                <th class="bg-primary text-white">IMAGE</th>
 
             </tr>
         </thead>
     </table>
 </div>
+
+
+
+
+
+
+
 
 <script>
     $(window).ready(function () {

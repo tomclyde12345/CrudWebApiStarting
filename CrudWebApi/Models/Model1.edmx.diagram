@@ -4,11 +4,13 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="20fc740717a44288849e2a6d58b6878d" Name="Diagram1">
-        <EntityTypeShape EntityType="WebapidbModel.SampleTribe" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebapidbModel.SampleRole" Width="1.5" PointX="3.375" PointY="1.375" />
-        <EntityTypeShape EntityType="WebapidbModel.SampleUser" Width="1.5" PointX="5.625" PointY="1" />
+      <Diagram DiagramId="7d7d8b55466545debacb829ef93da69c" Name="Diagram1" ZoomLevel="64">
+        <EntityTypeShape EntityType="WebapidbModel.SampleRole" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebapidbModel.SampleTribe" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebapidbModel.SampleUpload" Width="1.5" PointX="3.375" PointY="4.75" />
+        <EntityTypeShape EntityType="WebapidbModel.SampleUser" Width="1.5" PointX="3" PointY="0.875" />
         <AssociationConnector Association="WebapidbModel.FK_SampleUser_SampleRole" />
+        <AssociationConnector Association="WebapidbModel.FK_SampleUpload_SampleUser" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

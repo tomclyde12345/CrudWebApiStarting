@@ -24,12 +24,12 @@
                             {
                                 @Html.AntiForgeryToken()
                                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                <div class="text-center">
+                          
 
-                                    <h4 class="mb-3 f-w-400" style="font-weight:600;">SAMPLE SYSTEMM</h4>
+                                    <h4 class="mb-3 f-w-400" style="font-weight:600;">SAMPLE SYSTEM</h4>
 
-                                    <br />
-                                </div>
+                                  
+                          
                                 <div class="form-group mb-4">
                                     <label style="text-align:left" class="fa fa-user"> USERNAME</label>
                                     @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", required = "required", type = "text", name = "username", id = "Username", style = "font-size:15px;" } })
@@ -49,13 +49,14 @@
                                 @Html.HiddenFor(m => m.Id)
                                 <br />
                                 <br />
-                                <button class="btn btn-block btn-primary btn-lg" type="submit">SIGN IN</button>
+                                <button class="btn btn-primary" type="submit">SIGN IN</button>
                                 <br />
-                                <div class="text-center">
-                                    <div class="custom-val" style="color:red;">
-                                        @ViewBag.Message
-                                    </div>
+                               
+                                <div class="custom-val" style="color:red;">
+                                    <br />
+                                    @ViewBag.Message
                                 </div>
+                             
                             }
                         </div>
                     </div>
@@ -63,22 +64,6 @@
             </div>
         </div>
     </div>
-
-
-    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
-
-    <script src="~/Scripts/jquery-3.4.1.js"></script>
-
-    <script src="~/Scripts/jquery.validate.js"></script>
-
-
-    <script src="~/Scripts/jquery.validate.js"></script>
-    <script src="~/Scripts/jquery.validate-vsdoc.js"></script>
-
-    @*<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
-    <script src="~/Scripts/jquery.validate.min.js"></script>
-
-    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
 
 
 

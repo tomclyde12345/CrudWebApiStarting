@@ -105,6 +105,10 @@ function CreateAccount() {
                 required: true,
                
             },
+            FilePath: {
+                required: true,
+
+            },
 
         },
         errorClass: "validationerror",
@@ -125,31 +129,47 @@ function CreateAccount() {
             roleId: {
                 required: "Please Select a Role",
             },
+            FilePath: {
+                required: "Please Choose an Image",
+            },
+
         },
-        submitHandler: function () {
-            if ($("#createaccount").valid()) {
-                var valdata = $("#createaccount").serialize();
-                $('#createModal').modal('hide');
-                $.ajax({
-                    url: '/api/saveaccount/postsaveaccount/',
-                    type: "POST",
-                    dataType: 'json',
-                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                    data: valdata,
-                });
-                setTimeout(function () {
-                    toastr.success('Successsfully Added a Account');
-                    setTimeout(function () {
-                        location.reload();
-                    }, 2000)
-                }, 1500);
-            }
-        }
     });
+    $("#createaccount").submit(function (e) {
+
+        e.preventDefault();
+        var formData = new FormData(this);
+        if ($("#createaccount").valid()) {
+            $('#createModal').modal('hide');
+            $.ajax({
+                type: 'POST',
+                url: '/api/residencephoto',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+
+                    setTimeout(function () {
+                        toastr.success("Account Successfully Created");
+                        setTimeout(function () {
+                            location.reload();
+                        }, 2000)
+                    }, 1500);
+                    $("#createModal").modal('hide');
+                },
+                error: function (response) {
+                    toastr.error("Unable to Delete Dependent in Foreign Key");
+                    //alert(result, result.DepartmentId, result.Name);
+                }
+            });
+        }
+    })
 
 
 
-    //GET DATA FOR MOREDETAILS RESIDENCE
+
+    //GET DATA ONLY FOR EDIT ACCOUNT GET METHOD
     $('#usertable').on('click', '.edit', function () {
         var id = $(this).attr('data-id');
         var url = '/api/editaccount/geteditaccount/' + id;
@@ -169,7 +189,7 @@ function CreateAccount() {
     });
 
 
-    /* SAVING EDIT  TRIBE IN HOUSEHOLDLIST*/
+    /* SAVING EDIT ACCOUNT POST METHOD*/
     $("#editaccount").validate({
         rules: {
             name: {
@@ -217,13 +237,7 @@ function CreateAccount() {
         }
     });
 
-
-
-
-
-
-
-
+    //SERVERSIDE DATATABLES FOR ACCOUNT DATATABLE LIST
     $("#usertable").DataTable({
         "ajax": {
             "url": "/Account/GetUserDatatable",
@@ -260,6 +274,20 @@ function CreateAccount() {
                 "data": null,
                 'render': function (data, type, full, meta) {
                     return '<button  class=\'btn btn-success btn-sm  edit \' data-id = ' + data.Id + ' > Edit <span class="feather icon-edit f-20" >  </span></button>'
+                        +
+                        '<button  class=\'btn btn-danger deleteaccount btn-sm\' data-id = ' + data.Id + ' > Delete<span class="fa fa-trash f-20" >  </span></button>'
+                }
+            },
+            {
+                "data": "FilePath", "name": "FilePath",
+                'render': function (data, type, full, meta) {
+                    if (row.FilePath == null) {
+                        return "<img src='/images/city-hall.png' class='img-circle' style='width:50px;height:50px;' />";
+                    }
+                    else {
+                        return "<img src='" + row.FilePath + "' class='img-circle' style='width:50px;height:50px;' />";
+                    }
+                       
                 }
             },
         ],
@@ -276,6 +304,87 @@ function CreateAccount() {
 
 
     });
+
+    /// DELETE ACCOUNT  IN ACCOUNT TABLE
+
+    $('#usertable').on('click', '.deleteaccount', function () {
+        var id = $(this).attr('data-id');
+        var url = '/api/accountdelete/getaccountdelete/' + id;
+        $("#DeleteAccountId").val(id);
+        $("#deleteAccountModal").modal('show');
+
+
+
+
+    });
+
+    $("#btnAccounteDelete").click(function () {
+     
+        // for deletion
+        var st = $("#DeleteAccountId").val();
+        //alert(dept);
+        $.ajax({
+            type: "DELETE",
+            url: "/api/accountdelete/getaccountdelete/" + st,
+            success: function (response) {
+
+                setTimeout(function () {
+                    toastr.success("Account Successfully Deleted");
+                    setTimeout(function () {
+                        location.reload();
+                    }, 2000)
+                }, 1500);
+                $("#deleteAccountModal").modal('hide');
+            },
+            error: function (response) {
+                toastr.error("Unable to Delete Dependent in Foreign Key");
+                //alert(result, result.DepartmentId, result.Name);
+            }
+        })
+
+
+
+    })
+
+
+
+    //$("#create").submit(function (e) {
+
+    //    e.preventDefault();
+    //    var formData = new FormData(this);
+    //    if ($("#create").valid()) {
+    //        $('#createModal').modal('hide');
+    //        $.ajax({
+    //            type: 'POST',
+    //            url: '/api/residencephoto',
+    //            data: formData,
+    //            cache: false,
+    //            contentType: false,
+    //            processData: false,
+    //            success: function (response) {
+
+    //                setTimeout(function () {
+    //                    toastr.success("Residence Successfully Created");
+    //                    setTimeout(function () {
+    //                        location.reload();
+    //                    }, 2000)
+    //                }, 1500);
+    //                $("#createModal").modal('hide');
+    //            },
+    //            error: function (response) {
+    //                toastr.error("Unable to Delete Dependent in Foreign Key");
+    //                //alert(result, result.DepartmentId, result.Name);
+    //            }
+    //        });
+    //    }
+    //})
+
+
+
+
+
+
+
 
 
 

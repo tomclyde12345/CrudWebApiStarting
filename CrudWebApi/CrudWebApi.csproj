@@ -212,6 +212,9 @@
     <Compile Include="Models\SampleTribe.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SampleUpload.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SampleUser.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -309,13 +312,14 @@
     <Content Include="Content\Site.css" />
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
+    <Content Include="DefaultImage\city-hall.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
       <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\Model1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -347,13 +351,6 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
-    <EntityDeploy Include="Models\Model1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
     <Content Include="libman.json" />
     <Content Include="obj\Debug\CrudWebApi.csproj.AssemblyReference.cache" />
     <Content Include="obj\Debug\CrudWebApi.csproj.CopyComplete" />
@@ -362,6 +359,7 @@
     <Content Include="obj\Debug\edmxResourcesToEmbed\Models\Model1.csdl" />
     <Content Include="obj\Debug\edmxResourcesToEmbed\Models\Model1.msl" />
     <Content Include="obj\Debug\edmxResourcesToEmbed\Models\Model1.ssdl" />
+    <Content Include="SampleImg\city-hall.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\General.js" />
@@ -424,7 +422,18 @@
     <Content Include="bin\roslyn\vbc.exe.config" />
     <Content Include="bin\roslyn\vbc.rsp" />
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
+    <EntityDeploy Include="Models\Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
     <None Include="packages.config" />
+    <Content Include="SampleImg\BodyPart_2d571e11-28a1-49ab-80cf-31fe965a33e5" />
+    <Content Include="SampleImg\BodyPart_78c7702b-3afb-404b-a4d1-4a62846d1015" />
+    <Content Include="SampleImg\BodyPart_a420c1bd-3bce-49fd-af78-cfa50f24a2aa" />
+    <Content Include="SampleImg\BodyPart_d6a13f5a-08c1-441c-bc59-917c89c60cd7" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Views\Role\Index.cshtml" />

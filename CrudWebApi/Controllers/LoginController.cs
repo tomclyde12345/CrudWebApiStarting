@@ -42,7 +42,7 @@ namespace CrudWebApi.Controllers
 
                 Session["LoginedTime"] = DateTime.Now.ToLongDateString();
                 Session["LoginID"] = result.Id;
-                Session["FilePath"] = result.FilePath;
+            
                 Session["Role_Id"] = result.RoleID;
 
                 FormsAuthentication.SetAuthCookie(result.UserName, false);
