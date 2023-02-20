@@ -25,7 +25,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FilePath" Type="nvarchar(max)" />
-          <Property Name="FileName" Type="nvarchar" MaxLength="100" />
+          <Property Name="FileName" Type="nvarchar(max)" />
           <Property Name="AccountId" Type="int" />
         </EntityType>
         <EntityType Name="SampleUser">
@@ -39,18 +39,6 @@
           <Property Name="Password" Type="nvarchar" MaxLength="200" />
           <Property Name="RoleID" Type="int" />
         </EntityType>
-        <Association Name="FK_SampleUpload_SampleUser">
-          <End Role="SampleUser" Type="Self.SampleUser" Multiplicity="0..1" />
-          <End Role="SampleUpload" Type="Self.SampleUpload" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SampleUser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="SampleUpload">
-              <PropertyRef Name="AccountId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_SampleUser_SampleRole">
           <End Role="SampleRole" Type="Self.SampleRole" Multiplicity="0..1" />
           <End Role="SampleUser" Type="Self.SampleUser" Multiplicity="*" />
@@ -68,10 +56,6 @@
           <EntitySet Name="SampleTribe" EntityType="Self.SampleTribe" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SampleUpload" EntityType="Self.SampleUpload" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SampleUser" EntityType="Self.SampleUser" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_SampleUpload_SampleUser" Association="Self.FK_SampleUpload_SampleUser">
-            <End Role="SampleUser" EntitySet="SampleUser" />
-            <End Role="SampleUpload" EntitySet="SampleUpload" />
-          </AssociationSet>
           <AssociationSet Name="FK_SampleUser_SampleRole" Association="Self.FK_SampleUser_SampleRole">
             <End Role="SampleRole" EntitySet="SampleRole" />
             <End Role="SampleUser" EntitySet="SampleUser" />
@@ -116,7 +100,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FilePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="FileName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="AccountId" Type="Int32" />
           <NavigationProperty Name="SampleUser" Relationship="WebapidbModel.FK_SampleUpload_SampleUser" FromRole="SampleUpload" ToRole="SampleUser" />
         </EntityType>

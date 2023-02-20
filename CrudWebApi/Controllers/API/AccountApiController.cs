@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Principal;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
@@ -27,36 +28,7 @@ namespace CrudWebApi.Controllers.API
             Db.Dispose();
         }
 
-        //CREATE/SAVING METHODS ACCOUNT
-        [HttpPost]
-        [Route("api/saveaccount/postsaveaccount")]
-        public IHttpActionResult SaveAccount(AccountDTO accountDTO)
-        {
-            var account = Mapper.Map<AccountDTO, SampleUser>(accountDTO);
-         
-            ScryptEncoder encoder = new ScryptEncoder();
-            if (accountDTO.Id == 0)
-            {
-                account.Password = encoder.Encode(accountDTO.Password);
-                account.Name = accountDTO.Name;
-                account.UserName = accountDTO.UserName;
-                account.Email = accountDTO.Email;
-                account.RoleID = accountDTO.RoleID;
-
-
-
-
-                Db.SampleUsers.Add(account);
-            }
-
-
-            Db.SaveChanges();
-
-            return Ok();
-
-        }
-
-        //get role data
+       
         [HttpGet]
         [Route("api/roledata/getroledata")]
         public IHttpActionResult GetRoleData()
@@ -72,6 +44,19 @@ namespace CrudWebApi.Controllers.API
             var datatable = Db.SampleUsers.ToList().Select(Mapper.Map<SampleUser, AccountDTO>);
             return Ok(datatable);
         }
+
+        [HttpGet]
+        [Route("api/sampleuploaddt/getsampleuploaddt/{id}")]
+        public IHttpActionResult GetdatatableuploadId(int id)
+        {
+            var datatable = Db.SampleUploads.SingleOrDefault(c => c.Id == id);
+            return Ok(Mapper.Map<SampleUpload, UploadDTO>(datatable));
+        }
+
+
+
+
+
 
         //GET DATA ONLY FOR EDIT ACCOUNT
         [HttpGet]
@@ -98,7 +83,7 @@ namespace CrudWebApi.Controllers.API
                 accountdt.Name = editaccountDTO.Name;
                 accountdt.UserName = editaccountDTO.UserName;
                 accountdt.Email = editaccountDTO.Email;
-
+                accountdt.RoleID = editaccountDTO.RoleID;
 
 
             }
@@ -129,6 +114,48 @@ namespace CrudWebApi.Controllers.API
             Db.SaveChanges();
             return Ok();
         }
+
+
+
+
+
+        //SAVING RESET PASSWORD
+
+        [HttpPost]
+        [Route("api/resetpassword/postresetpassword/{id}")]
+        public IHttpActionResult SavingResetPassword(AccountDTO resetpass)
+        {
+
+            ScryptEncoder encoder = new ScryptEncoder();
+            if (ModelState.IsValid)
+            {
+                var accountdt = Db.SampleUsers.Single(c => c.Id == resetpass.Id);
+
+                accountdt.Id = resetpass.Id;
+                accountdt.Name = resetpass.Name;
+                accountdt.UserName = resetpass.UserName;
+                accountdt.Email = resetpass.Email;
+                accountdt.RoleID = resetpass.RoleID;
+                accountdt.Password = encoder.Encode(resetpass.Password);
+
+
+
+            }
+
+            Db.SaveChanges();
+
+
+            return Ok();
+
+        }
+
+
+
+
+
+
+
+
 
 
 

@@ -1,4 +1,4 @@
-﻿
+﻿@model CrudWebApi.ViewModel.AccountVM
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 
@@ -13,11 +13,6 @@
 </form-group>
 
 <!---->
-
-
-
-
-
 @*CREATE ACCOUNT IN MODAL *@
 <div id="createModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -64,6 +59,13 @@
                             <input type="password" class="form-control" name="Password" id="Password" value="" required>
 
                         </div>
+
+                        <div class="form-group">
+                            <div class="text-left" style="font-size:12px;">
+
+                                <input type="checkbox" onclick="showpasswordinCreate()"> Show Password
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label for="RoleID">Role</label>
                             <select class="form-control" style="width:100%" name="roleId" id="roleId">
@@ -94,13 +96,15 @@
 <div id="editAccountModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
-        <!-- Modal content-->
+
+
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Edit Account</h4>
             </div>
             <div class="modal-body">
+
                 <form id="editaccount">
                     <div class="col-md-6">
                         <div class="form-group" style="display:none;">
@@ -111,6 +115,16 @@
                             <label for="name">Name</label>
                             <input type="text" class="form-control" name="name" id="name" value="" />
                         </div>
+
+                        <div class="form-group">
+                            <label for="RoleID">Role</label>
+                            <select class="form-control" style="width:100%" name="roleID" id="roleID">
+                                <option value="">Please Select a Role</option>
+                            </select>
+
+
+                        </div>
+
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
@@ -141,7 +155,7 @@
 
 
 @*DELETE ACCOUNT IN MODAL *@
-<div class="modal fade" id="deleteAccountModal">
+<div class="modal fade" id="deleteAccountModal" role="dialog">
     <div class="modal-dialog modal-m modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -166,6 +180,122 @@
     </div>
 </div>
 
+<div class="card-body">
+    <div class="card">
+        <div class="card-header">
+            <h2 style="color:white; font-weight:800;">RESET PASSWORD</h2>
+        </div>
+
+
+
+        @*IMAGE IN MODAL *@
+        <div class="modal fade" id="changephotoModal">
+            <div class="modal-dialog modal-m modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="card-title d-flex justify-content-between modal-title" style="padding:0;">PROFILE IMAGE</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <form id="changephoto">
+                        <div class="modal-body">
+
+
+
+
+
+
+
+                        </div>
+                        <div class="modal-footer coolTZ">
+
+
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">CLOSE</button>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+</div>
+
+
+
+
+<div class="card-body">
+    <div class="card">
+        <div class="card-header">
+            <h2 style="color:white; font-weight:800;">RESET PASSWORD</h2>
+        </div>
+
+
+
+        @*RESET PASSWORD IN MODAL *@
+        <div class="modal fade" id="resetpassModal">
+            <div class="modal-dialog modal-m modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="card-title d-flex justify-content-between modal-title" style="padding:0;">RESET  PASSWORD</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <form id="resetpassword">
+                        <div class="modal-body">
+                            <div class="form-group">
+
+                                <input type="hidden" class="form-control" name="id" id="id" value="" />
+                                <input type="hidden" class="form-control" name="name" id="name" value="" />
+                                <input type="hidden" class="form-control" name="email" id="email" value="" />
+                                <input type="hidden" class="form-control" name="roleID" id="roleID" value="" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="userName">UserName</label>
+                                <input type="text" class="form-control" name="userName" id="userName" value="" readonly />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" placeholder="Enter a New Password" class="form-control" name="password" id="password" value="" />
+                            </div>
+
+                            <div class="form-group">
+                                <div class="text-left" style="font-size:12px;">
+
+                                    <input type="checkbox" onclick="myFunction()"> Show Password
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+
+                            <button class="btn btn-primary btn-sm" id="btnsave" type="submit">Save</button>
+                        </div>
+                        <div class="modal-footer ">
+
+
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">CLOSE</button>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+</div>
+
 
 
 
@@ -186,13 +316,40 @@
                 <th class="bg-primary text-white">USERNAME</th>
                 <th class="bg-primary text-white">ROLE</th>
                 <th class="bg-primary text-white">ACTION</th>
-                <th class="bg-primary text-white">IMAGE</th>
+                <th class="bg-primary text-white">Reset Password</th>
+
 
             </tr>
         </thead>
     </table>
 </div>
 
+
+
+
+@*SHOW PASSWORD*@
+<script>
+    function myFunction() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>
+
+@*SHOW PASSWORD*@
+<script>
+    function showpasswordinCreate() {
+        var x = document.getElementById("Password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>
 
 
 

@@ -83,6 +83,16 @@ function CreateAccount() {
         }
     });
 
+    $.ajax({
+        type: 'GET',
+        url: '/api/roledata/getroledata',
+        success: function (data) {
+            $.each(data, function (index, value) {
+                $('select[name=roleID]').append('<option value="' + value.id + '">' + value.roleName + '</option>');
+            })
+        }
+    });
+
 
 
 
@@ -183,6 +193,50 @@ function CreateAccount() {
                 $('#editaccount').find('input[name="name"]').val(data.name);
                 $('#editaccount').find('input[name="userName"]').val(data.userName);
                 $('#editaccount').find('input[name="email"]').val(data.email);
+                $('#editaccount').find('select[name="roleID"]').val(data.roleID);
+
+            }
+        })
+    });
+
+    //  //GET DATA ONLY FOR  RESET PASSWORD
+    $('#usertable').on('click', '.resetpass', function () {
+        var id = $(this).attr('data-id');
+        var url = '/api/editaccount/geteditaccount/' + id;
+        /*    toastr.success(id);*/
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function (data) {
+                $('#resetpassModal').modal('show');
+                $('#resetpassword').find('input[name="id"]').val(data.id);
+                $('#resetpassword').find('input[name="userName"]').val(data.userName);
+                $('#resetpassword').find('input[name="password"]').val('');
+                $('#resetpassword').find('input[name="name"]').val(data.name);
+                $('#resetpassword').find('input[name="email"]').val(data.email);
+                $('#resetpassword').find('input[name="roleID"]').val(data.roleID);
+
+            }
+        })
+    });
+
+
+
+    //GET DATA ONLY FOR IMAGE
+    $('#usertable').on('click', '.photo', function (e) {
+
+         e.preventDefault();
+        var id = $(this).attr('data-id');
+        var url = '/api/sampleuploaddt/getsampleuploaddt/' + id;
+            toastr.success(id);
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function (data) {
+                $('#changephotoModal').modal('show');
+                $('#changephoto').find('input[name="id"]').val(data.id);
+
+             
 
             }
         })
@@ -237,6 +291,59 @@ function CreateAccount() {
         }
     });
 
+
+
+   //Resetpassword
+    $("#resetpassword").validate({
+        rules: {
+        
+            userName: {
+                required: true,
+            },
+            password: {
+                required: true,
+                regex: ("(?=.*?[0-9])(?=.*?[A-Z])(?=.*?[#?!@$%^&*\\-_]).{8,}$")
+            },
+          
+
+        },
+        errorClass: "validationerror",
+        messages: {
+         
+            userName: {
+                required: "Please Enter Your Username",
+            },
+            password: {
+                required: "Please Input a Password",
+                regex: "At least 1 Uppercase,1 Lowercase,1 Special Character, 1 Numeric Character and Minimum of 8 Characters"
+            },
+          
+
+        },
+        submitHandler: function () {
+            if ($("#resetpassword").valid()) {
+                var valdata = $("#resetpassword").serialize();
+                $('#resetpassModal').modal('hide');
+                $.ajax({
+                    url: '/api/resetpassword/postresetpassword/' + id,
+                    type: "POST",
+                    dataType: 'json',
+                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                    data: valdata,
+                });
+                setTimeout(function () {
+                    toastr.success('RESET PASSWORD SUCCESSFULLY');
+                    setTimeout(function () {
+                        location.reload();
+                    }, 2000)
+                }, 1500);
+            }
+        }
+    });
+
+
+
+
     //SERVERSIDE DATATABLES FOR ACCOUNT DATATABLE LIST
     $("#usertable").DataTable({
         "ajax": {
@@ -276,20 +383,18 @@ function CreateAccount() {
                     return '<button  class=\'btn btn-success btn-sm  edit \' data-id = ' + data.Id + ' > Edit <span class="feather icon-edit f-20" >  </span></button>'
                         +
                         '<button  class=\'btn btn-danger deleteaccount btn-sm\' data-id = ' + data.Id + ' > Delete<span class="fa fa-trash f-20" >  </span></button>'
+                        +
+                        '<button  class=\'btn btn-warning photo btn-sm\' data-id = ' + data.Id + ' > Image<span class="fa fa-trash f-20" >  </span></button>'
                 }
             },
             {
-                "data": "FilePath", "name": "FilePath",
+                "data": null,
                 'render': function (data, type, full, meta) {
-                    if (row.FilePath == null) {
-                        return "<img src='/images/city-hall.png' class='img-circle' style='width:50px;height:50px;' />";
-                    }
-                    else {
-                        return "<img src='" + row.FilePath + "' class='img-circle' style='width:50px;height:50px;' />";
-                    }
+                    return '<button  class=\'btn btn-warning btn-sm  resetpass \' data-id = ' + data.Id + ' > ResetPassword <span class="feather icon-edit f-20" >  </span></button>'
                        
                 }
             },
+        
         ],
 
 
