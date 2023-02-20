@@ -115,10 +115,7 @@ function CreateAccount() {
                 required: true,
                
             },
-            FilePath: {
-                required: true,
-
-            },
+          
 
         },
         errorClass: "validationerror",
@@ -139,9 +136,7 @@ function CreateAccount() {
             roleId: {
                 required: "Please Select a Role",
             },
-            FilePath: {
-                required: "Please Choose an Image",
-            },
+         
 
         },
     });
@@ -183,7 +178,9 @@ function CreateAccount() {
     $('#usertable').on('click', '.edit', function () {
         var id = $(this).attr('data-id');
         var url = '/api/editaccount/geteditaccount/' + id;
-      /*    toastr.success(id);*/
+        /*    toastr.success(id);*/
+
+
         $.ajax({
             type: 'GET',
             url: url,
@@ -195,6 +192,15 @@ function CreateAccount() {
                 $('#editaccount').find('input[name="email"]').val(data.email);
                 $('#editaccount').find('select[name="roleID"]').val(data.roleID);
 
+            }
+        })
+        /* SHOW DISPLAY OF PHOTO AFTER CREATED */
+        $.ajax({
+            type: 'GET',
+            url: "/api/residence/getpics/" + id,
+            success: function (data) {
+            
+                $("#pic-holder").append("<img style='width:73%;height:172px; border-radius: 92px; overflow:hidden' src='" + data.filePath + "' />");
             }
         })
     });
@@ -221,27 +227,40 @@ function CreateAccount() {
     });
 
 
+    //$('#usertable').on('click', '.photo', function () {
+
+    //    var id = $(this).attr('data-id');
+    //    var url = '/api/sampleuploaddt/getsampleuploaddt/' + id;
+
+    //    $.ajax({
+    //        type: 'GET',
+    //        url: url,
+    //        success: function (data) {
+    //            $("#changePhotoModal").modal('show');
+    //            $('#changephoto').find('input[name="AccountId"]').val(data.id);
+    //            $('#changephoto').find('input[name="name"]').val(data.name);
+    //            console.log(data.id)
+
+    //        }
+    //    });
+
+    //    var url2 = '/api/residence/getpics/' + id;
+
+    //    $.ajax({
+    //        type: 'GET',
+    //        url: url2,
+    //        success: function (data) {
+    //            $('#changephoto').find('input[name="Id"]').val(data.id);
+    //            $("#imageshow").empty();
+    //            $("#imageshow").append("<img style='width:43%;height:193px;overflow:hidden;border-radius: 115px;' src='" + data.filePath + "' />");
+    //        }
+    //    });
+
+    //});
+
 
     //GET DATA ONLY FOR IMAGE
-    $('#usertable').on('click', '.photo', function (e) {
-
-         e.preventDefault();
-        var id = $(this).attr('data-id');
-        var url = '/api/sampleuploaddt/getsampleuploaddt/' + id;
-            toastr.success(id);
-        $.ajax({
-            type: 'GET',
-            url: url,
-            success: function (data) {
-                $('#changephotoModal').modal('show');
-                $('#changephoto').find('input[name="id"]').val(data.id);
-
-             
-
-            }
-        })
-    });
-
+   
 
     /* SAVING EDIT ACCOUNT POST METHOD*/
     $("#editaccount").validate({
@@ -383,8 +402,14 @@ function CreateAccount() {
                     return '<button  class=\'btn btn-success btn-sm  edit \' data-id = ' + data.Id + ' > Edit <span class="feather icon-edit f-20" >  </span></button>'
                         +
                         '<button  class=\'btn btn-danger deleteaccount btn-sm\' data-id = ' + data.Id + ' > Delete<span class="fa fa-trash f-20" >  </span></button>'
-                        +
-                        '<button  class=\'btn btn-warning photo btn-sm\' data-id = ' + data.Id + ' > Image<span class="fa fa-trash f-20" >  </span></button>'
+                       
+                }
+            },
+            {
+                "data": null,
+                'render': function (data, type, full, meta) {
+                    return '<button  class=\'btn btn-warning btn-sm  photo \' data-id = ' + data.Id + ' > Image <span class="feather icon-image f-20" >  </span></button>'
+
                 }
             },
             {
@@ -450,41 +475,6 @@ function CreateAccount() {
 
 
     })
-
-
-
-    //$("#create").submit(function (e) {
-
-    //    e.preventDefault();
-    //    var formData = new FormData(this);
-    //    if ($("#create").valid()) {
-    //        $('#createModal').modal('hide');
-    //        $.ajax({
-    //            type: 'POST',
-    //            url: '/api/residencephoto',
-    //            data: formData,
-    //            cache: false,
-    //            contentType: false,
-    //            processData: false,
-    //            success: function (response) {
-
-    //                setTimeout(function () {
-    //                    toastr.success("Residence Successfully Created");
-    //                    setTimeout(function () {
-    //                        location.reload();
-    //                    }, 2000)
-    //                }, 1500);
-    //                $("#createModal").modal('hide');
-    //            },
-    //            error: function (response) {
-    //                toastr.error("Unable to Delete Dependent in Foreign Key");
-    //                //alert(result, result.DepartmentId, result.Name);
-    //            }
-    //        });
-    //    }
-    //})
-
-
 
 
 

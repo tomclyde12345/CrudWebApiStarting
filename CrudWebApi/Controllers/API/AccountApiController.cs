@@ -14,6 +14,9 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Xml.Linq;
+using Microsoft.Ajax.Utilities;
+using System.Web.ModelBinding;
+using System.Web.UI.WebControls;
 
 
 namespace CrudWebApi.Controllers.API
@@ -52,9 +55,6 @@ namespace CrudWebApi.Controllers.API
             var datatable = Db.SampleUploads.SingleOrDefault(c => c.Id == id);
             return Ok(Mapper.Map<SampleUpload, UploadDTO>(datatable));
         }
-
-
-
 
 
 
@@ -150,7 +150,14 @@ namespace CrudWebApi.Controllers.API
         }
 
 
-
+        //QUERY RESIDENCE ONLY SHOW PICTURE ONLY BY RESIDENCE ID
+        [HttpGet]
+        [Route("api/residence/getpics/{id}")]
+        public IHttpActionResult GetPics(int id)
+        {
+            var userss = Db.SampleUploads.OrderByDescending(u => u.Id).FirstOrDefault(u => u.AccountId == id);
+            return Ok(userss);
+        }
 
 
 
