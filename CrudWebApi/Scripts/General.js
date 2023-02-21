@@ -199,7 +199,7 @@ function CreateAccount() {
             type: 'GET',
             url: "/api/account/getpics/" + id,
             success: function (data) {
-                $("#pic-holder").append("<img style='width:73%;height:172px; border-radius: 92px; overflow:hidden' src='" + data.filePath + "' class='papi-cholo' />");
+                $("#pic-holder").append("<img style='width:73%;height:167px; border-radius: 92px; overflow:hidden' src='" + data.filePath + "' class='papi-cholo' />");
             }
         });
     });
@@ -207,7 +207,7 @@ function CreateAccount() {
     $("#editAccountModal").on("hidden.bs.modal", function () {
         // put your default event here
        
-       
+       111
         $(".papi-cholo").remove();
     });
 
@@ -233,36 +233,38 @@ function CreateAccount() {
     });
 
 
-    //$('#usertable').on('click', '.photo', function () {
 
-    //    var id = $(this).attr('data-id');
-    //    var url = '/api/sampleuploaddt/getsampleuploaddt/' + id;
+    //GET DATA CHANGE IMAGE
+    $('#usertable').on('click', '.photo', function () {
+        var id = $(this).attr('data-id');
+        var url = '/api/editaccount/geteditaccount/' + id;
 
-    //    $.ajax({
-    //        type: 'GET',
-    //        url: url,
-    //        success: function (data) {
-    //            $("#changePhotoModal").modal('show');
-    //            $('#changephoto').find('input[name="AccountId"]').val(data.id);
-    //            $('#changephoto').find('input[name="name"]').val(data.name);
-    //            console.log(data.id)
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function (data) {
+                $("#changePhotoModal").modal('show');
+                $('#changephoto').find('input[name="AccountId"]').val(data.id);
+                $('#changephoto').find('input[name="id"]').val(data.id);
+                $('#changephoto').find('input[name="name"]').val(data.name);
+                console.log(data.id)
 
-    //        }
-    //    });
+            }
+        });
 
-    //    var url2 = '/api/residence/getpics/' + id;
+        var url2 = '/api/account/getpics/' + id;
 
-    //    $.ajax({
-    //        type: 'GET',
-    //        url: url2,
-    //        success: function (data) {
-    //            $('#changephoto').find('input[name="Id"]').val(data.id);
-    //            $("#imageshow").empty();
-    //            $("#imageshow").append("<img style='width:43%;height:193px;overflow:hidden;border-radius: 115px;' src='" + data.filePath + "' />");
-    //        }
-    //    });
+        $.ajax({
+            type: 'GET',
+            url: url2,
+            success: function (data) {
+                $('#changephoto').find('input[name="Id"]').val(data.id);
+                $("#imageshow").empty();
+                $("#imageshow").append("<img style='width:73%;height:167px; border-radius: 92px; overflow:hidden' src='" + data.filePath + "' />");
+            }
+        });
 
-    //});
+    });
 
 
     //GET DATA ONLY FOR IMAGE

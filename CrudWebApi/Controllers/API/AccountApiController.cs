@@ -48,16 +48,11 @@ namespace CrudWebApi.Controllers.API
             return Ok(datatable);
         }
 
-        [HttpGet]
-        [Route("api/sampleuploaddt/getsampleuploaddt/{id}")]
-        public IHttpActionResult GetdatatableuploadId(int id)
-        {
-            var datatable = Db.SampleUploads.SingleOrDefault(c => c.Id == id);
-            return Ok(Mapper.Map<SampleUpload, UploadDTO>(datatable));
-        }
 
 
 
+
+       
         //GET DATA ONLY FOR EDIT ACCOUNT
         [HttpGet]
         [Route("api/editaccount/geteditaccount/{id}")]

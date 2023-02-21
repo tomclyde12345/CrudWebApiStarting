@@ -109,31 +109,7 @@ namespace CrudWebApi.Controllers
 
         }
 
-        public ActionResult AdminPic() 
-        {
-            if (Session["Role_Id"] == null)
-            {
-                return RedirectToAction("logout", "Account");
-            }
-
-            var users = Db.SampleUsers.ToList();
-
-            var sess_id = (int)Session["LoginID"];
-
-            if ((int)Session["Role_Id"] != 1)
-            {
-                users = users.Where(d => d.Id == sess_id).ToList();
-            }
-
-            return PartialView(users);
-        }
-
-
-
-
-
-
-
+      
 
     }
 
