@@ -1,4 +1,4 @@
-﻿@model CrudWebApi.ViewModel.AccountVM
+﻿
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 
@@ -26,13 +26,9 @@
             <div class="modal-body">
                 <form id="createaccount" enctype="multipart/form-data">
                     <div class="text-center">
-                        <img id="imgs" style=" position: relative; height: 190px; width: 32%; overflow: hidden;" src="~/Images/try.png"/>
-                    </div>
-
-
-                    <br />
-
-
+                        @*<img id="imgs" style=" position: relative; height: 190px; width: 32%; overflow: hidden;" src="~/Images/try.png"/>*@
+                    </div> 
+                    <br /> 
                     <div class="form-group" style="display:none;">
                         <label for="name">Id</label>
                         <input type="text" class="form-control" name="id" id="id" value="" />
@@ -48,11 +44,12 @@
                             <input type="text" class="form-control" name="UserName" id="UserName" value="" onchange="UserCheck()" required>
                             <p id="Status" />
                         </div>
+                        <br />
                         <div class="form-group">
                             <label for="name">Image</label>
                             <input type="file" class="form-control" id="FilePath" name="FilePath" accept="image/*" onchange="imgchange(event)" />
                             <input type="hidden" class="form-control" name="FileName" id="FileName">
-
+                           
                         </div>
 
                     </div>
@@ -65,16 +62,15 @@
 
                         <div class="form-group">
                             <label for="name">Password</label>
-                            <input type="password" class="form-control" name="Password" id="Password" value="" required>
+
+
+                            <input type="password" name="Password" class="form-control" required="" id="Password">
+                            <i class="fa fa-eye" id="togglePassword" style="margin-left: -35px; cursor: pointer;"></i>
+
 
                         </div>
 
-                        <div class="form-group">
-                            <div class="text-left" style="font-size:12px;">
-
-                                <input type="checkbox" onclick="showpasswordinCreate()"> Show Password
-                            </div>
-                        </div>
+                    
                         <div class="form-group">
                             <label for="RoleID">Role</label>
                             <select class="form-control" style="width:100%" name="roleId" id="roleId">
@@ -114,19 +110,15 @@
             </div>
             <div class="modal-body">
 
+                @*@{
+            Html.RenderAction("AdminPic", "Account");
+        }*@
+                <div class="text-center">
+            <div id="pic-holder" style="  height: 190px; width: 50%; overflow: hidden;">  </div>
+        </div>
+
                 <form id="editaccount">
-
                     @*UPLOAD PICTURE *@
-
-                    <div>
-                        <div class="text-center">
-                            <div id="pic-holder" style=" position: relative; height: 196px; width: 100%; overflow: hidden;">
-
-                            </div>
-                        </div>
-
-                    </div>
-
                     <div class="col-md-6">
                         <div class="form-group" style="display:none;">
                             <label for="name">Id</label>
@@ -325,34 +317,28 @@
             </div>
         </div>
 
-
-
-
     </div>
 </div>
-
-
-
 
 
 
 @*DATATABLES *@
 <div class="col-md-12">
     <br />
-    <table id="usertable" class="table table-condensed" style="width:100%;background-color:whitesmoke;">
+    <table id="usertable" class="table table-responsive" style="width:100%;background-color:whitesmoke;">
 
 
         <thead style="height:46px;">
             <tr>
                 @*<th>Id</th>*@
-                <th class="bg-primary text-white" style="display:none;">Id</th>
-                <th class="bg-primary text-white">NAME</th>
+                <th class="bg-primary text-white  "style="display:none;">Id</th>
+                <th class="bg-primary text-white ">NAME</th>
                 <th class="bg-primary text-white">EMAIL</th>
                 <th class="bg-primary text-white">USERNAME</th>
                 <th class="bg-primary text-white">ROLE</th>
                 <th class="bg-primary text-white">ACTION</th>
                 <th class="bg-primary text-white">IMAGE</th>
-                <th class="bg-primary text-white">Reset Password</th>
+                <th class="bg-primary text-white">RESET PASSWORD </th>
 
 
             </tr>
@@ -361,24 +347,28 @@
 </div>
 
 
+<script>
+    const togglePassword = document.querySelector('#togglePassword');
+    const password = document.querySelector('#Password');
+
+    togglePassword.addEventListener('click', function (e) {
+        // toggle the type attribute
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+        // toggle the eye slash icon
+        this.classList.toggle('fa-eye-slash');
+    });
+</script>
+
+
+
+
 
 
 @*SHOW PASSWORD*@
 <script>
     function myFunction() {
         var x = document.getElementById("password");
-        if (x.type === "password") {
-            x.type = "text";
-        } else {
-            x.type = "password";
-        }
-    }
-</script>
-
-@*SHOW PASSWORD*@
-<script>
-    function showpasswordinCreate() {
-        var x = document.getElementById("Password");
         if (x.type === "password") {
             x.type = "text";
         } else {
@@ -425,6 +415,8 @@
 
 </script>
 
+
+@*DISPLAY PICTURE  WHILE CHOOSING A PROFILE PICTURE*@
 <script>
     function imgchange(event) {
         $("#imgs").attr('src', URL.createObjectURL(event.target.files[0]));

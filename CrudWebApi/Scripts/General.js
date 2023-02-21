@@ -197,12 +197,18 @@ function CreateAccount() {
         /* SHOW DISPLAY OF PHOTO AFTER CREATED */
         $.ajax({
             type: 'GET',
-            url: "/api/residence/getpics/" + id,
+            url: "/api/account/getpics/" + id,
             success: function (data) {
-            
-                $("#pic-holder").append("<img style='width:73%;height:172px; border-radius: 92px; overflow:hidden' src='" + data.filePath + "' />");
+                $("#pic-holder").append("<img style='width:73%;height:172px; border-radius: 92px; overflow:hidden' src='" + data.filePath + "' class='papi-cholo' />");
             }
-        })
+        });
+    });
+
+    $("#editAccountModal").on("hidden.bs.modal", function () {
+        // put your default event here
+       
+       
+        $(".papi-cholo").remove();
     });
 
     //  //GET DATA ONLY FOR  RESET PASSWORD
@@ -312,7 +318,7 @@ function CreateAccount() {
 
 
 
-   //Resetpassword
+   //Resetpassword saving
     $("#resetpassword").validate({
         rules: {
         
@@ -399,7 +405,7 @@ function CreateAccount() {
             {
                 "data": null,
                 'render': function (data, type, full, meta) {
-                    return '<button  class=\'btn btn-success btn-sm  edit \' data-id = ' + data.Id + ' > Edit <span class="feather icon-edit f-20" >  </span></button>'
+                    return '<button  class=\'btn btn-success btn-sm  edit \' data-id = ' + data.Id + ' > Edit <span class="fa fa-edit f-20" >  </span></button>'
                         +
                         '<button  class=\'btn btn-danger deleteaccount btn-sm\' data-id = ' + data.Id + ' > Delete<span class="fa fa-trash f-20" >  </span></button>'
                        
@@ -408,14 +414,14 @@ function CreateAccount() {
             {
                 "data": null,
                 'render': function (data, type, full, meta) {
-                    return '<button  class=\'btn btn-warning btn-sm  photo \' data-id = ' + data.Id + ' > Image <span class="feather icon-image f-20" >  </span></button>'
+                    return '<button  class=\'btn btn-info btn-sm  photo \' data-id = ' + data.Id + ' > Image <span class="fa fa-image f-20" >  </span></button>'
 
                 }
             },
             {
                 "data": null,
                 'render': function (data, type, full, meta) {
-                    return '<button  class=\'btn btn-warning btn-sm  resetpass \' data-id = ' + data.Id + ' > ResetPassword <span class="feather icon-edit f-20" >  </span></button>'
+                    return '<button  class=\'btn btn-warning btn-sm  resetpass \' data-id = ' + data.Id + ' > ResetPassword <span class="fa fa-key f-20" >  </span></button>'
                        
                 }
             },

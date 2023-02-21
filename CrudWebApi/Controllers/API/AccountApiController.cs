@@ -152,11 +152,11 @@ namespace CrudWebApi.Controllers.API
 
         //QUERY RESIDENCE ONLY SHOW PICTURE ONLY BY RESIDENCE ID
         [HttpGet]
-        [Route("api/residence/getpics/{id}")]
+        [Route("api/account/getpics/{id}")]
         public IHttpActionResult GetPics(int id)
         {
-            var userss = Db.SampleUploads.OrderByDescending(u => u.Id).FirstOrDefault(u => u.AccountId == id);
-            return Ok(userss);
+            var account = Db.SampleUploads.OrderByDescending(u => u.Id).FirstOrDefault(u => u.AccountId == id);
+            return Ok(account);
         }
 
 

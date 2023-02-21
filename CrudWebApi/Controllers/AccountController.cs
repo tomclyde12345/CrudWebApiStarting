@@ -108,74 +108,25 @@ namespace CrudWebApi.Controllers
             }
 
         }
-        [HttpPost]
-        public ActionResult ResetPassword(AccountVM resetpassword)
 
+        public ActionResult AdminPic() 
         {
             if (Session["Role_Id"] == null)
             {
                 return RedirectToAction("logout", "Account");
             }
 
-            var sess_id = (int)Session["LoginID"];
-            ScryptEncoder encoder = new ScryptEncoder();
-            if (resetpassword.User.Id == 0)
-            {
-
-                Db.SampleUsers.Add(resetpassword.User);
-                resetpassword.User.Password = encoder.Encode(resetpassword.User.Password);
-
-            }
-
-            else
-            {
-                var usersInDb = Db.SampleUsers.Single(c => c.Id == resetpassword.User.Id);
-                usersInDb.UserName = resetpassword.User.UserName;
-                usersInDb.Password = encoder.Encode(resetpassword.User.Password);
-            }
-
-         
-
-            Db.SaveChanges();
-
-            TempData["MessageReset"] = "RESET";
-
-            return RedirectToAction("Index", "Account");
-
-        }
-
-        //GET DATA ID FOR RESET PASS
-        public ActionResult ResetPass(int id)
-        {
-            if (Session["Role_Id"] == null)
-            {
-                return RedirectToAction("logout", "Account");
-            }
-            var resetfilter = Db.SampleUsers.ToList();
-
+            var users = Db.SampleUsers.ToList();
 
             var sess_id = (int)Session["LoginID"];
 
-            if ((int)Session["Role_Id"] == 1)
+            if ((int)Session["Role_Id"] != 1)
             {
-                resetfilter = resetfilter.Where(d => d.Id == sess_id).ToList();
+                users = users.Where(d => d.Id == sess_id).ToList();
             }
 
-            var manageuser = Db.SampleUsers.SingleOrDefault(c => c.Id == id); //EDIT METHOD
-
-
-            var viewModel = new AccountVM()
-            {
-
-                User = manageuser,
-                UsersList = Db.SampleUsers.ToList(),
-
-
-            };
-
-            return View("ResetPass", viewModel);
+            return PartialView(users);
         }
-
 
 
 
