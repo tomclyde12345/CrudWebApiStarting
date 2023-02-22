@@ -199,7 +199,7 @@ function CreateAccount() {
             type: 'GET',
             url: "/api/account/getpics/" + id,
             success: function (data) {
-                $("#pic-holder").append("<img style='width:73%;height:167px; border-radius: 92px; overflow:hidden' src='" + data.filePath + "' class='papi-cholo' />");
+                $("#pic-holder").append("<img style='width:155px;height:155px; border-radius: 92px; overflow:hidden' src='" + data.filePath + "' class='papi-cholo' />");
             }
         });
     });
@@ -260,14 +260,44 @@ function CreateAccount() {
             success: function (data) {
                 $('#changephoto').find('input[name="Id"]').val(data.id);
                 $("#imageshow").empty();
-                $("#imageshow").append("<img style='width:73%;height:167px; border-radius: 92px; overflow:hidden' src='" + data.filePath + "' />");
+                $("#imageshow").append("<img style='width:155px;height:155px; border-radius: 92px; overflow:hidden' src='" + data.filePath + "' />");
             }
         });
 
     });
 
 
-    //GET DATA ONLY FOR IMAGE
+    //CHANGE PROFILE PICTURE SAVING PHOTO
+    $("#changephoto").submit(function (e) {
+        e.preventDefault();
+        var formData = new FormData(this);
+        if ($("#changephoto").valid()) {
+            $('#changePhotoModal').modal('hide');
+            $.ajax({
+                type: 'POST',
+                url: '/api/changephoto',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+
+                    setTimeout(function () {
+                        toastr.success("Profile Picture Successfully Change");
+                        setTimeout(function () {
+                            location.reload();
+                        }, 2000)
+                    }, 1500);
+                    $("#changePhotoModal").modal('hide');
+                },
+                error: function (response) {
+                    toastr.error("Unable to Delete Dependent in Foreign Key");
+                    //alert(result, result.DepartmentId, result.Name);
+                }
+
+            });
+        }
+    })
    
 
     /* SAVING EDIT ACCOUNT POST METHOD*/

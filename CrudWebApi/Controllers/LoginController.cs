@@ -20,7 +20,7 @@ namespace CrudWebApi.Controllers
         public ActionResult Login()
         {
             return View();
-            ViewBag.Message = "";
+          
         }
 
         [HttpPost]

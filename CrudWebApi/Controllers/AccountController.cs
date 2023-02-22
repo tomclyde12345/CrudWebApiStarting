@@ -52,7 +52,7 @@ namespace CrudWebApi.Controllers
 
 
                 int totalrows = userlist.Count();
-
+                 
                 if (!string.IsNullOrEmpty(searchValue))//FILTER SEARCH
                 {
                     userlist = userlist.

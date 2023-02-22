@@ -5,6 +5,17 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="WebapidbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="SampleLogs">
+          <Key>
+            <PropertyRef Name="LogId" />
+          </Key>
+          <Property Name="LogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="100" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="LogMessage" Type="nvarchar(max)" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+        </EntityType>
         <EntityType Name="SampleRole">
           <Key>
             <PropertyRef Name="Id" />
@@ -39,6 +50,18 @@
           <Property Name="Password" Type="nvarchar" MaxLength="200" />
           <Property Name="RoleID" Type="int" />
         </EntityType>
+        <Association Name="FK_SampleLogs_SampleUser">
+          <End Role="SampleUser" Type="Self.SampleUser" Multiplicity="0..1" />
+          <End Role="SampleLogs" Type="Self.SampleLogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SampleUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SampleLogs">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SampleUser_SampleRole">
           <End Role="SampleRole" Type="Self.SampleRole" Multiplicity="0..1" />
           <End Role="SampleUser" Type="Self.SampleUser" Multiplicity="*" />
@@ -52,10 +75,15 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="WebapidbModelStoreContainer">
+          <EntitySet Name="SampleLogs" EntityType="Self.SampleLogs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SampleRole" EntityType="Self.SampleRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SampleTribe" EntityType="Self.SampleTribe" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SampleUpload" EntityType="Self.SampleUpload" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SampleUser" EntityType="Self.SampleUser" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_SampleLogs_SampleUser" Association="Self.FK_SampleLogs_SampleUser">
+            <End Role="SampleUser" EntitySet="SampleUser" />
+            <End Role="SampleLogs" EntitySet="SampleLogs" />
+          </AssociationSet>
           <AssociationSet Name="FK_SampleUser_SampleRole" Association="Self.FK_SampleUser_SampleRole">
             <End Role="SampleRole" EntitySet="SampleRole" />
             <End Role="SampleUser" EntitySet="SampleUser" />
@@ -93,6 +121,11 @@
             <End Role="SampleUser" EntitySet="SampleUsers" />
             <End Role="SampleUpload" EntitySet="SampleUploads" />
           </AssociationSet>
+          <EntitySet Name="SampleLogs" EntityType="WebapidbModel.SampleLog" />
+          <AssociationSet Name="FK_SampleLogs_SampleUser" Association="WebapidbModel.FK_SampleLogs_SampleUser">
+            <End Role="SampleUser" EntitySet="SampleUsers" />
+            <End Role="SampleLog" EntitySet="SampleLogs" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="SampleUpload">
           <Key>
@@ -116,6 +149,7 @@
           <Property Name="RoleID" Type="Int32" />
           <NavigationProperty Name="SampleRole" Relationship="WebapidbModel.FK_SampleUser_SampleRole" FromRole="SampleUser" ToRole="SampleRole" />
           <NavigationProperty Name="SampleUploads" Relationship="WebapidbModel.FK_SampleUpload_SampleUser" FromRole="SampleUser" ToRole="SampleUpload" />
+          <NavigationProperty Name="SampleLogs" Relationship="WebapidbModel.FK_SampleLogs_SampleUser" FromRole="SampleUser" ToRole="SampleLog" />
         </EntityType>
         <Association Name="FK_SampleUser_SampleRole">
           <End Type="WebapidbModel.SampleRole" Role="SampleRole" Multiplicity="0..1" />
@@ -138,6 +172,30 @@
             </Principal>
             <Dependent Role="SampleUpload">
               <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SampleLog">
+          <Key>
+            <PropertyRef Name="LogId" />
+          </Key>
+          <Property Name="LogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="LogMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SampleUser" Relationship="WebapidbModel.FK_SampleLogs_SampleUser" FromRole="SampleLog" ToRole="SampleUser" />
+        </EntityType>
+        <Association Name="FK_SampleLogs_SampleUser">
+          <End Type="WebapidbModel.SampleUser" Role="SampleUser" Multiplicity="0..1" />
+          <End Type="WebapidbModel.SampleLog" Role="SampleLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SampleUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SampleLog">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -182,6 +240,18 @@
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SampleLogs">
+            <EntityTypeMapping TypeName="WebapidbModel.SampleLog">
+              <MappingFragment StoreEntitySet="SampleLogs">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LogMessage" ColumnName="LogMessage" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="LogId" ColumnName="LogId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

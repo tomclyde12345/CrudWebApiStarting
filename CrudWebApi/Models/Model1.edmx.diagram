@@ -11,6 +11,8 @@
         <EntityTypeShape EntityType="WebapidbModel.SampleUser" Width="1.5" PointX="3" PointY="0.875" />
         <AssociationConnector Association="WebapidbModel.FK_SampleUser_SampleRole" />
         <AssociationConnector Association="WebapidbModel.FK_SampleUpload_SampleUser" />
+        <EntityTypeShape EntityType="WebapidbModel.SampleLog" Width="1.5" PointX="5.375" PointY="0.75" />
+        <AssociationConnector Association="WebapidbModel.FK_SampleLogs_SampleUser" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

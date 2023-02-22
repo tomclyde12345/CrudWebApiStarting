@@ -18,6 +18,7 @@ namespace CrudWebApi.Models
         public SampleUser()
         {
             this.SampleUploads = new HashSet<SampleUpload>();
+            this.SampleLogs = new HashSet<SampleLog>();
         }
     
         public int Id { get; set; }
@@ -30,5 +31,7 @@ namespace CrudWebApi.Models
         public virtual SampleRole SampleRole { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SampleUpload> SampleUploads { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SampleLog> SampleLogs { get; set; }
     }
 }

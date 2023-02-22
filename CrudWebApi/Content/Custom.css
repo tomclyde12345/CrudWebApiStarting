@@ -1,0 +1,9 @@
+﻿
+.validationerror {
+    color: red !important;
+    display: block;
+}
+
+.hideThis {
+    display: none;
+}

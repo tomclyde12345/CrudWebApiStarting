@@ -1,16 +1,13 @@
 ﻿
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 
 }
 
 
 
 @*BUTTON ONLY CLICK START CREATE ACCOUNT *@
-<br />
-<form-group>
-    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#createModal">CREATE ACCOUNT</button>
-</form-group>
+
 
 <!---->
 @*CREATE ACCOUNT IN MODAL *@
@@ -26,7 +23,7 @@
             <div class="modal-body">
                 <form id="createaccount" enctype="multipart/form-data">
                     <div class="text-center">
-                        @*<img id="imgs" style=" position: relative; height: 190px; width: 32%; overflow: hidden;" src="~/Images/try.png"/>*@
+                        <img id="imgs" style=" position: relative; height: 190px; width: 32%; overflow: hidden;" src="~/Images/try.png" />
                     </div>
                     <br />
                     <div class="form-group" style="display:none;">
@@ -105,56 +102,68 @@
 
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Edit Account</h4>
+                <h4 class="card-title d-flex justify-content-between modal-title" style="padding:0;">Edit Account</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
 
                 @*UPLOAD PICTURE *@
                 <div class="text-center">
-                    <div id="pic-holder" class="center-block" style=" position: relative; height: 190px; width: 43%; overflow: hidden;">
+
+                    <div id="pic-holder">
 
                     </div>
                 </div>
-
+                <br />
+                <div class="alert alert-primary">
+                    Edit information in Account
+                </div>
                 <form id="editaccount">
-
-                    <div class="col-md-6">
-                        <div class="form-group" style="display:none;">
-                            <label for="name">Id</label>
-                            <input type="text" class="form-control" name="id" id="id" value="" />
-                        </div>
-                        <div class="form-group">
+                    <div class=" row">
+                        <div class="col-sm-6">
+                            <div class="input-group" style="display:none;">
+                                <label for="name">Id</label>
+                                <input type="text" class="form-control" name="id" id="id" value="" />
+                            </div>
                             <label for="name">Name</label>
-                            <input type="text" class="form-control" name="name" id="name" value="" />
-                        </div>
+                            <div class="input-group">
 
-                        <div class="form-group">
+                                <span class="input-group-addon" ><i class="fa fa-users"></i></span>
+                                <input type="text" class="form-control" name="name" id="name" value="" />
+                            </div>
                             <label for="RoleID">Role</label>
-                            <select class="form-control" style="width:100%" name="roleID" id="roleID">
-                                <option value="">Please Select a Role</option>
-                            </select>
+                            <div class="input-group">
+                                <span class="input-group-addon" ><i class="fa fa-user"></i></span>
+                                <select class="form-control" style="width:100%" name="roleID" id="roleID">
+                                    <option value="">Please Select a Role</option>
+                                </select>
 
+
+                            </div>
 
                         </div>
-
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
+                        <div class="col-sm-6">
                             <label for="name">Email</label>
-                            <input type="email" class="form-control" name="email" id="email" value="" />
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="ti-email"></i></span>
+                                <input type="email" class="form-control" name="email" id="email" value="" />
+                            </div>
+
+                            <label for="name">UserName</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="ti-user"></i></span>
+                                <input type="text" class="form-control" name="userName" id="userName" value="" />
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="name">Username</label>
-                            <input type="text" class="form-control" name="userName" id="userName" value="" />
-                        </div>
+
                     </div>
+
                     <div class="text-center">
 
-                        <button class="btn btn-primary btn-sm " id="btnsubmit" type="submit">Save</button>
+                        <button class="btn btn-primary btn-md btn-grd-*" id="btnsubmit" type="submit">SAVE</button>
                     </div>
-
-
                 </form>
             </div>
             <div class="modal-footer">
@@ -196,64 +205,63 @@
 
 
 
-@*CHANGE PROFILE IMAGE IN MODAL*@
-<div id="changePhotoModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
 
 
 
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Change Profile Image</h4>
-            </div>
-            <div class="modal-body">
-
-                @*UPLOAD PICTURE *@
-                <div class="text-center">
-                    <div id="imageshow" class="center-block" style=" position: relative; height: 190px; width: 43%; overflow: hidden;">
-
+<div class="card-body">
+    <div class="card">
+        @*CHANGE PROFILE IMAGE IN MODAL *@
+        <div class="modal fade" id="changePhotoModal">
+            <div class="modal-dialog modal-m modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="card-title d-flex justify-content-between modal-title" style="padding:0;">Change Profile Image</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                </div>
 
-                <form id="changephoto">
+                    @*UPLOAD PICTURE *@
+                    
+                        <div id="imageshow" class="align-self-center" >
 
+                        </div>
 
-                    <div class="alert alert-success">
+                    <br />
+                    <div class="alert alert-primary" >
                         Please Choose an Image File to Change a Photo
-
                     </div>
-                    <input type="hidden" class="form-control" name="AccountId" id="AccountId" value="" />
-                    <div class="col-md-6">
-                        <div class="form-group" style="display:none;">
-                            <label for="name">Id</label>
-                            <input type="text" class="form-control" name="id" id="id" value="" />
+                    <form id="changephoto">
+                        <div class="modal-body">
+                            <label for="userName">Name</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="ti-user"></i></span>
+                                <input type="text" class="form-control" name="name" id="name" value="" readonly />
+
+                            </div>
+                            <input type="hidden" class="form-control" name="AccountId" id="AccountId" value="" />
+
+                            <label for="password">Image</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="ti-image"></i></span>
+                                <input type="file" class="form-control" id="FilePath" name="FilePath" accept="image/*" required />
+                            </div>
+
+
                         </div>
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" class="form-control" name="name" id="name" value="" />
+                        <div class="text-center">
+
+                            <button class="btn btn-primary btn-sm btn-grd-* " id="btnsubmit" type="submit">SAVE</button>
                         </div>
 
+                        <div class="modal-footer ">
 
 
-                    </div>
-                    <div class="col-md-6">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">CLOSE</button>
 
-                        <div class="form-group">
-                            <label for="name">Image</label>
-                            <input type="file" class="form-control" id="FilePath" name="FilePath" accept="image/*" required />
                         </div>
-                    </div>
-                    <div class="text-center">
-
-                        <button class="btn btn-primary btn-sm " id="btnsubmit" type="submit">Save</button>
-                    </div>
-
-
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </form>
+                </div>
             </div>
         </div>
 
@@ -261,12 +269,14 @@
 </div>
 
 
+
+
+
+
+
+
 <div class="card-body">
     <div class="card">
-        <div class="card-header">
-
-        </div>
-
         @*RESET PASSWORD IN MODAL *@
         <div class="modal fade" id="resetpassModal">
             <div class="modal-dialog modal-m modal-dialog-centered">
@@ -290,34 +300,46 @@
                                 <input type="hidden" class="form-control" name="roleID" id="roleID" value="" />
                             </div>
 
-                            <div class="form-group">
-                                <label for="userName">UserName</label>
-                                <input type="text" class="form-control" name="userName" id="userName" value="" readonly />
-                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
 
-                            <div class="form-group">
-                                <label for="password">Password</label>
-                                <input type="password" placeholder="Enter a New Password" class="form-control" name="password" id="password" value="" />
-                            </div>
+                                  
+                                    <div class="form-group">
+                                        <label for="userName">UserName</label>
+                                        <input type="text" class="form-control" name="userName" id="userName" value="" readonly />
+                                    </div>
 
-                            <div class="form-group">
-                                <div class="text-left" style="font-size:12px;">
+                                </div>
 
-                                    <input type="checkbox" onclick="myFunction()"> Show Password
+                                <div class="col-sm-6">
+                                   
+                                    <div class="form-group">
+                                        <label for="password">Password</label>
+                                     
+                                        <input type="password" placeholder="Enter a New Password" class="form-control" name="password" id="password" value="" />
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="text-left" style="font-size:12px;">
+
+                                            <input type="checkbox" onclick="myFunction()"> Show Password
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="text-center">
 
-                            <button class="btn btn-primary btn-sm" id="btnsave" type="submit">Save</button>
-                        </div>
-                        <div class="modal-footer ">
+                              
+                            </div>
+                            <div class="text-center">
+
+                                <button class="btn btn-primary btn-sm  btn-grd-* " id="btnsave" type="submit">SAVE</button>
+                            </div>
+                            <div class="modal-footer ">
 
 
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">CLOSE</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">CLOSE</button>
 
-                        </div>
-                    </form>
+                            </div>
+</form>
                 </div>
             </div>
         </div>
@@ -327,29 +349,58 @@
 
 
 
-@*DATATABLES *@
-<div class="col-md-12">
-    <br />
-    <table id="usertable" class="table table-responsive" style="width:100%;background-color:whitesmoke;">
+
+<div class="card">
+    <div class="card-header">
+        <h5>Account List</h5>
 
 
-        <thead style="height:46px;">
-            <tr>
-                @*<th>Id</th>*@
-                <th class="bg-primary text-white  " style="display:none;">Id</th>
-                <th class="bg-primary text-white ">NAME</th>
-                <th class="bg-primary text-white">EMAIL</th>
-                <th class="bg-primary text-white">USERNAME</th>
-                <th class="bg-primary text-white">ROLE</th>
-                <th class="bg-primary text-white">ACTION</th>
-                <th class="bg-primary text-white">IMAGE</th>
-                <th class="bg-primary text-white">RESET PASSWORD </th>
+        <div class="card-header-right">
+            <ul class="list-unstyled card-option">
+                <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                <li><i class="fa fa-window-maximize full-card"></i></li>
+                <li><i class="fa fa-minus minimize-card"></i></li>
+                <li><i class="fa fa-refresh reload-card"></i></li>
+                <li><i class="fa fa-trash close-card"></i></li>
+            </ul>
+        </div>
+    </div>
+    @*OPENING  CREATE ACCOUNTMODAL*@
+    <form-group style="padding: 2% 2.5%">
+        <button class="btn btn-primary btn-sm ti-plus" data-toggle="modal" data-target="#createModal">CREATE ACCOUNT</button>
+    </form-group>
 
 
-            </tr>
-        </thead>
-    </table>
+
+
+    <div class="card-block table-border-style">
+        <div class="table-responsive">
+            <table id="usertable" class="table table-hover">
+
+
+                <thead style="height:46px;">
+                    <tr>
+                        @*<th>Id</th>*@
+                        <th style="display:none;">Id</th>
+                        <th>NAME</th>
+                        <th>EMAIL</th>
+                        <th>USERNAME</th>
+                        <th>ROLE</th>
+                        <th>ACTION</th>
+                        <th>IMAGE</th>
+                        <th>RESET PASSWORD </th>
+
+
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
 </div>
+
+
+
+
 
 
 <script>

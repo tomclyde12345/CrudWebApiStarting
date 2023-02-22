@@ -157,11 +157,7 @@ namespace CrudWebApi.Controllers.API
 
 
 
-
-
-
-
-
+        //SAVEVING ACCOUNT CREATION WITH INCLUDE PROFILE IMAGE
 
         [HttpPost]
         [Route("api/residencephoto")]
@@ -231,6 +227,7 @@ namespace CrudWebApi.Controllers.API
 
                                 Db.SampleUploads.Add(upload);
                                 Db.SaveChanges();
+                              
 
                             }
                         }
@@ -248,6 +245,84 @@ namespace CrudWebApi.Controllers.API
         }
 
 
+
+
+
+        [HttpPost]
+        [Route("api/changephoto")]
+        public async Task<string> ChangePhoto()
+        {
+            var ctx = HttpContext.Current;
+            var root = ctx.Server.MapPath("~/SampleImg/");
+            var provider =
+                new MultipartFormDataStreamProvider(root);
+
+            try
+            {
+                await Request.Content
+                    .ReadAsMultipartAsync(provider);
+
+                SampleUser res = new SampleUser();
+
+                foreach (var file in provider.FileData)
+                {
+                    foreach (var key in provider.FormData.AllKeys)
+                    {
+                        foreach (var val in provider.FormData.GetValues(key))
+
+                            if (key == "AccountId")
+                            {
+                                var name = file.Headers
+                                       .ContentDisposition
+                                       .FileName;
+
+                                // remove double quotes from string.
+                                name = name.Trim('"');
+                                var dateNew = Convert.ToString(DateTime.Now.Ticks) + "-";
+
+                                var localFileName = file.LocalFileName;
+                                var filePath = Path.Combine(root, dateNew + name);
+
+                                File.Move(localFileName, filePath);
+                                SampleUpload upload = new SampleUpload();
+
+                                {
+                                    upload.FilePath = "/SampleImg/" + dateNew + name;
+                                }
+
+                                upload.FileName = name;
+                                upload.AccountId = Convert.ToInt32(provider.FormData["AccountId"]);
+                                upload.Id = upload.Id;
+                                Db.SampleUploads.Add(upload);
+                                Db.SaveChanges();
+                                //Db2.IppLogsUploads.Add(new IppLogsUpload()
+                                //{
+
+                                //    LogMessage = provider.FormData["UserName"] + " " + "Change a Photo" + " " + " Residence Name:" + " " + provider.FormData["Name"],
+                                //    UserId = Convert.ToInt32(provider.FormData["UserId"]),
+                                //    Date = DateTime.Now,
+                                //    UserName = provider.FormData["UserName"],
+                                //    Name = provider.FormData["Name"],
+
+
+                                //});
+                                //Db2.SaveChanges();
+                            };
+
+
+                    }
+                }
+
+
+            }
+
+            catch (Exception e)
+            {
+                return $"Error: {e.Message}";
+            }
+
+            return "File uploaded!";
+        }
 
 
 
