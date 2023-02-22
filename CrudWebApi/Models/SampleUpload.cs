@@ -18,7 +18,5 @@ namespace CrudWebApi.Models
         public string FilePath { get; set; }
         public string FileName { get; set; }
         public Nullable<int> AccountId { get; set; }
-    
-        public virtual SampleUser SampleUser { get; set; }
     }
 }

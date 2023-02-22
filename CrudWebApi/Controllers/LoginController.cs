@@ -71,6 +71,12 @@ namespace CrudWebApi.Controllers
                     return RedirectToAction("Index", "User");
                 }
 
+                //IF USER
+                if (result.RoleID == 4)
+                {
+                    TempData["Message"] = "WELCOME CENRO QUEZON";
+                    return RedirectToAction("Index", "CentroQuezon");
+                }
             }
             else
             {

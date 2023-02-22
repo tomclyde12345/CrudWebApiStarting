@@ -175,8 +175,11 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\API\AccountApiController.cs" />
+    <Compile Include="Controllers\API\ContractorAPIController.cs" />
     <Compile Include="Controllers\API\RoleApiController.cs" />
     <Compile Include="Controllers\API\TribeAPIController.cs" />
+    <Compile Include="Controllers\CentroQuezonController.cs" />
+    <Compile Include="Controllers\ContractorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
@@ -185,6 +188,7 @@
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DTO\AccountDTO.cs" />
+    <Compile Include="DTO\ContractorDTO.cs" />
     <Compile Include="DTO\RoleDTO.cs" />
     <Compile Include="DTO\TribeDTO.cs" />
     <Compile Include="DTO\UploadDTO.cs" />
@@ -206,6 +210,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NgpContractor.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SampleLog.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -624,6 +631,8 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Account\AdminPic.cshtml" />
+    <Content Include="Views\Contractor\Index.cshtml" />
+    <Content Include="Views\CentroQuezon\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

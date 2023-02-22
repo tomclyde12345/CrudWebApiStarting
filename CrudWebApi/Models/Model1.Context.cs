@@ -25,10 +25,11 @@ namespace CrudWebApi.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<NgpContractor> NgpContractors { get; set; }
+        public virtual DbSet<SampleLog> SampleLogs { get; set; }
         public virtual DbSet<SampleRole> SampleRoles { get; set; }
         public virtual DbSet<SampleTribe> SampleTribes { get; set; }
         public virtual DbSet<SampleUpload> SampleUploads { get; set; }
         public virtual DbSet<SampleUser> SampleUsers { get; set; }
-        public virtual DbSet<SampleLog> SampleLogs { get; set; }
     }
 }

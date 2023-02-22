@@ -1,0 +1,190 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+@*CREATE CONTRACTOR IN MODAL *@
+<div id="createcontractorModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h4 class="card-title d-flex justify-content-between modal-title" style="padding:0;">Create Contractor</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body ">
+                <form id="createcontractor">
+
+
+
+                    <div class="row">
+
+                        <div class="col-sm-4">
+
+                            <div class="form-group">
+                                <label for="name">ContractorName</label>
+                                <input type="text" class="form-control" name="ContractorName" id="ContractorName" value="" />
+                            </div>
+                            <div class="form-group">
+                                <label for="name">ProjectName</label>
+                                <input type="text" class="form-control" name="ProjectName" id="ProjectName" value="" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="name">SiteCode</label>
+                                <input type="text" class="form-control" name="SiteCode" id="SiteCode" value="" />
+                            </div>
+                            <div class="form-group">
+                                <label for="name">AreaContracted</label>
+                                <input type="text" class="form-control" name="AreaContracted" id="AreaContracted" value="" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+
+                            <div class="form-group">
+                                <label for="name">AddressMunicipality</label>
+                                <input type="text" class="form-control" name="AddressMunicipality" id="AddressMunicipality" value="" />
+                            </div>
+                            <div class="form-group">
+                                <label for="name">AddressBarangay</label>
+                                <input type="text" class="form-control" name="AddressBarangay" id="AddressBarangay" value="" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="name">LocationMunicipality</label>
+                                <input type="text" class="form-control" name="LocationMunicipality" id="LocationMunicipality" value="" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="name">LocationBarangay</label>
+                                <input type="text" class="form-control" name="LocationBarangay" id="LocationBarangay" value="" required>
+                            </div>
+
+
+                        </div>
+
+
+
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="name">LocationSitio</label>
+                                <input type="text" class="form-control" name="LocationSitio" id="LocationSitio" value="" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="RoleID">Penro</label>
+                                <select class="form-control" style="width:100%" name="Penro" id="Penro" required>
+                                    <option value="">Please Select a Goverment Agency</option>
+                                    <option value="City Penro">City Penro</option>
+                                </select>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="RoleID">Region</label>
+                                <select class="form-control" style="width:100%" name="Region" id="Region" required>
+                                    <option value="">Please Select a Region</option>
+                                    <option value="RegionIV-B">RegionIV-B</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="RoleID">Year Established</label>
+                                <select class="form-control" style="width:100%" name="Year_Estb" id="Year_Estb" required>
+                                    <option value="">Please Select a Year</option>
+                                    <option value="2023">2023</option>
+                                    <option value="2024">2024</option>
+                                    <option value="2025">2025</option>
+                                    <option value="2026">2026</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+
+                        <button class="btn btn-primary btn-sm " id="btnsubmit" type="submit">Save</button>
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+<div class="card">
+    <div class="card-header">
+        <h5>Account List</h5>
+
+
+        @*<div class="card-header-right">
+            <ul class="list-unstyled card-option">
+                <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                <li><i class="fa fa-window-maximize full-card"></i></li>
+                <li><i class="fa fa-minus minimize-card"></i></li>
+                <li><i class="fa fa-refresh reload-card"></i></li>
+                <li><i class="fa fa-trash close-card"></i></li>
+            </ul>
+        </div>*@
+    </div>
+
+    @*OPENING  CREATE CONTRACTOR*@
+    <form-group style="padding: 2% 2.5%">
+        <button class="btn btn-primary btn-sm ti-plus" data-toggle="modal" data-target="#createcontractorModal">CREATE CONTRACTOR</button>
+    </form-group>
+
+
+
+    <div class="card-block table-border-style">
+        <div class="table-responsive">
+            <table id="contractortable" class="table table-hover">
+
+
+                <thead style="height:46px;">
+                    <tr>
+                        @*<th>Id</th>*@
+                        <th style="display:none;">Id</th>
+                        <th>Year_Estb</th>
+                        <th>Region</th>
+                        <th>Penro</th>
+                        <th>SiteCode</th>
+                        <th>ContractorName</th>
+                        <th>ProjectName</th>
+                        <th>AreaContracted </th>
+                        <th>AddressMunicipality </th>
+                        <th>AddressBarangay </th>
+                        <th>LocationMunicipality </th>
+                        <th>LocationBarangay </th>
+                        <th>LocationSitio </th>
+
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<script>
+    $(window).ready(function () {
+        CreateContractor();
+    });
+</script>

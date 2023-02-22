@@ -1,4 +1,138 @@
 ﻿
+
+
+function CreateContractor() {
+    $("#createcontractor").validate({
+        rules: {
+            ContractorName: {
+                required: true,
+            },
+            ProjectName: {
+                required: true,
+            },
+            SiteCode: {
+                required: true,
+            },
+            AreaContracted: {
+                required: true,
+            },
+            Penro: {
+                required: true,
+            },
+            Region: {
+                required: true,
+            },
+            Year_Estb: {
+                required: true,
+            },
+            AddressMunicipality: {
+                required: true,
+            },
+            AddressBarangay: {
+                required: true,
+            },
+            LocationMunicipality: {
+                required: true,
+            },
+            LocationBarangay: {
+                required: true,
+            },
+            LocationSitio: {
+                required: true,
+            },
+        },
+        errorClass: "validationerror",
+        messages: {
+            Name: {
+                required: "Please Select a fssafas",
+            },
+        },
+        submitHandler: function () {
+            if ($("#createcontractor").valid()) {
+                var valdata = $("#createcontractor").serialize();
+                $('#createcontractorModal').modal('hide');
+                $.ajax({
+                    url: '/api/savecontractor/postcontractor/',
+                    type: "POST",
+                    dataType: 'json',
+                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                    data: valdata,
+                });
+                setTimeout(function () {
+                    toastr.success('Save Contractor Successfully');
+                    setTimeout(function () {
+                        location.reload();
+                    }, 2000)
+                }, 1500);
+            }
+        }
+    });
+
+   
+    $('#contractortable').DataTable({
+
+        ajax: {
+            url: '/api/contractordatable/getcontractordatable/',
+            dataSrc: '',
+        },
+        columns: [
+
+            {
+                data: "year_Estb",
+            },
+            {
+                data: "region",
+            },
+            {
+                data: "penro",
+            },
+            {
+                data: "siteCode",
+            },
+            {
+                data: "contractorName",
+            },
+            {
+                data: "projectName",
+            },
+            {
+                data: "areaContracted",
+            },
+            {
+                data: "addressMunicipality",
+            },
+            {
+                data: "addressBarangay",
+            },
+            {
+                data: "locationMunicipality",
+            },
+            {
+                data: "locationBarangay",
+            },
+            {
+                data: "locationSitio",
+            },
+
+
+        ]
+    });
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
 function CreateTribe() {
     $("#SaveRequest").validate({
         rules: {
