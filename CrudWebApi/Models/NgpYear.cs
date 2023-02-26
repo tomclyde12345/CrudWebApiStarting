@@ -30,6 +30,12 @@ namespace CrudWebApi.Models
         public string no_seedlings_survived { get; set; }
         public string survival_rate { get; set; }
         public string year_contracted { get; set; }
+        public string moa3 { get; set; }
+        public string moa2 { get; set; }
+        public string no_seedlings_year1 { get; set; }
+        public string no_seedlings_replanted { get; set; }
+        public string no_seedlings_replanted3 { get; set; }
+        public string no_seedlings_year3 { get; set; }
     
         public virtual NgpContractor NgpContractor { get; set; }
     }

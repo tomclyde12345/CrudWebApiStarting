@@ -38,6 +38,7 @@ namespace CrudWebApi.Controllers.API
             if (yearDTO.Id == 0)
             {
 
+                year.Date_moa = yearDTO.Date_moa;
                 year.ProjectNameId = yearDTO.ProjectNameId;
                 year.moa_number = yearDTO.moa_number;
                 year.Date_moa = yearDTO.Date_moa;
@@ -96,6 +97,97 @@ namespace CrudWebApi.Controllers.API
                 year.no_seedlings_survived = yearDTO.no_seedlings_survived;
                 year.survival_rate = yearDTO.survival_rate;
                 year.year_contracted = yearDTO.year_contracted;
+                year.moa2 = yearDTO.moa2;
+                year.no_seedlings_year1 = yearDTO.no_seedlings_year1;
+                year.no_seedlings_replanted = yearDTO.no_seedlings_replanted;
+                year.moa3 = yearDTO.moa3;
+                year.no_seedlings_year3 = yearDTO.no_seedlings_year3;
+                 year.no_seedlings_replanted3 = yearDTO.no_seedlings_replanted3;
+
+
+            }
+
+            Db.SaveChanges();
+
+
+            return Ok();
+
+        }
+
+        //EDIT METHOD FOR  SAVING  EDIT YEAR
+
+        [HttpPost]
+        [Route("api/edityearsave2/postedityearsave2/{id}")]
+        public IHttpActionResult EditYear2(YearDTO yearDTO)
+        {
+
+
+            if (ModelState.IsValid)
+            {
+                var year = Db.NgpYears.Single(c => c.Id == yearDTO.Id);
+
+                year.Id = yearDTO.Id;
+                year.ProjectNameId = yearDTO.ProjectNameId;
+                year.moa_number = yearDTO.moa_number;
+                year.Date_moa = yearDTO.Date_moa;
+                year.Unit_cost = yearDTO.Unit_cost;
+                year.contract_cost = yearDTO.contract_cost;
+                year.date_obligated = yearDTO.date_obligated;
+                year.ors_no = yearDTO.ors_no;
+                year.no_seedings_produced = yearDTO.no_seedings_produced;
+                year.commodity_forest = yearDTO.commodity_forest;
+                year.commodity_fruit = yearDTO.commodity_fruit;
+                year.no_seedlings_planted = yearDTO.no_seedlings_planted;
+                year.no_seedlings_survived = yearDTO.no_seedlings_survived;
+                year.survival_rate = yearDTO.survival_rate;
+                year.year_contracted = yearDTO.year_contracted;
+                year.moa2 = yearDTO.moa2;
+                year.no_seedlings_year1 = yearDTO.no_seedlings_year1;
+                year.no_seedlings_replanted = yearDTO.no_seedlings_replanted;
+
+
+            }
+
+            Db.SaveChanges();
+
+
+            return Ok();
+
+        }
+
+        //EDIT METHOD FOR  SAVING  EDIT YEAR
+
+        [HttpPost]
+        [Route("api/edityearsave3/postedityearsave3/{id}")]
+        public IHttpActionResult EditYear3(YearDTO yearDTO)
+        {
+
+
+            if (ModelState.IsValid)
+            {
+                var year = Db.NgpYears.Single(c => c.Id == yearDTO.Id);
+
+                year.Id = yearDTO.Id;
+                year.ProjectNameId = yearDTO.ProjectNameId;
+                year.moa_number = yearDTO.moa_number;
+                year.Date_moa = yearDTO.Date_moa;
+                year.Unit_cost = yearDTO.Unit_cost;
+                year.contract_cost = yearDTO.contract_cost;
+                year.date_obligated = yearDTO.date_obligated;
+                year.ors_no = yearDTO.ors_no;
+                year.no_seedings_produced = yearDTO.no_seedings_produced;
+                year.commodity_forest = yearDTO.commodity_forest;
+                year.commodity_fruit = yearDTO.commodity_fruit;
+                year.no_seedlings_planted = yearDTO.no_seedlings_planted;
+                year.no_seedlings_survived = yearDTO.no_seedlings_survived;
+                year.survival_rate = yearDTO.survival_rate;
+                year.year_contracted = yearDTO.year_contracted;
+                year.moa2 = yearDTO.moa2;
+                year.no_seedlings_year1 = yearDTO.no_seedlings_year1;
+                year.no_seedlings_replanted = yearDTO.no_seedlings_replanted;
+                year.moa3 = yearDTO.moa3;
+                year.no_seedlings_year3 = yearDTO.no_seedlings_year3;
+                year.no_seedlings_replanted3 = yearDTO.no_seedlings_replanted3;
 
 
             }

@@ -37,12 +37,7 @@ namespace CrudWebApi.Controllers
                 IQueryable<NgpContractor> contractorlist = Db.NgpContractors;
 
                 //SHOWING FILTER DATA BASE ON ROLE ID  DEPENDENT IN LOGIN ID
-                var sess_id = (int)Session["LoginID"];
-
-                if ((int)Session["Role_Id"] != 1)
-                {
-                    contractorlist = contractorlist.Where(d => d.Id == sess_id);
-                }
+             
                 //
 
 

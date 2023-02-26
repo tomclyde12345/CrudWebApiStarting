@@ -72,6 +72,12 @@
           <Property Name="no_seedlings_survived" Type="nvarchar" MaxLength="100" />
           <Property Name="survival_rate" Type="nvarchar" MaxLength="100" />
           <Property Name="year_contracted" Type="nvarchar" MaxLength="100" />
+          <Property Name="moa3" Type="nvarchar" MaxLength="100" />
+          <Property Name="moa2" Type="nvarchar" MaxLength="100" />
+          <Property Name="no_seedlings_year1" Type="nvarchar" MaxLength="100" />
+          <Property Name="no_seedlings_replanted" Type="nvarchar" MaxLength="100" />
+          <Property Name="no_seedlings_replanted3" Type="nvarchar" MaxLength="100" />
+          <Property Name="no_seedlings_year3" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="SampleTribe">
           <Key>
@@ -211,6 +217,12 @@
           <Property Name="survival_rate" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="year_contracted" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="NgpContractor" Relationship="WebapidbModel.FK_NgpYear_NgpContractor" FromRole="NgpYear" ToRole="NgpContractor" />
+          <Property Name="moa3" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="moa2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="no_seedlings_year1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="no_seedlings_replanted" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="no_seedlings_replanted3" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="no_seedlings_year3" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="SampleTribe">
           <Key>
@@ -303,6 +315,12 @@
           <EntitySetMapping Name="NgpYears">
             <EntityTypeMapping TypeName="WebapidbModel.NgpYear">
               <MappingFragment StoreEntitySet="NgpYear">
+                <ScalarProperty Name="no_seedlings_year3" ColumnName="no_seedlings_year3" />
+                <ScalarProperty Name="no_seedlings_replanted3" ColumnName="no_seedlings_replanted3" />
+                <ScalarProperty Name="no_seedlings_replanted" ColumnName="no_seedlings_replanted" />
+                <ScalarProperty Name="no_seedlings_year1" ColumnName="no_seedlings_year1" />
+                <ScalarProperty Name="moa2" ColumnName="moa2" />
+                <ScalarProperty Name="moa3" ColumnName="moa3" />
                 <ScalarProperty Name="year_contracted" ColumnName="year_contracted" />
                 <ScalarProperty Name="survival_rate" ColumnName="survival_rate" />
                 <ScalarProperty Name="no_seedlings_survived" ColumnName="no_seedlings_survived" />

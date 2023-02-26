@@ -105,9 +105,9 @@ function CreateYear() {
             {
                 "data": "moa_number", "name": "moa_number"
             },
-            //{
-            //    "data": "Date_moa", "name": "Date_moa"
-            //},
+            {
+                "data": "Date_moa", "name": "Date_moa"
+            },
 
             {
                 "data": "Unit_cost", "name": "Unit_cost"
@@ -156,12 +156,40 @@ function CreateYear() {
                 "data": "year_contracted", "name": "year_contracted"
             },
             {
+                "data": "moa2", "name": "moa2"
+            },
+            {
+                "data": "no_seedlings_year1", "name": "no_seedlings_year1"
+            },
+            {
+                "data": "no_seedlings_replanted", "name": "no_seedlings_replanted"
+            },
+            {
                 "data": null,
                 'render': function (data, type, full, meta) {
-                    return '<button  class=\'btn btn-primary btn-sm  edityear \' data-id = ' + data.Id + ' > EDIT <span class="fa fa-trast f-20" >  </span></button>'
+                    return '<button  class=\'btn btn-primary btn-sm  edityear \' data-id = ' + data.Id + ' > EDIT <span class="fa fa-edit f-20" >  </span></button>'
+                    
 
                 }
             },
+            {
+                "data": null,
+                'render': function (data, type, full, meta) {
+                    return '<button  class=\'btn btn-danger btn-sm  year2 \' data-id = ' + data.Id + ' > Year2 <span class="fa fa-plus f-20" >  </span></button>'
+
+
+                }
+            },
+
+            {
+                "data": null,
+                'render': function (data, type, full, meta) {
+                    return '<button  class=\'btn btn-success btn-sm  year3 \' data-id = ' + data.Id + ' > Year3 <span class="fa fa-plus f-20" >  </span></button>'
+
+
+                }
+            },
+
          
 
 
@@ -216,6 +244,85 @@ function CreateYear() {
                 $('#edityear').find('select[name="commodity_bamboo"]').val(data.commodity_bamboo);
                 $('#edityear').find('input[name="survival_rate"]').val(data.survival_rate);
                 $('#edityear').find('input[name="year_contracted"]').val(data.year_contracted);
+                $('#edityear').find('input[name="date_moa"]').val(data.date_moa);
+                $('#edityear').find('input[name="moa2"]').val(data.moa2);
+                $('#edityear').find('input[name="no_seedlings_year1"]').val(data.no_seedlings_year1);
+                $('#edityear').find('input[name="no_seedlings_replanted"]').val(data.no_seedlings_replanted);
+                $('#edityear').find('input[name="moa3"]').val(data.moa3);
+                $('#edityear').find('input[name="no_seedlings_year3"]').val(data.no_seedlings_year3);
+                $('#edityear').find('input[name="no_seedlings_replanted3"]').val(data.no_seedlings_replanted3);
+              
+            }
+        })
+    });
+
+    //get data for year2
+    $('#yeartable').on('click', '.year2', function () {
+        var id = $(this).attr('data-id');
+        var url = '/api/edityear/getedityear/' + id;
+        /*   toastr.success(id);*/
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function (data) {
+                $('#year2Modal').modal('show');
+                $('#year2').find('input[name="id"]').val(data.id);
+                $('#year2').find('select[name="projectNameId"]').val(data.projectNameId);
+                $('#year2').find('input[name="projectNameId"]').val(data.projectNameId);
+                $('#year2').find('input[name="moa_number"]').val(data.moa_number);
+                $('#year2').find('input[name="unit_cost"]').val(data.unit_cost);
+                $('#year2').find('input[name="contract_cost"]').val(data.contract_cost);
+                $('#year2').find('input[name="date_obligated"]').val(data.date_obligated);
+                $('#year2').find('input[name="no_seedlings_planted"]').val(data.no_seedlings_planted);
+                $('#year2').find('input[name="no_seedlings_survived"]').val(data.no_seedlings_survived);
+                $('#year2').find('input[name="contract_cost"]').val(data.contract_cost);
+                $('#year2').find('input[name="ors_no"]').val(data.ors_no);
+                $('#year2').find('input[name="no_seedings_produced"]').val(data.no_seedings_produced);
+                $('#year2').find('select[name="commodity_forest"]').val(data.commodity_forest);
+                $('#year2').find('select[name="commodity_fruit"]').val(data.commodity_fruit);
+                $('#year2').find('select[name="commodity_bamboo"]').val(data.commodity_bamboo);
+                $('#year2').find('input[name="survival_rate"]').val(data.survival_rate);
+                $('#year2').find('input[name="year_contracted"]').val(data.year_contracted);
+                $('#year2').find('input[name="date_moa"]').val(data.date_moa);
+             
+
+
+            }
+        })
+    });
+
+    //get data for year3
+    $('#yeartable').on('click', '.year3', function () {
+        var id = $(this).attr('data-id');
+        var url = '/api/edityear/getedityear/' + id;
+        /*   toastr.success(id);*/
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function (data) {
+                $('#year3Modal').modal('show');
+                $('#year3').find('input[name="id"]').val(data.id);
+                $('#year3').find('select[name="projectNameId"]').val(data.projectNameId);
+                $('#year3').find('input[name="projectNameId"]').val(data.projectNameId);
+                $('#year3').find('input[name="moa_number"]').val(data.moa_number);
+                $('#year3').find('input[name="unit_cost"]').val(data.unit_cost);
+                $('#year3').find('input[name="contract_cost"]').val(data.contract_cost);
+                $('#year3').find('input[name="date_obligated"]').val(data.date_obligated);
+                $('#year3').find('input[name="no_seedlings_planted"]').val(data.no_seedlings_planted);
+                $('#year3').find('input[name="no_seedlings_survived"]').val(data.no_seedlings_survived);
+                $('#year3').find('input[name="contract_cost"]').val(data.contract_cost);
+                $('#year3').find('input[name="ors_no"]').val(data.ors_no);
+                $('#year3').find('input[name="no_seedings_produced"]').val(data.no_seedings_produced);
+                $('#year3').find('select[name="commodity_forest"]').val(data.commodity_forest);
+                $('#year3').find('select[name="commodity_fruit"]').val(data.commodity_fruit);
+                $('#year3').find('select[name="commodity_bamboo"]').val(data.commodity_bamboo);
+                $('#year3').find('input[name="survival_rate"]').val(data.survival_rate);
+                $('#year3').find('input[name="moa2"]').val(data.moa2);
+                $('#year3').find('input[name="no_seedlings_year1"]').val(data.no_seedlings_year1);
+                $('#year3').find('input[name="no_seedlings_replanted"]').val(data.no_seedlings_replanted);
+                $('#year3').find('input[name="year_contracted"]').val(data.year_contracted);
+                $('#year3').find('input[name="date_moa"]').val(data.date_moa);
+
 
             }
         })
@@ -223,7 +330,109 @@ function CreateYear() {
 
 
 
+    //savingdata for year2
+    $("#year2").validate({
+        rules: {
+          
+        },
+        errorClass: "validationerror",
+        messages: {
 
+
+
+        },
+        submitHandler: function () {
+            if ($("#year2").valid()) {
+                var valdata = $("#year2").serialize();
+                $('#year2Modal').modal('hide');
+                $.ajax({
+                    url: '/api/edityearsave2/postedityearsave2/' + id,
+                    type: "POST",
+                    dataType: 'json',
+                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                    data: valdata,
+                });
+                setTimeout(function () {
+                    toastr.success('Year2 Create Successfully');
+                    setTimeout(function () {
+                        location.reload();
+                    }, 2000)
+                }, 1500);
+            }
+        }
+    });
+
+
+
+    //savingdata for year3
+    $("#year3").validate({
+        rules: {
+
+        },
+        errorClass: "validationerror",
+        messages: {
+
+
+
+        },
+        submitHandler: function () {
+            if ($("#year3").valid()) {
+                var valdata = $("#year3").serialize();
+                $('#year3Modal').modal('hide');
+                $.ajax({
+                    url: '/api/edityearsave3/postedityearsave3/' + id,
+                    type: "POST",
+                    dataType: 'json',
+                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                    data: valdata,
+                });
+                setTimeout(function () {
+                    toastr.success('Year3 Create Successfully');
+                    setTimeout(function () {
+                        location.reload();
+                    }, 2000)
+                }, 1500);
+            }
+        }
+    });
+
+
+
+    //savingdata for year3
+    $("#year3").validate({
+        rules: {
+
+        },
+        errorClass: "validationerror",
+        messages: {
+
+
+
+        },
+        submitHandler: function () {
+            if ($("#year3").valid()) {
+                var valdata = $("#year3").serialize();
+                $('#year3Modal').modal('hide');
+                $.ajax({
+                    url: '/api/edityearsave3/postedityearsave3/' + id,
+                    type: "POST",
+                    dataType: 'json',
+                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                    data: valdata,
+                });
+                setTimeout(function () {
+                    toastr.success('Year3 Create Successfully');
+                    setTimeout(function () {
+                        location.reload();
+                    }, 2000)
+                }, 1500);
+            }
+        }
+    });
+
+
+
+    //EDIT YEAR
     $("#edityear").validate({
         rules: {
             ProjectNameId: {
@@ -492,7 +701,13 @@ function CreateContractor() {
             {
                 "data": "CenroId", "name": "CenroId"
             },
+            {
+                "data": null,
+                'render': function (data, type, full, meta) {
+                    return '<button  class=\'btn btn-primary btn-sm  editcontractor \' data-id = ' + data.Id + ' > Edit Contractor <span class="fa fa-edit f-20" >  </span></button>'
 
+                }
+            },
           
           
 
@@ -510,7 +725,65 @@ function CreateContractor() {
 
 
     });
-   
+    //GET DATA FROM CONTRACTOR TABLE
+    $('#contractortable').on('click', '.editcontractor', function () {
+        var id = $(this).attr('data-id');
+        var url = '/api/editcontractor/geteditcontractor/' + id;
+        /*    toastr.success(id);*/
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function (data) {
+                $('#editcontractorModal').modal('show');
+                $('#editcontractorModal').find('input[name="id"]').val(data.id);
+                $('#editcontractorModal').find('input[name="contractorName"]').val(data.contractorName);
+                $('#editcontractorModal').find('input[name="projectName"]').val(data.projectName);
+                $('#editcontractorModal').find('input[name="siteCode"]').val(data.siteCode);
+                $('#editcontractorModal').find('input[name="areaContracted"]').val(data.areaContracted);
+                $('#editcontractorModal').find('input[name="addressMunicipality"]').val(data.addressMunicipality);
+                $('#editcontractorModal').find('input[name="addressBarangay"]').val(data.addressBarangay);
+                $('#editcontractorModal').find('input[name="locationMunicipality"]').val(data.locationMunicipality);
+                $('#editcontractorModal').find('input[name="locationBarangay"]').val(data.locationBarangay);
+                $('#editcontractorModal').find('input[name="locationSitio"]').val(data.locationSitio);
+                $('#editcontractorModal').find('select[name="penro"]').val(data.penro);
+                $('#editcontractorModal').find('select[name="region"]').val(data.region);
+                $('#editcontractorModal').find('input[name="year_Estb"]').val(data.year_Estb);
+                $('#editcontractorModal').find('select[name="cenroId"]').val(data.cenroId);
+             
+
+
+            }
+        })
+    });
+    //SAVING EDIT METHOD FOR CONTRACTOR
+
+    $("#editcontractor").validate({
+        rules: {
+         
+        },
+        messages: {
+           
+        },
+        submitHandler: function () {
+            if ($("#editcontractor").valid()) {
+                var valdata = $("#editcontractor").serialize();
+                $('#editcontractorModal').modal('hide');
+                $.ajax({
+                    url: '/api/editsavecontractor/posteditsavecontractor/' + id,
+                    type: "POST",
+                    dataType: 'json',
+                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                    data: valdata,
+                });
+                setTimeout(function () {
+                    toastr.success('Edit Contractor Successfully');
+                    setTimeout(function () {
+                        location.reload();
+                    }, 2000)
+                }, 1500);
+            }
+        }
+    });
 }
 
 

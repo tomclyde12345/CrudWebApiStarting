@@ -88,7 +88,7 @@ namespace CrudWebApi.Controllers
                     Id = user.Id,
                     ProjectNameId = user.NgpContractor.ProjectName,
                     moa_number = user.moa_number,
-                    //Date_moa = user.Date_moa,
+                    Date_moa = user.Date_moa,
                     Unit_cost = user.Unit_cost,
                     contract_cost = user.contract_cost,
                     date_obligated = user.date_obligated,
@@ -101,6 +101,9 @@ namespace CrudWebApi.Controllers
                     no_seedlings_survived = user.no_seedlings_survived,
                     survival_rate = user.survival_rate,
                     year_contracted = user.year_contracted,
+                    moa2 = user.moa2,
+                    no_seedlings_year1 = user.no_seedlings_year1,
+                    no_seedlings_replanted = user.no_seedlings_replanted,
 
                 }).ToList();
 

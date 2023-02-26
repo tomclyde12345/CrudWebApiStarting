@@ -31,6 +31,10 @@
                                 </select>
                             </div>
                             <div class="form-group">
+                                <label for="Date_moa">Date_moa</label>
+                                <input type="text" class="form-control" name="Date_moa" id="Date_moa" value="" />
+                            </div>
+                            <div class="form-group">
                                 <label for="name">moa_number</label>
                                 <input type="text" class="form-control" name="moa_number" id="moa_number" value="" />
                             </div>
@@ -164,8 +168,12 @@
 
                     <div class="row">
 
-                     
+
                         <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="date_moa">date_moa</label>
+                                <input type="text" class="form-control" name="date_moa" id="date_moa" value="" />
+                            </div>
                             <div class="form-group">
                                 <label for="name">Id</label>
                                 <input type="text" class="form-control" name="id" id="id" value="" />
@@ -265,13 +273,403 @@
                                 <label for="commodity_bamboo">year_contracted</label>
                                 <select class="form-control" style="width:100%" name="year_contracted" id="year_contracted" required>
                                     <option value="3years">3years</option>
-                                 
+
+
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="moa2">moa2</label>
+                                <input type="text" class="form-control" name="moa2" id="moa2" value="" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="no_seedlings_year1">no_seedlings_year1</label>
+                                <input type="text" class="form-control" name="no_seedlings_year1" id="no_seedlings_year1" value="" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="no_seedlings_replanted">no_seedlings_replanted</label>
+                                <input type="text" class="form-control" name="no_seedlings_replanted" id="no_seedlings_replanted" value="" required>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <label for="moa2">moa3</label>
+                                <input type="text" class="form-control" name="moa3" id="moa3" value="" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="no_seedlings_year3">no_seedlings_year3</label>
+                                <input type="text" class="form-control" name="no_seedlings_year3" id="no_seedlings_year3" value="" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="no_seedlings_replanted3">no_seedlings_replanted3</label>
+                                <input type="text" class="form-control" name="no_seedlings_replanted3" id="no_seedlings_replanted3" value="" required>
+                            </div>
+
+
+
+                        </div>
+
+
+                    </div>
+                    <div class="text-center">
+
+                        <button class="btn btn-primary btn-sm " id="btnsubmit" type="submit">Save</button>
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+@*DISPLAY MODAL YEAR2 IN MODAL *@
+<div id="year2Modal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h4 class="card-title d-flex justify-content-between modal-title" style="padding:0;"> Year 2</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body ">
+                <form id="year2">
+
+                    <div class="row">
+
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="date_moa">date_moa</label>
+                                <input type="text" class="form-control" name="date_moa" id="date_moa" value="" />
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Id</label>
+                                <input type="text" class="form-control" name="id" id="id" value="" />
+                            </div>
+                            <input type="text" class="form-control" name="projectNameId" id="projectNameId" value="" readonly />
+                            <div class="form-group">
+                                <label for="RoleID">ProjectNameId</label>
+                                <select class="form-control" style="width:100%" name="projectNameId" id="projectNameId" readonly required>
+                                    <option value="">Please Select a Project Name</option>
+
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="name">moa_number</label>
+                                <input type="text" class="form-control" name="moa_number" id="moa_number" value="" readonly />
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Unit_cost</label>
+                                <input type="text" class="form-control" name="unit_cost" id="Unit_cost" value="" readonly required>
+                            </div>
+                            <div class="form-group">
+                                <label for="name">contract_cost</label>
+                                <input type="text" class="form-control" name="contract_cost" id="contract_cost" readonly value="" />
+                            </div>
+                            <div class="form-group">
+                                <label for="name">date_obligated</label>
+                                <input type="date" class="form-control" name="date_obligated" id="date_obligated " readonly value="" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="name">no_seedlings_planted</label>
+                                <input type="text" class="form-control" name="no_seedlings_planted" id="no_seedlings_planted" value="" required readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="name">no_seedlings_survived</label>
+                                <input type="text" class="form-control" name="no_seedlings_survived" id="no_seedlings_survived" value="" readonly required>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+                                <label for="name">ors_no</label>
+                                <input type="text" class="form-control" name="ors_no" id="ors_no" value="" readonly />
+                            </div>
+                            <div class="form-group">
+                                <label for="name">no_seedings_produced</label>
+                                <input type="hidden" class="form-control" name="no_seedings_produced" id="no_seedings_produced" value="" readonly required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="commodity_forest">commodity_forest</label>
+
+                                <select class="form-control forest" style="width:100%" name="commodity_forest" id="commodity_forest" required>
+
+                                    <option value="">Please Select a commodity_forest</option>
+                                    <option value="Narra">
+                                        Narra
+                                    </option>
+                                    <option value="Banaba">Banaba</option>
+                                    <option value="Catmon">Catmon</option>
+                                    <option value="Ilangilang">Ilangilang</option>
+                                    <option value="ADSAS">ADSAS</option>
+                                    <option value="ADS">ADS</option>
+
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="commodity_fruit">commodity_fruit</label>
+                                <select class="form-control" style="width:100%" name="commodity_fruit" id="commodity_fruit" required>
+                                    <option value="">Please Select a commodity_fruit</option>
+                                    <option value="Narra">Mango</option>
+                                    <option value="Banaba">Atis</option>
+                                    <option value="Catmon">Aratilis</option>
+                                    <option value="Ilangilang">Guyabano</option>
+                                    <option value="ADSAS">Pinya</option>
+
+
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="commodity_bamboo">commodity_bamboo</label>
+                                <select class="form-control" style="width:100%" name="commodity_bamboo" id="commodity_bamboo" required>
+                                    <option value="">Please Select a commodity_bamboo</option>
+                                    <option value="Narra">Bamboo grove</option>
+                                    <option value="Banaba">Espinosa</option>
+                                    <option value="Catmon">Kawayangtinik</option>
 
                                 </select>
                             </div>
 
 
-                  
+                            <div class="form-group">
+                                <label for="name">survival_rate</label>
+                                <input type="text" class="form-control" name="survival_rate" id="survival_rate" value="" readonly required>
+                            </div>
+                            <input type="hidden" class="form-control" name="year_contracted" id="year_contracted" value="" required>
+                            <div class="form-group">
+                                <label for="commodity_bamboo">year_contracted</label>
+                                <select class="form-control" style="width:100%" name="year_contracted" id="year_contracted" readonly>
+                                    <option value="3years">3years</option>
+
+
+                                </select>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="moa2">moa2</label>
+                                <input type="text" class="form-control" name="moa2" id="moa2" value="" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="no_seedlings_year1">no_seedlings_year1</label>
+                                <input type="text" class="form-control" name="no_seedlings_year1" id="no_seedlings_year1" value="" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="no_seedlings_replanted">no_seedlings_replanted</label>
+                                <input type="text" class="form-control" name="no_seedlings_replanted" id="no_seedlings_replanted" value="" required>
+                            </div>
+
+
+
+
+                        </div>
+
+
+                    </div>
+                    <div class="text-center">
+
+                        <button class="btn btn-primary btn-sm " id="btnsubmit" type="submit">Save</button>
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+@*DISPLAY MODAL YEAR2 IN MODAL *@
+<div id="year3Modal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h4 class="card-title d-flex justify-content-between modal-title" style="padding:0;"> Year 3</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body ">
+                <form id="year3">
+
+                    <div class="row">
+
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="date_moa">date_moa</label>
+                                <input type="text" class="form-control" name="date_moa" id="date_moa" value="" />
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Id</label>
+                                <input type="text" class="form-control" name="id" id="id" value="" />
+                            </div>
+                            <input type="text" class="form-control" name="projectNameId" id="projectNameId" value="" readonly />
+                            <div class="form-group">
+                                <label for="RoleID">ProjectNameId</label>
+                                <select class="form-control" style="width:100%" name="projectNameId" id="projectNameId" readonly required>
+                                    <option value="">Please Select a Project Name</option>
+
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="name">moa_number</label>
+                                <input type="text" class="form-control" name="moa_number" id="moa_number" value="" readonly />
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Unit_cost</label>
+                                <input type="text" class="form-control" name="unit_cost" id="Unit_cost" value="" readonly required>
+                            </div>
+                            <div class="form-group">
+                                <label for="name">contract_cost</label>
+                                <input type="text" class="form-control" name="contract_cost" id="contract_cost" readonly value="" />
+                            </div>
+                            <div class="form-group">
+                                <label for="name">date_obligated</label>
+                                <input type="date" class="form-control" name="date_obligated" id="date_obligated " readonly value="" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="name">no_seedlings_planted</label>
+                                <input type="text" class="form-control" name="no_seedlings_planted" id="no_seedlings_planted" value="" required readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="name">no_seedlings_survived</label>
+                                <input type="text" class="form-control" name="no_seedlings_survived" id="no_seedlings_survived" value="" readonly required>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+                                <label for="name">ors_no</label>
+                                <input type="text" class="form-control" name="ors_no" id="ors_no" value="" readonly />
+                            </div>
+                            <div class="form-group">
+                                <label for="name">no_seedings_produced</label>
+                                <input type="hidden" class="form-control" name="no_seedings_produced" id="no_seedings_produced" value="" readonly required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="commodity_forest">commodity_forest</label>
+
+                                <select class="form-control forest" style="width:100%" name="commodity_forest" id="commodity_forest" required>
+
+                                    <option value="">Please Select a commodity_forest</option>
+                                    <option value="Narra">
+                                        Narra
+                                    </option>
+                                    <option value="Banaba">Banaba</option>
+                                    <option value="Catmon">Catmon</option>
+                                    <option value="Ilangilang">Ilangilang</option>
+                                    <option value="ADSAS">ADSAS</option>
+                                    <option value="ADS">ADS</option>
+
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="commodity_fruit">commodity_fruit</label>
+                                <select class="form-control" style="width:100%" name="commodity_fruit" id="commodity_fruit" required>
+                                    <option value="">Please Select a commodity_fruit</option>
+                                    <option value="Narra">Mango</option>
+                                    <option value="Banaba">Atis</option>
+                                    <option value="Catmon">Aratilis</option>
+                                    <option value="Ilangilang">Guyabano</option>
+                                    <option value="ADSAS">Pinya</option>
+
+
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="commodity_bamboo">commodity_bamboo</label>
+                                <select class="form-control" style="width:100%" name="commodity_bamboo" id="commodity_bamboo" required>
+                                    <option value="">Please Select a commodity_bamboo</option>
+                                    <option value="Narra">Bamboo grove</option>
+                                    <option value="Banaba">Espinosa</option>
+                                    <option value="Catmon">Kawayangtinik</option>
+
+                                </select>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="name">survival_rate</label>
+                                <input type="text" class="form-control" name="survival_rate" id="survival_rate" value="" readonly required>
+                            </div>
+                            <input type="hidden" class="form-control" name="year_contracted" id="year_contracted" value="" required>
+                            <div class="form-group">
+                                <label for="commodity_bamboo">year_contracted</label>
+                                <select class="form-control" style="width:100%" name="year_contracted" id="year_contracted" readonly>
+                                    <option value="3years">3years</option>
+
+
+                                </select>
+                            </div>
+
+
+                           
+                                <input type="hidden" class="form-control" name="moa2" id="moa2" value="" required>
+                         
+
+                         
+                                <input type="hidden" class="form-control" name="no_seedlings_year1" id="no_seedlings_year1" value="" required>
+                         
+                                <input type="hidden" class="form-control" name="no_seedlings_replanted" id="no_seedlings_replanted" value="" required>
+                          
+
+
+
+                            <div class="form-group">
+                                <label for="moa2">moa3</label>
+                                <input type="text" class="form-control" name="moa3" id="moa3" value="" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="no_seedlings_year3">no_seedlings_year3</label>
+                                <input type="text" class="form-control" name="no_seedlings_year3" id="no_seedlings_year3" value="" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="no_seedlings_replanted3">no_seedlings_replanted3</label>
+                                <input type="text" class="form-control" name="no_seedlings_replanted3" id="no_seedlings_replanted3" value="" required>
+                            </div>
+
+
 
                         </div>
 
@@ -330,7 +728,7 @@
                         <th style="display:none;">Id</th>
                         <th>ProjectNameId</th>
                         <th>moa_number</th>
-                        @*<th>Date_moa</th>*@
+                        <th>date_moa</th>
                         <th>Unit_cost</th>
                         <th>contract_cost</th>
                         <th>date_obligated</th>
@@ -343,7 +741,12 @@
                         <th>no_seedlings_survived </th>
                         <th>survival_rate </th>
                         <th>year_contracted </th>
+                        <th>moa2 </th>
+                        <th>no_seedlings_year1 </th>
+                        <th>no_seedlings_replanted </th>
                         <th>Edit </th>
+                        <th>YEAR2 </th>
+                        <th>YEAR3 </th>
 
                     </tr>
                 </thead>

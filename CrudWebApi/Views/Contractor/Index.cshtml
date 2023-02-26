@@ -87,24 +87,16 @@
                                 <label for="CenroId">CenroId</label>
                                 <select class="form-control" style="width:100%" name="CenroId" id="CenroId" required>
 
-                                    @{ if ((int)Session["Role_Id"] == 2)
 
-                                        {
-                                            <option value="Cenro-PuertoPrincesa">Cenro-PuertoPrincesa</option>
-                                        }
-                                    }
-                                    @{ if ((int)Session["Role_Id"] == 1)
+                                    <option value="">Please Select a Role Agency</option>
 
-                                        {
-                                            <option value="Cenro-Quezon">Cenro-Quezon</option>
-                                            <option value="Cenro-PuertoPrincesa">Cenro-PuertoPrincesa</option>
-                                            <option value="Cenro-BrookesPoint">Cenro-BrookesPoint</option>
-                                            <option value="Cenro-Conron">Cenro-Conron</option>
-                                            <option value="Cenro-Taytay">Cenro-Taytay</option>
-                                            <option value="Cenro-Roxas">Cenro-Roxas</option>
+                                    <option value="Cenro-PuertoPrincesa">Cenro-PuertoPrincesa</option>
+                                    <option value="Cenro-Quezon">Cenro-Quezon</option>
+                                    <option value="Cenro-BrookesPoint">Cenro-BrookesPoint</option>
+                                    <option value="Cenro-Conron">Cenro-Conron</option>
+                                    <option value="Cenro-Taytay">Cenro-Taytay</option>
+                                    <option value="Cenro-Roxas">Cenro-Roxas</option>
 
-                                        }
-                                    }
 
                                 </select>
                             </div>
@@ -118,14 +110,8 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="RoleID">Year Established</label>
-                                <select class="form-control" style="width:100%" name="Year_Estb" id="Year_Estb" required>
-                                    <option value="">Please Select a Year</option>
-                                    <option value="2023">2023</option>
-                                    <option value="2024">2024</option>
-                                    <option value="2025">2025</option>
-                                    <option value="2026">2026</option>
-                                </select>
+                                <label for="year_Estb">year_Estb</label>
+                                <input type="text" class="form-control" name="year_Estb" id="year_Estb" value="" required>
                             </div>
                         </div>
                     </div>
@@ -144,6 +130,143 @@
 
     </div>
 </div>
+
+
+
+
+
+
+@*EDIT CONTRACTOR IN MODAL *@
+<div id="editcontractorModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h4 class="card-title d-flex justify-content-between modal-title" style="padding:0;">Edit Contractor</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body ">
+                <form id="editcontractor">
+
+
+
+                    <div class="row">
+
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="name">ID</label>
+                                <input type="text" class="form-control" name="id" id="id" value="" />
+                            </div>
+                            <div class="form-group">
+                                <label for="name">ContractorName</label>
+                                <input type="text" class="form-control" name="contractorName" id="contractorName" value="" />
+                            </div>
+                            <div class="form-group">
+                                <label for="name">ProjectName</label>
+                                <input type="text" class="form-control" name="projectName" id="projectName" value="" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="name">siteCode</label>
+                                <input type="text" class="form-control" name="siteCode" id="siteCode" value="" />
+                            </div>
+                            <div class="form-group">
+                                <label for="name">areaContracted</label>
+                                <input type="text" class="form-control" name="areaContracted" id="areaContracted" value="" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+
+                            <div class="form-group">
+                                <label for="name">addressMunicipality</label>
+                                <input type="text" class="form-control" name="addressMunicipality" id="addressMunicipality" value="" />
+                            </div>
+                            <div class="form-group">
+                                <label for="name">addressBarangay</label>
+                                <input type="text" class="form-control" name="addressBarangay" id="addressBarangay" value="" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="name">locationMunicipality</label>
+                                <input type="text" class="form-control" name="locationMunicipality" id="locationMunicipality" value="" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="name">locationBarangay</label>
+                                <input type="text" class="form-control" name="locationBarangay" id="locationBarangay" value="" required>
+                            </div>
+
+
+                        </div>
+
+
+
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="locationSitio">locationSitio</label>
+                                <input type="text" class="form-control" name="locationSitio" id="locationSitio" value="" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="penro">Penro</label>
+                                <select class="form-control" style="width:100%" name="penro" id="penro" required>
+                                    <option value="">Please Select a Goverment Agency</option>
+                                    <option value="City Penro">City Penro</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="cenroId">CenroId</label>
+
+                                <select class="form-control" style="width:100%" name="cenroId" id="cenroId" required>
+
+                                    <option value="">Please Select a Role Agency</option>
+
+                                    <option value="Cenro-PuertoPrincesa">Cenro-PuertoPrincesa</option>
+                                    <option value="Cenro-Quezon">Cenro-Quezon</option>
+                                    <option value="Cenro-BrookesPoint">Cenro-BrookesPoint</option>
+                                    <option value="Cenro-Conron">Cenro-Conron</option>
+                                    <option value="Cenro-Taytay">Cenro-Taytay</option>
+                                    <option value="Cenro-Roxas">Cenro-Roxas</option>
+
+
+
+                                </select>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="region">region</label>
+                                <select class="form-control" style="width:100%" name="region" id="region" required>
+                                    <option value="">Please Select a Region</option>
+                                    <option value="RegionIV-B">RegionIV-B</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="year_Estb">year_Estb</label>
+                                <input type="text" class="form-control" name="year_Estb" id="year_Estb" value="" required>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="text-center">
+
+                        <button class="btn btn-primary btn-sm " id="btnsubmit" type="submit">Save</button>
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 
 
 
@@ -192,7 +315,7 @@
                         <th>LocationBarangay </th>
                         <th>LocationSitio </th>
                         <th>Cenro </th>
-
+                        <th>Edit </th>
                     </tr>
                 </thead>
             </table>

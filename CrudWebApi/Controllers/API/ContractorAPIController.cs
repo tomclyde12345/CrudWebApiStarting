@@ -68,5 +68,58 @@ namespace CrudWebApi.Controllers.API
             var datatable = Db.NgpContractors.ToList().Select(Mapper.Map<NgpContractor, ContractorDTO>);
             return Ok(datatable);
         }
+
+
+
+        //GET DATA ONLY FOR EDIT CONTRACTOR
+        [HttpGet]
+        [Route("api/editcontractor/geteditcontractor/{id}")]
+        public IHttpActionResult GetEditContractor(int id)
+        {
+            var editcontractor = Db.NgpContractors.SingleOrDefault(c => c.Id == id);
+            return Ok(Mapper.Map<NgpContractor, ContractorDTO>(editcontractor));
+        }
+
+
+
+
+        //EDIT METHOD FOR  SAVING  CONTRACTOR
+        [HttpPost]
+        [Route("api/editsavecontractor/posteditsavecontractor/{id}")]
+        public IHttpActionResult EditSaveContractor(ContractorDTO contractorDTO)
+        {
+
+
+            if (ModelState.IsValid)
+            {
+                var contractor = Db.NgpContractors.Single(c => c.Id == contractorDTO.Id);
+
+                contractor.Id = contractorDTO.Id;
+                contractor.Year_Estb = contractorDTO.Year_Estb;
+                contractor.Region = contractorDTO.Region;
+                contractor.Penro = contractorDTO.Penro;
+                contractor.SiteCode = contractorDTO.SiteCode;
+                contractor.ContractorName = contractorDTO.ContractorName;
+                contractor.ProjectName = contractorDTO.ProjectName;
+                contractor.AreaContracted = contractorDTO.AreaContracted;
+                contractor.AddressMunicipality = contractorDTO.AddressMunicipality;
+                contractor.AddressBarangay = contractorDTO.AddressBarangay;
+                contractor.LocationMunicipality = contractorDTO.LocationMunicipality;
+                contractor.LocationBarangay = contractorDTO.LocationBarangay;
+                contractor.LocationSitio = contractorDTO.LocationSitio;
+                contractor.CenroId = contractorDTO.CenroId;
+             
+
+
+            }
+
+            Db.SaveChanges();
+
+
+            return Ok();
+
+        }
+
+
     }
 }

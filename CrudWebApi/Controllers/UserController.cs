@@ -70,6 +70,7 @@ namespace CrudWebApi.Controllers
             return PartialView(showprofileiflogin);
         }
 
-      
+
+
     }
 }
