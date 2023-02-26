@@ -1,8 +1,9 @@
 ﻿
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>hello USER</h2>
-
+@{
+    Html.RenderAction("ShowNameifLogin", "User");
+}

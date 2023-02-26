@@ -39,15 +39,15 @@ namespace CrudWebApi.Controllers
             using (WebapidbEntities Db = new WebapidbEntities())
 
             {
-                IQueryable<SampleUser> userlist = Db.SampleUsers;
+                IQueryable<NgpUser> userlist = Db.NgpUsers;
 
                 //SHOWING FILTER DATA BASE ON ROLE ID  DEPENDENT IN LOGIN ID
-                var sess_id = (int)Session["LoginID"];
+                //var sess_id = (int)Session["LoginID"];
 
-                if ((int)Session["Role_Id"] != 1)
-                {
-                    userlist = userlist.Where(d => d.Id == sess_id);
-                }
+                //if ((int)Session["Role_Id"] != 1)
+                //{
+                //    userlist = userlist.Where(d =>  d.Id == sess_id);
+                //}
                 //
 
 
@@ -60,7 +60,7 @@ namespace CrudWebApi.Controllers
                             x.Name.ToString().Contains(searchValue.ToLower()) ||
                             x.Email.ToLower().Contains(searchValue.ToLower()) ||
                             x.UserName.ToString().Contains(searchValue.ToLower()) ||
-                            x.SampleRole.RoleName.ToString().Contains(searchValue.ToLower()));
+                            x.NgpRole.RoleName.ToString().Contains(searchValue.ToLower()));
 
 
                 }
@@ -82,7 +82,7 @@ namespace CrudWebApi.Controllers
                     Name = user.Name,
                     Email = user.Email,
                     UserName = user.UserName,
-                    RoleID = user.SampleRole.RoleName,
+                    RoleID = user.NgpRole.RoleName,
 
                 }).ToList();
 
@@ -97,7 +97,7 @@ namespace CrudWebApi.Controllers
         public JsonResult CheckUsernameAvailability(string userdata)
         {
             System.Threading.Thread.Sleep(200);
-            var SeachData = Db.SampleUsers.Where(x => x.UserName == userdata).SingleOrDefault();
+            var SeachData = Db.NgpUsers.Where(x => x.UserName == userdata).SingleOrDefault();
             if (SeachData != null)
             {
                 return Json(1);

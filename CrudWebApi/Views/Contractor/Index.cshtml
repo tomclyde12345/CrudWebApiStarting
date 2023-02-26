@@ -1,7 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 
@@ -83,6 +83,31 @@
                                     <option value="City Penro">City Penro</option>
                                 </select>
                             </div>
+                            <div class="form-group">
+                                <label for="CenroId">CenroId</label>
+                                <select class="form-control" style="width:100%" name="CenroId" id="CenroId" required>
+
+                                    @{ if ((int)Session["Role_Id"] == 2)
+
+                                        {
+                                            <option value="Cenro-PuertoPrincesa">Cenro-PuertoPrincesa</option>
+                                        }
+                                    }
+                                    @{ if ((int)Session["Role_Id"] == 1)
+
+                                        {
+                                            <option value="Cenro-Quezon">Cenro-Quezon</option>
+                                            <option value="Cenro-PuertoPrincesa">Cenro-PuertoPrincesa</option>
+                                            <option value="Cenro-BrookesPoint">Cenro-BrookesPoint</option>
+                                            <option value="Cenro-Conron">Cenro-Conron</option>
+                                            <option value="Cenro-Taytay">Cenro-Taytay</option>
+                                            <option value="Cenro-Roxas">Cenro-Roxas</option>
+
+                                        }
+                                    }
+
+                                </select>
+                            </div>
 
 
                             <div class="form-group">
@@ -122,15 +147,12 @@
 
 
 
-
-
-
 <div class="card">
     <div class="card-header">
-        <h5>Account List</h5>
+        <h5>Contractor List</h5>
 
 
-        @*<div class="card-header-right">
+        <div class="card-header-right">
             <ul class="list-unstyled card-option">
                 <li><i class="fa fa fa-wrench open-card-option"></i></li>
                 <li><i class="fa fa-window-maximize full-card"></i></li>
@@ -138,7 +160,7 @@
                 <li><i class="fa fa-refresh reload-card"></i></li>
                 <li><i class="fa fa-trash close-card"></i></li>
             </ul>
-        </div>*@
+        </div>
     </div>
 
     @*OPENING  CREATE CONTRACTOR*@
@@ -169,6 +191,7 @@
                         <th>LocationMunicipality </th>
                         <th>LocationBarangay </th>
                         <th>LocationSitio </th>
+                        <th>Cenro </th>
 
                     </tr>
                 </thead>
@@ -176,11 +199,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-
 
 
 <script>

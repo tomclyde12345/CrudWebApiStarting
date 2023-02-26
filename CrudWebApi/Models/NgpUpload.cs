@@ -12,15 +12,11 @@ namespace CrudWebApi.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class SampleLog
+    public partial class NgpUpload
     {
-        public int LogId { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
-        public string UserName { get; set; }
-        public Nullable<int> UserId { get; set; }
-        public string LogMessage { get; set; }
-        public string Name { get; set; }
-    
-        public virtual SampleUser SampleUser { get; set; }
+        public int Id { get; set; }
+        public string FilePath { get; set; }
+        public string FileName { get; set; }
+        public Nullable<int> AccountId { get; set; }
     }
 }

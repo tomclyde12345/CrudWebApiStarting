@@ -26,10 +26,10 @@ namespace CrudWebApi.Models
         }
     
         public virtual DbSet<NgpContractor> NgpContractors { get; set; }
-        public virtual DbSet<SampleLog> SampleLogs { get; set; }
-        public virtual DbSet<SampleRole> SampleRoles { get; set; }
+        public virtual DbSet<NgpRole> NgpRoles { get; set; }
+        public virtual DbSet<NgpUpload> NgpUploads { get; set; }
+        public virtual DbSet<NgpUser> NgpUsers { get; set; }
+        public virtual DbSet<NgpYear> NgpYears { get; set; }
         public virtual DbSet<SampleTribe> SampleTribes { get; set; }
-        public virtual DbSet<SampleUpload> SampleUploads { get; set; }
-        public virtual DbSet<SampleUser> SampleUsers { get; set; }
     }
 }

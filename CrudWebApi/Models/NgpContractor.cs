@@ -14,11 +14,16 @@ namespace CrudWebApi.Models
     
     public partial class NgpContractor
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public NgpContractor()
+        {
+            this.NgpYears = new HashSet<NgpYear>();
+        }
+    
         public int Id { get; set; }
         public string Year_Estb { get; set; }
         public string Region { get; set; }
         public string Penro { get; set; }
-        public Nullable<int> CenroId { get; set; }
         public Nullable<int> AddressId { get; set; }
         public string SiteCode { get; set; }
         public string ContractorName { get; set; }
@@ -29,5 +34,9 @@ namespace CrudWebApi.Models
         public string LocationMunicipality { get; set; }
         public string LocationBarangay { get; set; }
         public string LocationSitio { get; set; }
+        public string CenroId { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NgpYear> NgpYears { get; set; }
     }
 }

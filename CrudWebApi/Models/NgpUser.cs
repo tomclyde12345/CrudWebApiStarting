@@ -12,18 +12,15 @@ namespace CrudWebApi.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class SampleRole
+    public partial class NgpUser
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public SampleRole()
-        {
-            this.SampleUsers = new HashSet<SampleUser>();
-        }
-    
         public int Id { get; set; }
-        public string RoleName { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public Nullable<int> RoleID { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SampleUser> SampleUsers { get; set; }
+        public virtual NgpRole NgpRole { get; set; }
     }
 }

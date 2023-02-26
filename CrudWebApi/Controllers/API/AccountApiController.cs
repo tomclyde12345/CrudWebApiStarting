@@ -36,7 +36,7 @@ namespace CrudWebApi.Controllers.API
         [Route("api/roledata/getroledata")]
         public IHttpActionResult GetRoleData()
         {
-            var roledb = Db.SampleRoles.ToList().Select(Mapper.Map<SampleRole, RoleDTO>);
+            var roledb = Db.NgpRoles.ToList().Select(Mapper.Map<NgpRole, RoleDTO>);
             return Ok(roledb);
         }
 
@@ -44,7 +44,7 @@ namespace CrudWebApi.Controllers.API
         [Route("api/userdatatable/getuserdatatable")]
         public IHttpActionResult UserDatatable()
         {
-            var datatable = Db.SampleUsers.ToList().Select(Mapper.Map<SampleUser, AccountDTO>);
+            var datatable = Db.NgpUsers.ToList().Select(Mapper.Map<NgpUser, AccountDTO>);
             return Ok(datatable);
         }
 
@@ -58,8 +58,8 @@ namespace CrudWebApi.Controllers.API
         [Route("api/editaccount/geteditaccount/{id}")]
         public IHttpActionResult GetDataEditAccount(int id)
         {
-            var editaccount = Db.SampleUsers.SingleOrDefault(c => c.Id == id);
-            return Ok(Mapper.Map<SampleUser, AccountDTO>(editaccount));
+            var editaccount = Db.NgpUsers.SingleOrDefault(c => c.Id == id);
+            return Ok(Mapper.Map<NgpUser, AccountDTO>(editaccount));
         }
 
         //EDIT METHOD FOR  SAVING  EDIT ACCOUNT
@@ -72,7 +72,7 @@ namespace CrudWebApi.Controllers.API
 
             if (ModelState.IsValid)
             {
-                var accountdt = Db.SampleUsers.Single(c => c.Id == editaccountDTO.Id);
+                var accountdt = Db.NgpUsers.Single(c => c.Id == editaccountDTO.Id);
 
                 accountdt.Id = editaccountDTO.Id;
                 accountdt.Name = editaccountDTO.Name;
@@ -97,13 +97,13 @@ namespace CrudWebApi.Controllers.API
         {
 
 
-            var deletedb = Db.SampleUsers.SingleOrDefault(d => d.Id == id);
+            var deletedb = Db.NgpUsers.SingleOrDefault(d => d.Id == id);
 
             if (deletedb == null)
             {
                 return NotFound();
             }
-            Db.SampleUsers.Remove(deletedb);
+            Db.NgpUsers.Remove(deletedb);
 
 
             Db.SaveChanges();
@@ -124,7 +124,7 @@ namespace CrudWebApi.Controllers.API
             ScryptEncoder encoder = new ScryptEncoder();
             if (ModelState.IsValid)
             {
-                var accountdt = Db.SampleUsers.Single(c => c.Id == resetpass.Id);
+                var accountdt = Db.NgpUsers.Single(c => c.Id == resetpass.Id);
 
                 accountdt.Id = resetpass.Id;
                 accountdt.Name = resetpass.Name;
@@ -150,7 +150,7 @@ namespace CrudWebApi.Controllers.API
         [Route("api/account/getpics/{id}")]
         public IHttpActionResult GetPics(int id)
         {
-            var account = Db.SampleUploads.OrderByDescending(u => u.Id).FirstOrDefault(u => u.AccountId == id);
+            var account = Db.NgpUploads.OrderByDescending(u => u.Id).FirstOrDefault(u => u.AccountId == id);
             return Ok(account);
         }
 
@@ -175,7 +175,7 @@ namespace CrudWebApi.Controllers.API
                 await Request.Content
                     .ReadAsMultipartAsync(provider);
                 ScryptEncoder encoder = new ScryptEncoder();
-                SampleUser user = new SampleUser();
+                NgpUser user = new NgpUser();
 
                 if (user.Id == 0)
                 {
@@ -185,7 +185,7 @@ namespace CrudWebApi.Controllers.API
                     user.Password = encoder.Encode( provider.FormData["Password"]);
                     user.RoleID = Convert.ToInt32(provider.FormData["RoleID"]);
                   
-                    Db.SampleUsers.Add(user);
+                    Db.NgpUsers.Add(user);
 
                 }
 
@@ -212,7 +212,7 @@ namespace CrudWebApi.Controllers.API
 
                                 File.Move(localFileName, filePath);
 
-                                SampleUpload upload = new SampleUpload();
+                                NgpUpload upload = new NgpUpload();
 
                                 if (name == null || name.Length == 0)
                                 {
@@ -225,7 +225,7 @@ namespace CrudWebApi.Controllers.API
                                 upload.FileName = name;
                                 upload.AccountId = user.Id;
 
-                                Db.SampleUploads.Add(upload);
+                                Db.NgpUploads.Add(upload);
                                 Db.SaveChanges();
                               
 
@@ -262,7 +262,7 @@ namespace CrudWebApi.Controllers.API
                 await Request.Content
                     .ReadAsMultipartAsync(provider);
 
-                SampleUser res = new SampleUser();
+                NgpUser res = new NgpUser();
 
                 foreach (var file in provider.FileData)
                 {
@@ -284,7 +284,7 @@ namespace CrudWebApi.Controllers.API
                                 var filePath = Path.Combine(root, dateNew + name);
 
                                 File.Move(localFileName, filePath);
-                                SampleUpload upload = new SampleUpload();
+                                NgpUpload upload = new NgpUpload();
 
                                 {
                                     upload.FilePath = "/SampleImg/" + dateNew + name;
@@ -293,7 +293,7 @@ namespace CrudWebApi.Controllers.API
                                 upload.FileName = name;
                                 upload.AccountId = Convert.ToInt32(provider.FormData["AccountId"]);
                                 upload.Id = upload.Id;
-                                Db.SampleUploads.Add(upload);
+                                Db.NgpUploads.Add(upload);
                                 Db.SaveChanges();
                                 //Db2.IppLogsUploads.Add(new IppLogsUpload()
                                 //{

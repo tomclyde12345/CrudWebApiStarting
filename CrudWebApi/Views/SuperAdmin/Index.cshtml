@@ -4,5 +4,7 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>hello superadmin</h2>
-    
+
+@{
+    Html.RenderAction("ShowNameifLogin", "User");
+}

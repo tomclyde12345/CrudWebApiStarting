@@ -21,6 +21,7 @@ namespace CrudWebApi.Controllers.API
             Db.Dispose();
         }
 
+
         //SAVING CONTRACTOR
         [HttpPost]
         [Route("api/savecontractor/postcontractor")]
@@ -44,6 +45,7 @@ namespace CrudWebApi.Controllers.API
                 contractor.LocationSitio = contractorDTO.LocationSitio;
                 contractor.AddressBarangay = contractorDTO.AddressBarangay;
                 contractor.AddressMunicipality = contractorDTO.AddressMunicipality;
+                contractor.CenroId = contractorDTO.CenroId;
 
 
 

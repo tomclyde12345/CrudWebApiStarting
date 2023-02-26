@@ -24,7 +24,7 @@ namespace CrudWebApi.Controllers.API
         [Route("api/saverole/postsaverole")]
         public IHttpActionResult SaveRole(RoleDTO roleDTO)
         {
-            var role = Mapper.Map<RoleDTO, SampleRole>(roleDTO);
+            var role = Mapper.Map<RoleDTO, NgpRole>(roleDTO);
 
             if (roleDTO.Id == 0)
             {
@@ -33,7 +33,7 @@ namespace CrudWebApi.Controllers.API
 
 
 
-                Db.SampleRoles.Add(role);
+                Db.NgpRoles.Add(role);
             }
 
 

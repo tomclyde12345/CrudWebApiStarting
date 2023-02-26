@@ -1,7 +1,319 @@
 ﻿
 
+function CreateYear() {
+
+    $.ajax({
+        type: 'GET',
+        url: '/api/projectdata/getprojectdata',
+        success: function (data) {
+            $.each(data, function (index, value) {
+                $('select[name=ProjectNameId]').append('<option value="' + value.id + '">' + value.projectName + '</option>');
+            })
+        }
+    });
+
+
+    $("#createyear").validate({
+        rules: {
+            ProjectNameId: {
+                required: true,
+            },
+            moa_number: {
+                required: true,
+            },
+            contract_cost: {
+                required: true,
+            },
+            date_obligated: {
+                required: true,
+            },
+            ors_no: {
+                required: true,
+            },
+            no_seedings_produced: {
+                required: true,
+            },
+            commodity_forest: {
+                required: true,
+            },
+            commodity_fruit: {
+                required: true,
+            },
+            commodity_bamboo: {
+                required: true,
+            },
+            no_seedlings_planted: {
+                required: true,
+            },
+            year_contracted: {
+                required: true,
+            },
+            survival_rate: {
+                required: true,
+            },
+            no_seedlings_survived: {
+                required: true,
+            },
+          
+        },
+        errorClass: "validationerror",
+        messages: {
+         
+
+
+        },
+        submitHandler: function () {
+            if ($("#createyear").valid()) {
+                var valdata = $("#createyear").serialize();
+                $('#createyearModal').modal('hide');
+                $.ajax({
+                    url: '/api/saveyear/postsaveyear/',
+                    type: "POST",
+                    dataType: 'json',
+                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                    data: valdata,
+                });
+                setTimeout(function () {
+                    toastr.success('Save Year Successfully');
+                    setTimeout(function () {
+                        location.reload();
+                    }, 2000)
+                }, 1500);
+            }
+        }
+    });
+    //SERVERSIDE DATATABLES FOR ACCOUNT DATATABLE LIST
+    $("#yeartable").DataTable({
+        "ajax": {
+            "url": "/Year/GetYearTable",
+            "type": "POST",
+            "datatype": "json", dataSrc: "data"
+        },
+
+        "processing": "true",
+        "serverSide": "true",
+        "serverSide": "true",
+        "order": [[1, "desc"]],
+
+        "columns": [
+            {
+                "data": "Id", "name": "Id", "className": "hideThis"
+            },
+            {
+                "data": "ProjectNameId", "name": "ProjectNameId",
+            },
+            {
+                "data": "moa_number", "name": "moa_number"
+            },
+            //{
+            //    "data": "Date_moa", "name": "Date_moa"
+            //},
+
+            {
+                "data": "Unit_cost", "name": "Unit_cost"
+            },
+
+
+            {
+                "data": "contract_cost", "name": "contract_cost"
+            },
+
+            {
+                "data": "date_obligated", "name": "date_obligated"
+            },
+
+            {
+                "data": "ors_no", "name": "ors_no"
+            },
+
+            {
+                "data": "no_seedings_produced", "name": "no_seedings_produced"
+            },
+
+            {
+                "data": "commodity_forest", "name": "commodity_forest"
+            },
+
+            {
+                "data": "commodity_fruit", "name": "commodity_fruit"
+            },
+
+            {
+                "data": "commodity_bamboo", "name": "commodity_bamboo"
+            },
+
+
+            {
+                "data": "no_seedlings_planted", "name": "no_seedlings_planted"
+            },
+            {
+                "data": "no_seedlings_survived", "name": "no_seedlings_survived"
+            },
+            {
+                "data": "survival_rate", "name": "survival_rate"
+            },
+            {
+                "data": "year_contracted", "name": "year_contracted"
+            },
+            {
+                "data": null,
+                'render': function (data, type, full, meta) {
+                    return '<button  class=\'btn btn-primary btn-sm  edityear \' data-id = ' + data.Id + ' > EDIT <span class="fa fa-trast f-20" >  </span></button>'
+
+                }
+            },
+         
+
+
+
+
+        ],
+
+
+        "processing": "true",
+        "language": {
+            "processing": "processing... please wait"
+        },
+
+        "fnInitComplete": function (oSettings, json) {
+
+        }
+
+
+    });
+    $.ajax({
+        type: 'GET',
+        url: '/api/contractordatable/getcontractordatable',
+        success: function (data) {
+            $.each(data, function (index, value) {
+                $('select[name=projectNameId]').append('<option value="' + value.id + '">' + value.projectName + '</option>');
+            })
+        }
+    });
+
+    $('#yeartable').on('click', '.edityear', function () {
+        var id = $(this).attr('data-id');
+        var url = '/api/edityear/getedityear/' + id;
+         /*   toastr.success(id);*/
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function (data) {
+                $('#edityearModal').modal('show');
+                $('#edityear').find('input[name="id"]').val(data.id);
+                $('#edityear').find('select[name="projectNameId"]').val(data.projectNameId);
+                $('#edityear').find('input[name="moa_number"]').val(data.moa_number);
+                $('#edityear').find('input[name="unit_cost"]').val(data.unit_cost);
+                $('#edityear').find('input[name="contract_cost"]').val(data.contract_cost);
+                $('#edityear').find('input[name="date_obligated"]').val(data.date_obligated);
+                $('#edityear').find('input[name="no_seedlings_planted"]').val(data.no_seedlings_planted);
+                $('#edityear').find('input[name="no_seedlings_survived"]').val(data.no_seedlings_survived);
+                $('#edityear').find('input[name="contract_cost"]').val(data.contract_cost);
+                $('#edityear').find('input[name="ors_no"]').val(data.ors_no);
+                $('#edityear').find('input[name="no_seedings_produced"]').val(data.no_seedings_produced);
+                $('#edityear').find('select[name="commodity_forest"]').val(data.commodity_forest);
+                $('#edityear').find('select[name="commodity_fruit"]').val(data.commodity_fruit);
+                $('#edityear').find('select[name="commodity_bamboo"]').val(data.commodity_bamboo);
+                $('#edityear').find('input[name="survival_rate"]').val(data.survival_rate);
+                $('#edityear').find('input[name="year_contracted"]').val(data.year_contracted);
+
+            }
+        })
+    });
+
+
+
+
+    $("#edityear").validate({
+        rules: {
+            ProjectNameId: {
+                required: true,
+            },
+            moa_number: {
+                required: true,
+            },
+            contract_cost: {
+                required: true,
+            },
+            date_obligated: {
+                required: true,
+            },
+            ors_no: {
+                required: true,
+            },
+            no_seedings_produced: {
+                required: true,
+            },
+            commodity_forest: {
+                required: true,
+            },
+            commodity_fruit: {
+                required: true,
+            },
+            commodity_bamboo: {
+                required: true,
+            },
+            no_seedlings_planted: {
+                required: true,
+            },
+            year_contracted: {
+                required: true,
+            },
+            survival_rate: {
+                required: true,
+            },
+            no_seedlings_survived: {
+                required: true,
+            },
+        },
+        errorClass: "validationerror",
+        messages: {
+        
+
+
+        },
+        submitHandler: function () {
+            if ($("#edityear").valid()) {
+                var valdata = $("#edityear").serialize();
+                $('#edityearModal').modal('hide');
+                $.ajax({
+                    url: '/api/edityearsave/postedityearsave/' + id,
+                    type: "POST",
+                    dataType: 'json',
+                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                    data: valdata,
+                });
+                setTimeout(function () {
+                    toastr.success('Edit Year Successfully');
+                    setTimeout(function () {
+                        location.reload();
+                    }, 2000)
+                }, 1500);
+            }
+        }
+    });
+
+
+
+
+
+}
+
 
 function CreateContractor() {
+
+    //$.ajax({
+    //    type: 'GET',
+    //    url: '/api/roledata/getroledata',
+    //    success: function (data) {
+    //        $.each(data, function (index, value) {
+    //            $('select[name=CenroId]').append('<option value="' + value.id + '">' + value.roleName + '</option>');
+    //        })
+    //    }
+    //});
+
+
+
     $("#createcontractor").validate({
         rules: {
             ContractorName: {
@@ -40,12 +352,54 @@ function CreateContractor() {
             LocationSitio: {
                 required: true,
             },
+            CenroId: {
+                required: true,
+            },
         },
         errorClass: "validationerror",
         messages: {
-            Name: {
-                required: "Please Select a fssafas",
+            ContractorName: {
+                required: "Please Input a ContractorName",
             },
+            ProjectName: {
+                required: "Please Input a ProjectName",
+            },
+            SiteCode: {
+                required: "Please Input a SiteCode",
+            },
+            AreaContracted: {
+                required: "Please Input a AreaContracted",
+            },
+            Penro: {
+                required: "Please Select a Goverment Agency",
+            },
+            Year_Estb: {
+                required: "Please Select a Year",
+            },
+            AddressMunicipality: {
+                required: "Please Input a AddressMunicipality",
+            },
+            AddressBarangay: {
+                required: "Please Input a AddressBarangay",
+            },
+            LocationMunicipality: {
+                required: "Please Input a LocationMunicipality",
+            },
+            LocationBarangay: {
+                required: "Please Input a LocationBarangay",
+            },
+            LocationSitio: {
+                required: "Please Input a LocationSitio",
+            },
+            Region: {
+                required: "Please Select a Region",
+            },
+            CenroId: {
+                required: "Please Select a CenroId",
+            },
+           
+
+
         },
         submitHandler: function () {
             if ($("#createcontractor").valid()) {
@@ -68,59 +422,95 @@ function CreateContractor() {
         }
     });
 
-   
-    $('#contractortable').DataTable({
 
-        ajax: {
-            url: '/api/contractordatable/getcontractordatable/',
-            dataSrc: '',
+
+
+    //SERVERSIDE DATATABLES FOR ACCOUNT DATATABLE LIST
+    $("#contractortable").DataTable({
+        "ajax": {
+            "url": "/Contractor/GetContractorTable",
+            "type": "POST",
+            "datatype": "json", dataSrc: "data"
         },
-        columns: [
+
+        "processing": "true",
+        "serverSide": "true",
+        "serverSide": "true",
+        "order": [[1, "desc"]],
+
+        "columns": [
+            {
+                "data": "Id", "name": "Id", "className": "hideThis"
+            },
+            {
+                "data": "Year_Estb", "name": "Year_Estb",
+            },
+            {
+                "data": "Region", "name": "Region"
+            },
+            {
+                "data": "Penro", "name": "Penro"
+            },
 
             {
-                data: "year_Estb",
-            },
-            {
-                data: "region",
-            },
-            {
-                data: "penro",
-            },
-            {
-                data: "siteCode",
-            },
-            {
-                data: "contractorName",
-            },
-            {
-                data: "projectName",
-            },
-            {
-                data: "areaContracted",
-            },
-            {
-                data: "addressMunicipality",
-            },
-            {
-                data: "addressBarangay",
-            },
-            {
-                data: "locationMunicipality",
-            },
-            {
-                data: "locationBarangay",
-            },
-            {
-                data: "locationSitio",
+                "data": "SiteCode", "name": "SiteCode"
             },
 
 
-        ]
+            {
+                "data": "ContractorName", "name": "ContractorName"
+            },
+
+            {
+                "data": "ProjectName", "name": "ProjectName"
+            },
+
+            {
+                "data": "AreaContracted", "name": "AreaContracted"
+            },
+
+            {
+                "data": "AddressMunicipality", "name": "AddressMunicipality"
+            },
+
+            {
+                "data": "AddressBarangay", "name": "AddressBarangay"
+            },
+
+            {
+                "data": "LocationMunicipality", "name": "LocationMunicipality"
+            },
+
+            {
+                "data": "LocationBarangay", "name": "LocationBarangay"
+            },
+
+
+            {
+                "data": "LocationSitio", "name": "LocationSitio"
+            },
+            {
+                "data": "CenroId", "name": "CenroId"
+            },
+
+          
+          
+
+        ],
+
+
+        "processing": "true",
+        "language": {
+            "processing": "processing... please wait"
+        },
+
+        "fnInitComplete": function (oSettings, json) {
+
+        }
+
+
     });
-
-
-
-
+   
 }
 
 
@@ -318,7 +708,7 @@ function CreateAccount() {
         $.ajax({
             type: 'GET',
             url: url,
-            success: function (data) {
+            success: function (data) { 
                 $('#editAccountModal').modal('show');
                 $('#editaccount').find('input[name="id"]').val(data.id);
                 $('#editaccount').find('input[name="name"]').val(data.name);

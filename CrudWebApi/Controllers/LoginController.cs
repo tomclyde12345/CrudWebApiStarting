@@ -24,11 +24,11 @@ namespace CrudWebApi.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(SampleUser log)
+        public ActionResult Login(NgpUser log)
         {
             ScryptEncoder encoder = new ScryptEncoder();
 
-            var result = Db.SampleUsers.SingleOrDefault(a => a.UserName == log.UserName);
+            var result = Db.NgpUsers.SingleOrDefault(a => a.UserName == log.UserName);
 
          
             if (result != null)
@@ -50,16 +50,16 @@ namespace CrudWebApi.Controllers
                 //IF admin
                 if (result.RoleID == 1)
                 {
-                    TempData["Message"] = "WELCOME SUPERADMIN";
+                    TempData["Message"] = "WELCOME NgpAdmin";
 
                     return RedirectToAction("Index", "SuperAdmin");
 
                 }
                 if (result.RoleID == 2)
                 {
-                    TempData["Message"] = "WELCOME ADMIN";
+                    TempData["Message"] = "Cenro-PuertoPrincesa";
 
-                    return RedirectToAction("Index", "Admin");
+                    return RedirectToAction("Index", "User");
 
                 }
 
@@ -67,15 +67,33 @@ namespace CrudWebApi.Controllers
                 //IF USER
                 if (result.RoleID == 3)
                 {
-                    TempData["Message"] = "WELCOME USER";
+                    TempData["Message"] = "Cenro-Quezon";
                     return RedirectToAction("Index", "User");
                 }
 
                 //IF USER
-                if (result.RoleID == 4)
+                if (result.RoleID == 5)
                 {
-                    TempData["Message"] = "WELCOME CENRO QUEZON";
-                    return RedirectToAction("Index", "CentroQuezon");
+                    TempData["Message"] = "Cenro-BrookesPoint";
+                    return RedirectToAction("Index", "User");
+                }
+                //IF USER
+                if (result.RoleID == 6)
+                {
+                    TempData["Message"] = "Cenro-Conron";
+                    return RedirectToAction("Index", "User");
+                }
+                //IF USER
+                if (result.RoleID == 7)
+                {
+                    TempData["Message"] = "Cenro-Taytay";
+                    return RedirectToAction("Index", "User");
+                }
+                //IF USER
+                if (result.RoleID == 8)
+                {
+                    TempData["Message"] = "Cenro-Roxas";
+                    return RedirectToAction("Index", "User");
                 }
             }
             else

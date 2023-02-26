@@ -14,10 +14,11 @@ namespace CrudWebApi.App_Start
         public MappingProfile()
         {
             Mapper.CreateMap<SampleTribe, TribeDTO>().ReverseMap();
-            Mapper.CreateMap<SampleRole, RoleDTO>().ReverseMap();
-            Mapper.CreateMap<SampleUser, AccountDTO>().ReverseMap();
-            Mapper.CreateMap<SampleUpload, UploadDTO>().ReverseMap();
+            Mapper.CreateMap<NgpRole, RoleDTO>().ReverseMap();
+            Mapper.CreateMap<NgpUser, AccountDTO>().ReverseMap();
+            Mapper.CreateMap<NgpUpload, UploadDTO>().ReverseMap();
             Mapper.CreateMap<NgpContractor, ContractorDTO>().ReverseMap();
+            Mapper.CreateMap<NgpYear, YearDTO>().ReverseMap();
         }
     }
 }

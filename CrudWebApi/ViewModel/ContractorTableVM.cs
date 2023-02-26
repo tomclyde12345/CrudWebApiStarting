@@ -1,12 +1,16 @@
-﻿using System;
+﻿using CrudWebApi.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace CrudWebApi.DTO
+namespace CrudWebApi.ViewModel
 {
-    public class ContractorDTO
+    public class ContractorTableVM
+
     {
+        public IEnumerable<NgpContractor> Contractorlist { get; set; }
+        public NgpContractor Contractor { get; set; }
         public int Id { get; set; }
         public string Year_Estb { get; set; }
         public string Region { get; set; }
