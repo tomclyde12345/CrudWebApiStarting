@@ -6,6 +6,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Linq.Dynamic;
+using CrudWebApi.DTO;
+
 namespace CrudWebApi.Controllers
 {
     public class ContractorController : Controller
@@ -18,8 +20,17 @@ namespace CrudWebApi.Controllers
         }
         public ActionResult Index()
         {
-            return View();
+            if (Session["Role_Id"] == null)
+            {
+                return RedirectToAction("logout", "Login");
+            }
+            var contractorlisttable = Db.NgpContractors.OrderByDescending(x => x.Id).ToList();
+
+         
+
+            return View(contractorlisttable);
         }
+
 
 
         public ActionResult GetContractorTable()
@@ -103,6 +114,106 @@ namespace CrudWebApi.Controllers
             }
 
 
+        }
+
+
+
+        public ActionResult Create()
+        {
+            if (Session["Role_Id"] == null)
+            {
+                return RedirectToAction("logout", "Login");
+            }
+
+        
+            var contractor = Db.NgpContractors.ToList();
+
+           
+            var vm = new ContractorTableVM()
+            {
+                Contractorlist = contractor,
+              
+
+            };
+            return View("Create", vm);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+        public ActionResult Edit(int id)
+        {
+          
+            var editcontractor = Db.NgpContractors.SingleOrDefault(c => c.Id == id); //EDIT METHOD
+            if (editcontractor == null)
+                return HttpNotFound();
+            var viewModel = new ContractorTableVM()
+            {
+
+                Contractor = editcontractor,
+                Contractorlist = Db.NgpContractors.ToList(),
+             
+
+            };
+
+            return View("Edit", viewModel);
+        }
+
+        public ActionResult Save(NgpContractor contractor)
+        {
+            if (contractor.Id == 0)
+            {
+               
+
+                contractor.ContractorName = contractor.ContractorName;
+                contractor.SiteCode = contractor.SiteCode;
+                contractor.ProjectName = contractor.ProjectName;
+                contractor.AreaContracted = contractor.AreaContracted;
+                contractor.Penro = contractor.Penro;
+                contractor.Region = contractor.Region;
+                contractor.Year_Estb = contractor.Year_Estb;
+                contractor.LocationBarangay = contractor.LocationBarangay;
+                contractor.LocationMunicipality = contractor.LocationMunicipality;
+                contractor.LocationSitio = contractor.LocationSitio;
+                contractor.AddressBarangay = contractor.AddressBarangay;
+                contractor.AddressMunicipality = contractor.AddressMunicipality;
+                contractor.CenroId = contractor.CenroId;
+                Db.NgpContractors.Add(contractor);
+            }
+            else
+            {
+                var usersInDb = Db.NgpContractors.Single(c => c.Id == contractor.Id);
+
+                usersInDb.Id = contractor.Id;
+                usersInDb.Year_Estb = contractor.Year_Estb;
+                usersInDb.Region = contractor.Region;
+                usersInDb.Penro = contractor.Penro;
+                usersInDb.SiteCode = contractor.SiteCode;
+                usersInDb.ContractorName = contractor.ContractorName;
+                usersInDb.ProjectName = contractor.ProjectName;
+                usersInDb.AreaContracted = contractor.AreaContracted;
+                usersInDb.AddressMunicipality = contractor.AddressMunicipality;
+                usersInDb.AddressBarangay = contractor.AddressBarangay;
+                usersInDb.LocationMunicipality = contractor.LocationMunicipality;
+                usersInDb.LocationBarangay = contractor.LocationBarangay;
+                usersInDb.LocationSitio = contractor.LocationSitio;
+                usersInDb.CenroId = contractor.CenroId;
+
+
+
+            }
+
+            Db.SaveChanges();
+            TempData["Message"] = "SAVE SUCCESSFULLY";
+            return RedirectToAction("Index", "Contractor");
         }
     }
 }

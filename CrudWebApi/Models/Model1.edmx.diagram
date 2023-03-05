@@ -5,13 +5,14 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="7d7d8b55466545debacb829ef93da69c" Name="Diagram1" ZoomLevel="95">
-        <EntityTypeShape EntityType="WebapidbModel.NgpContractor" Width="1.5" PointX="0.75" PointY="1.125" />
-        <EntityTypeShape EntityType="WebapidbModel.NgpRole" Width="1.5" PointX="5.75" PointY="1.375" />
+        <EntityTypeShape EntityType="WebapidbModel.NgpContractor" Width="1.5" PointX="0.75" PointY="1.875" />
+        <EntityTypeShape EntityType="WebapidbModel.NgpRole" Width="1.5" PointX="5.75" PointY="1.5" />
         <EntityTypeShape EntityType="WebapidbModel.NgpUpload" Width="1.5" PointX="5.75" PointY="4.75" />
         <EntityTypeShape EntityType="WebapidbModel.NgpUser" Width="1.5" PointX="8" PointY="1" />
-        <EntityTypeShape EntityType="WebapidbModel.NgpYear" Width="1.5" PointX="3" PointY="1" />
-        <EntityTypeShape EntityType="WebapidbModel.SampleTribe" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="WebapidbModel.NgpYear" Width="1.5" PointX="3" PointY="1.125" />
+        <EntityTypeShape EntityType="WebapidbModel.SampleTribe" Width="1.5" PointX="0.75" PointY="7.75" />
         <AssociationConnector Association="WebapidbModel.FK_NgpYear_NgpContractor" />
+        <AssociationConnector Association="WebapidbModel.FK_NgpYear_NgpContractor1" />
         <AssociationConnector Association="WebapidbModel.FK_NgpUser_NgpRole" />
       </Diagram>
     </edmx:Diagrams>

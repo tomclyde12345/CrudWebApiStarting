@@ -1,0 +1,33 @@
+﻿
+
+@foreach (var adminnameinviewprofile in Model)
+{
+
+    if (adminnameinviewprofile.FilePath == null)
+    {
+        <img src="~/Images/city-hall.png" style="width: 60px; height: 60px; border-radius: 45px; " />
+    }
+    else
+    {
+
+        <img src="@adminnameinviewprofile.FilePath" style="width: 60px; height: 60px; border-radius: 45px; " />
+    }
+
+
+
+<span>
+    @adminnameinviewprofile.Name
+</span>
+       
+   
+
+    
+    <span>
+        @adminnameinviewprofile.NgpRole.RoleName
+    </span>
+
+
+
+
+
+}

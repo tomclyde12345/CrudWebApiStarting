@@ -509,282 +509,6 @@ function CreateYear() {
 }
 
 
-function CreateContractor() {
-
-    //$.ajax({
-    //    type: 'GET',
-    //    url: '/api/roledata/getroledata',
-    //    success: function (data) {
-    //        $.each(data, function (index, value) {
-    //            $('select[name=CenroId]').append('<option value="' + value.id + '">' + value.roleName + '</option>');
-    //        })
-    //    }
-    //});
-
-
-
-    $("#createcontractor").validate({
-        rules: {
-            ContractorName: {
-                required: true,
-            },
-            ProjectName: {
-                required: true,
-            },
-            SiteCode: {
-                required: true,
-            },
-            AreaContracted: {
-                required: true,
-            },
-            Penro: {
-                required: true,
-            },
-            Region: {
-                required: true,
-            },
-            Year_Estb: {
-                required: true,
-            },
-            AddressMunicipality: {
-                required: true,
-            },
-            AddressBarangay: {
-                required: true,
-            },
-            LocationMunicipality: {
-                required: true,
-            },
-            LocationBarangay: {
-                required: true,
-            },
-            LocationSitio: {
-                required: true,
-            },
-            CenroId: {
-                required: true,
-            },
-        },
-        errorClass: "validationerror",
-        messages: {
-            ContractorName: {
-                required: "Please Input a ContractorName",
-            },
-            ProjectName: {
-                required: "Please Input a ProjectName",
-            },
-            SiteCode: {
-                required: "Please Input a SiteCode",
-            },
-            AreaContracted: {
-                required: "Please Input a AreaContracted",
-            },
-            Penro: {
-                required: "Please Select a Goverment Agency",
-            },
-            Year_Estb: {
-                required: "Please Select a Year",
-            },
-            AddressMunicipality: {
-                required: "Please Input a AddressMunicipality",
-            },
-            AddressBarangay: {
-                required: "Please Input a AddressBarangay",
-            },
-            LocationMunicipality: {
-                required: "Please Input a LocationMunicipality",
-            },
-            LocationBarangay: {
-                required: "Please Input a LocationBarangay",
-            },
-            LocationSitio: {
-                required: "Please Input a LocationSitio",
-            },
-            Region: {
-                required: "Please Select a Region",
-            },
-            CenroId: {
-                required: "Please Select a CenroId",
-            },
-           
-
-
-        },
-        submitHandler: function () {
-            if ($("#createcontractor").valid()) {
-                var valdata = $("#createcontractor").serialize();
-                $('#createcontractorModal').modal('hide');
-                $.ajax({
-                    url: '/api/savecontractor/postcontractor/',
-                    type: "POST",
-                    dataType: 'json',
-                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                    data: valdata,
-                });
-                setTimeout(function () {
-                    toastr.success('Save Contractor Successfully');
-                    setTimeout(function () {
-                        location.reload();
-                    }, 2000)
-                }, 1500);
-            }
-        }
-    });
-
-
-
-
-    //SERVERSIDE DATATABLES FOR ACCOUNT DATATABLE LIST
-    $("#contractortable").DataTable({
-        "ajax": {
-            "url": "/Contractor/GetContractorTable",
-            "type": "POST",
-            "datatype": "json", dataSrc: "data"
-        },
-
-        "processing": "true",
-        "serverSide": "true",
-        "serverSide": "true",
-        "order": [[1, "desc"]],
-
-        "columns": [
-            {
-                "data": "Id", "name": "Id", "className": "hideThis"
-            },
-            {
-                "data": "Year_Estb", "name": "Year_Estb",
-            },
-            {
-                "data": "Region", "name": "Region"
-            },
-            {
-                "data": "Penro", "name": "Penro"
-            },
-
-            {
-                "data": "SiteCode", "name": "SiteCode"
-            },
-
-
-            {
-                "data": "ContractorName", "name": "ContractorName"
-            },
-
-            {
-                "data": "ProjectName", "name": "ProjectName"
-            },
-
-            {
-                "data": "AreaContracted", "name": "AreaContracted"
-            },
-
-            {
-                "data": "AddressMunicipality", "name": "AddressMunicipality"
-            },
-
-            {
-                "data": "AddressBarangay", "name": "AddressBarangay"
-            },
-
-            {
-                "data": "LocationMunicipality", "name": "LocationMunicipality"
-            },
-
-            {
-                "data": "LocationBarangay", "name": "LocationBarangay"
-            },
-
-
-            {
-                "data": "LocationSitio", "name": "LocationSitio"
-            },
-            {
-                "data": "CenroId", "name": "CenroId"
-            },
-            {
-                "data": null,
-                'render': function (data, type, full, meta) {
-                    return '<button  class=\'btn btn-primary btn-sm  editcontractor \' data-id = ' + data.Id + ' > Edit Contractor <span class="fa fa-edit f-20" >  </span></button>'
-
-                }
-            },
-          
-          
-
-        ],
-
-
-        "processing": "true",
-        "language": {
-            "processing": "processing... please wait"
-        },
-
-        "fnInitComplete": function (oSettings, json) {
-
-        }
-
-
-    });
-    //GET DATA FROM CONTRACTOR TABLE
-    $('#contractortable').on('click', '.editcontractor', function () {
-        var id = $(this).attr('data-id');
-        var url = '/api/editcontractor/geteditcontractor/' + id;
-        /*    toastr.success(id);*/
-        $.ajax({
-            type: 'GET',
-            url: url,
-            success: function (data) {
-                $('#editcontractorModal').modal('show');
-                $('#editcontractorModal').find('input[name="id"]').val(data.id);
-                $('#editcontractorModal').find('input[name="contractorName"]').val(data.contractorName);
-                $('#editcontractorModal').find('input[name="projectName"]').val(data.projectName);
-                $('#editcontractorModal').find('input[name="siteCode"]').val(data.siteCode);
-                $('#editcontractorModal').find('input[name="areaContracted"]').val(data.areaContracted);
-                $('#editcontractorModal').find('input[name="addressMunicipality"]').val(data.addressMunicipality);
-                $('#editcontractorModal').find('input[name="addressBarangay"]').val(data.addressBarangay);
-                $('#editcontractorModal').find('input[name="locationMunicipality"]').val(data.locationMunicipality);
-                $('#editcontractorModal').find('input[name="locationBarangay"]').val(data.locationBarangay);
-                $('#editcontractorModal').find('input[name="locationSitio"]').val(data.locationSitio);
-                $('#editcontractorModal').find('select[name="penro"]').val(data.penro);
-                $('#editcontractorModal').find('select[name="region"]').val(data.region);
-                $('#editcontractorModal').find('input[name="year_Estb"]').val(data.year_Estb);
-                $('#editcontractorModal').find('select[name="cenroId"]').val(data.cenroId);
-             
-
-
-            }
-        })
-    });
-    //SAVING EDIT METHOD FOR CONTRACTOR
-
-    $("#editcontractor").validate({
-        rules: {
-         
-        },
-        messages: {
-           
-        },
-        submitHandler: function () {
-            if ($("#editcontractor").valid()) {
-                var valdata = $("#editcontractor").serialize();
-                $('#editcontractorModal').modal('hide');
-                $.ajax({
-                    url: '/api/editsavecontractor/posteditsavecontractor/' + id,
-                    type: "POST",
-                    dataType: 'json',
-                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                    data: valdata,
-                });
-                setTimeout(function () {
-                    toastr.success('Edit Contractor Successfully');
-                    setTimeout(function () {
-                        location.reload();
-                    }, 2000)
-                }, 1500);
-            }
-        }
-    });
-}
 
 
 
@@ -945,7 +669,7 @@ function CreateAccount() {
             $('#createModal').modal('hide');
             $.ajax({
                 type: 'POST',
-                url: '/api/residencephoto',
+                url: '/api/accountphoto',
                 data: formData,
                 cache: false,
                 contentType: false,
@@ -1008,6 +732,7 @@ function CreateAccount() {
         $(".papi-cholo").remove();
     });
 
+
     //  //GET DATA ONLY FOR  RESET PASSWORD
     $('#usertable').on('click', '.resetpass', function () {
         var id = $(this).attr('data-id');
@@ -1041,7 +766,6 @@ function CreateAccount() {
             url: url,
             success: function (data) {
                 $("#changePhotoModal").modal('show');
-                $('#changephoto').find('input[name="AccountId"]').val(data.id);
                 $('#changephoto').find('input[name="id"]').val(data.id);
                 $('#changephoto').find('input[name="name"]').val(data.name);
                 console.log(data.id)
@@ -1055,7 +779,7 @@ function CreateAccount() {
             type: 'GET',
             url: url2,
             success: function (data) {
-                $('#changephoto').find('input[name="Id"]').val(data.id);
+                $('#changephoto').find('input[name="id"]').val(data.id);
                 $("#imageshow").empty();
                 $("#imageshow").append("<img style='width:155px;height:155px; border-radius: 92px; overflow:hidden' src='" + data.filePath + "' />");
             }

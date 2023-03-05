@@ -639,6 +639,10 @@
     <Content Include="Views\CentroQuezon\Index.cshtml" />
     <Content Include="Views\Year\Index.cshtml" />
     <Content Include="Views\User\ShowNameifLogin.cshtml" />
+    <Content Include="Views\User\AdminNameViewinProfile.cshtml" />
+    <Content Include="Views\Shared\_LayoutCreateContractor.cshtml" />
+    <Content Include="Views\Contractor\Edit.cshtml" />
+    <Content Include="Views\Contractor\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

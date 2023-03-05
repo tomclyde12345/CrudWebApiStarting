@@ -1,0 +1,110 @@
+﻿@model CrudWebApi.ViewModel.ContractorTableVM
+
+
+@using (Html.BeginForm("Save", "Contractor"))
+{
+    <!--header-->
+    <br />
+
+
+    <div class="main-w3l">
+        <div class="w3layouts-main" style="height: auto !important; width: 100% !important; background-color: #fff;">
+            <div class="form-title" style="height: 60px; color: #6F6F6F; "><h3 class="title1">Create Contractor  </h3></div>
+
+            <form action="#" method="post">
+                <div style="padding: 0 2.5%">
+                    <br />
+                    <div class="alert alert-info">
+                        Please fill details to create a phonebook
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class=" tom">
+                                Phone Number  <label class="fa fa-phone-square" style="color:black"> </label>
+                            </div>
+                        </div>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.Contractor.LocationBarangay, new { htmlAttributes = new { @class = "form-control", maxlength = "50", @type = "text", placeholder = "Enter Your Full Name" } })
+
+
+
+                        <div class="form-group">
+                            <div class="tom">
+                                <br />
+                                FullName  <label class="fa fa-user" style="color:black"> </label>
+                            </div>
+                        </div>
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.Contractor.AreaContracted, new { htmlAttributes = new { @class = "form-control", maxlength = "50", @type = "text", placeholder = "Enter Your Full Name" } })
+
+
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="tom">
+                                Position  <label class="fa fa-building-o" style="color:black"> </label>
+                            </div>
+                        </div>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger", style = "color:red;" })
+                        @Html.EditorFor(model => model.Contractor.ContractorName, new { htmlAttributes = new { @class = "form-control", maxlength = "50", @type = "text", placeholder = "Enter a Position" } })
+                    
+                        <div class="form-group">
+                            <div class="tom">
+                                <br />
+                                Remarks  <label class="fa fa-arrow-circle-o-up" style="color:black"> </label>
+
+                            </div>
+                        </div>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.Contractor.AddressMunicipality, new { htmlAttributes = new { @class = "form-control", maxlength = "50", @type = "text", placeholder = "Enter a Remarks" } })
+                    
+                    </div>
+                    @*<div class="col-md-12">
+                            <div class="form-group" style="text-align:center;">
+
+
+                                @{
+                                    if ((int)Session["Role_Id"] == 1)
+                                    {
+                                        <div class="tom">
+                                            <br />
+                                            GroupName  <label class="fa fa-users" style="color:black"> </label>
+                                        </div>
+                                        @Html.DropDownListFor(model => model.Phonebook.GroupId, new SelectList(Model.GroupList, "GroupId", "GroupName"), "SELECT A GROUP", new { @class = "form-control", @placeholder = "Enter a Message Here", @style = "border:1px solid black; width: 100%;", id = "multipledrop", multiple = "multiple" })
+                                    }
+                                }
+                                <div class="clear"></div>
+                            </div>
+                            @Html.HiddenFor(o => o.Phonebook.PhoneId)
+                            @Html.AntiForgeryToken()
+                        </div>*@
+                </div>
+
+
+                <div style="padding: 2% 0;">
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <div class="text-center">
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <input type="submit" value="CREATE" class="btn btn-default" style="width: 120px; color:white; background-color: rgba(97, 100, 193, 0.85); height: 50px; border-radius: 20px; font-weight: 800; " />
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+    <!--//main-->
+    <!--footer-->
+    <div class="footer-w3l">
+
+    </div>
+
+ 
+
+}

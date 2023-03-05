@@ -18,6 +18,7 @@ namespace CrudWebApi.Models
         public NgpContractor()
         {
             this.NgpYears = new HashSet<NgpYear>();
+            this.NgpYears1 = new HashSet<NgpYear>();
         }
     
         public int Id { get; set; }
@@ -38,5 +39,7 @@ namespace CrudWebApi.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NgpYear> NgpYears { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NgpYear> NgpYears1 { get; set; }
     }
 }

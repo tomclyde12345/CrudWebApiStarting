@@ -20,6 +20,8 @@ namespace CrudWebApi.Models
         public string UserName { get; set; }
         public string Password { get; set; }
         public Nullable<int> RoleID { get; set; }
+        public string FileName { get; set; }
+        public string FilePath { get; set; }
     
         public virtual NgpRole NgpRole { get; set; }
     }

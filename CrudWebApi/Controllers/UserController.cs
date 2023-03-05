@@ -71,6 +71,33 @@ namespace CrudWebApi.Controllers
         }
 
 
+        public ActionResult AdminNameViewinProfile() //IMAGE AND NAME VIEW IN DASHBOARD
+        {
+            if (Session["Role_Id"] == null)
+            {
+                return RedirectToAction("logout", "Account");
+            }
+
+
+            var adminnameviewinprofile = Db.NgpUsers.ToList();
+
+
+            var sess_id = (int)Session["LoginID"];
+
+            if ((int)Session["Role_Id"] == 1)
+            {
+                adminnameviewinprofile = adminnameviewinprofile.Where(d => d.Id == sess_id).ToList();
+            }
+            else
+
+             if ((int)Session["Role_Id"] != 1)
+            {
+                adminnameviewinprofile = adminnameviewinprofile.Where(d => d.Id == sess_id).ToList();
+            }
+
+
+            return PartialView(adminnameviewinprofile);
+        }
 
     }
 }

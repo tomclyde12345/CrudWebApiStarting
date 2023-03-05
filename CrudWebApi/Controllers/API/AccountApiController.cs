@@ -145,12 +145,12 @@ namespace CrudWebApi.Controllers.API
         }
 
 
-        //QUERY RESIDENCE ONLY SHOW PICTURE ONLY BY RESIDENCE ID
+        //QUERY USERS ONLY SHOW PICTURE ONLY BY USERS PICS ID
         [HttpGet]
         [Route("api/account/getpics/{id}")]
         public IHttpActionResult GetPics(int id)
         {
-            var account = Db.NgpUploads.OrderByDescending(u => u.Id).FirstOrDefault(u => u.AccountId == id);
+            var account = Db.NgpUsers.OrderByDescending(u => u.Id).FirstOrDefault(u => u.Id == id);
             return Ok(account);
         }
 
@@ -160,7 +160,7 @@ namespace CrudWebApi.Controllers.API
         //SAVEVING ACCOUNT CREATION WITH INCLUDE PROFILE IMAGE
 
         [HttpPost]
-        [Route("api/residencephoto")]
+        [Route("api/accountphoto")]
 
         public async Task<string> PostImage()
         {
@@ -185,11 +185,10 @@ namespace CrudWebApi.Controllers.API
                     user.Password = encoder.Encode( provider.FormData["Password"]);
                     user.RoleID = Convert.ToInt32(provider.FormData["RoleID"]);
                   
-                    Db.NgpUsers.Add(user);
+                  
 
                 }
-
-                Db.SaveChanges();
+               
 
                 foreach (var file in provider.FileData)
                 {
@@ -212,20 +211,20 @@ namespace CrudWebApi.Controllers.API
 
                                 File.Move(localFileName, filePath);
 
-                                NgpUpload upload = new NgpUpload();
+                             
 
                                 if (name == null || name.Length == 0)
                                 {
-                                    upload.FilePath = "/DefaultImage/city-hall.png";
+                                    user.FilePath = "/DefaultImage/city-hall.png";
                                 }
                                 else
                                 {
-                                    upload.FilePath = "/SampleImg/" + dateNew + name;
+                                    user.FilePath = "/SampleImg/" + dateNew + name;
                                 }
-                                upload.FileName = name;
-                                upload.AccountId = user.Id;
+                                user.FileName = name;
+                                user.Id = user.Id;
 
-                                Db.NgpUploads.Add(upload);
+                                Db.NgpUsers.Add(user);
                                 Db.SaveChanges();
                               
 
@@ -243,6 +242,8 @@ namespace CrudWebApi.Controllers.API
 
             return "File uploaded!";
         }
+
+
 
 
 
@@ -270,7 +271,7 @@ namespace CrudWebApi.Controllers.API
                     {
                         foreach (var val in provider.FormData.GetValues(key))
 
-                            if (key == "AccountId")
+                            if (key == "Id")
                             {
                                 var name = file.Headers
                                        .ContentDisposition
@@ -284,29 +285,21 @@ namespace CrudWebApi.Controllers.API
                                 var filePath = Path.Combine(root, dateNew + name);
 
                                 File.Move(localFileName, filePath);
-                                NgpUpload upload = new NgpUpload();
+                              
 
                                 {
-                                    upload.FilePath = "/SampleImg/" + dateNew + name;
+                                    res.FilePath = "/SampleImg/" + dateNew + name;
                                 }
 
-                                upload.FileName = name;
-                                upload.AccountId = Convert.ToInt32(provider.FormData["AccountId"]);
-                                upload.Id = upload.Id;
-                                Db.NgpUploads.Add(upload);
+                                res.FileName = name;
+                                res.Id = Convert.ToInt32(provider.FormData["Id"]);
+                                res.Id = res.Id;
+                              
                                 Db.SaveChanges();
-                                //Db2.IppLogsUploads.Add(new IppLogsUpload()
-                                //{
-
-                                //    LogMessage = provider.FormData["UserName"] + " " + "Change a Photo" + " " + " Residence Name:" + " " + provider.FormData["Name"],
-                                //    UserId = Convert.ToInt32(provider.FormData["UserId"]),
-                                //    Date = DateTime.Now,
-                                //    UserName = provider.FormData["UserName"],
-                                //    Name = provider.FormData["Name"],
+                              
 
 
-                                //});
-                                //Db2.SaveChanges();
+
                             };
 
 
@@ -323,6 +316,8 @@ namespace CrudWebApi.Controllers.API
 
             return "File uploaded!";
         }
+
+
 
 
 

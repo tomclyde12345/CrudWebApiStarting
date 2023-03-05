@@ -45,12 +45,14 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
           <Property Name="UserName" Type="nvarchar" MaxLength="50" />
           <Property Name="Password" Type="nvarchar" MaxLength="200" />
           <Property Name="RoleID" Type="int" />
+          <Property Name="FileName" Type="nvarchar(max)" />
+          <Property Name="FilePath" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="NgpYear">
           <Key>
@@ -78,6 +80,7 @@
           <Property Name="no_seedlings_replanted" Type="nvarchar" MaxLength="100" />
           <Property Name="no_seedlings_replanted3" Type="nvarchar" MaxLength="100" />
           <Property Name="no_seedlings_year3" Type="nvarchar" MaxLength="100" />
+          <Property Name="ContractorNameId" Type="int" />
         </EntityType>
         <EntityType Name="SampleTribe">
           <Key>
@@ -110,6 +113,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_NgpYear_NgpContractor1">
+          <End Role="NgpContractor" Type="Self.NgpContractor" Multiplicity="0..1" />
+          <End Role="NgpYear" Type="Self.NgpYear" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NgpContractor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NgpYear">
+              <PropertyRef Name="ContractorNameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="WebapidbModelStoreContainer">
           <EntitySet Name="NgpContractor" EntityType="Self.NgpContractor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NgpRole" EntityType="Self.NgpRole" Schema="dbo" store:Type="Tables" />
@@ -122,6 +137,10 @@
             <End Role="NgpUser" EntitySet="NgpUser" />
           </AssociationSet>
           <AssociationSet Name="FK_NgpYear_NgpContractor" Association="Self.FK_NgpYear_NgpContractor">
+            <End Role="NgpContractor" EntitySet="NgpContractor" />
+            <End Role="NgpYear" EntitySet="NgpYear" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NgpYear_NgpContractor1" Association="Self.FK_NgpYear_NgpContractor1">
             <End Role="NgpContractor" EntitySet="NgpContractor" />
             <End Role="NgpYear" EntitySet="NgpYear" />
           </AssociationSet>
@@ -138,6 +157,10 @@
           <EntitySet Name="NgpYears" EntityType="WebapidbModel.NgpYear" />
           <EntitySet Name="SampleTribes" EntityType="WebapidbModel.SampleTribe" />
           <AssociationSet Name="FK_NgpYear_NgpContractor" Association="WebapidbModel.FK_NgpYear_NgpContractor">
+            <End Role="NgpContractor" EntitySet="NgpContractors" />
+            <End Role="NgpYear" EntitySet="NgpYears" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NgpYear_NgpContractor1" Association="WebapidbModel.FK_NgpYear_NgpContractor1">
             <End Role="NgpContractor" EntitySet="NgpContractors" />
             <End Role="NgpYear" EntitySet="NgpYears" />
           </AssociationSet>
@@ -166,6 +189,7 @@
           <Property Name="LocationSitio" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="CenroId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="NgpYears" Relationship="WebapidbModel.FK_NgpYear_NgpContractor" FromRole="NgpContractor" ToRole="NgpYear" />
+          <NavigationProperty Name="NgpYears1" Relationship="WebapidbModel.FK_NgpYear_NgpContractor1" FromRole="NgpContractor" ToRole="NgpYear" />
         </EntityType>
         <EntityType Name="NgpRole">
           <Key>
@@ -188,12 +212,14 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="RoleID" Type="Int32" />
+          <Property Name="FileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FilePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="NgpRole" Relationship="WebapidbModel.FK_NgpUser_NgpRole" FromRole="NgpUser" ToRole="NgpRole" />
         </EntityType>
         <EntityType Name="NgpYear">
@@ -216,13 +242,15 @@
           <Property Name="no_seedlings_survived" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="survival_rate" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="year_contracted" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="NgpContractor" Relationship="WebapidbModel.FK_NgpYear_NgpContractor" FromRole="NgpYear" ToRole="NgpContractor" />
           <Property Name="moa3" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="moa2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="no_seedlings_year1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="no_seedlings_replanted" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="no_seedlings_replanted3" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="no_seedlings_year3" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ContractorNameId" Type="Int32" />
+          <NavigationProperty Name="NgpContractor" Relationship="WebapidbModel.FK_NgpYear_NgpContractor" FromRole="NgpYear" ToRole="NgpContractor" />
+          <NavigationProperty Name="NgpContractor1" Relationship="WebapidbModel.FK_NgpYear_NgpContractor1" FromRole="NgpYear" ToRole="NgpContractor" />
         </EntityType>
         <EntityType Name="SampleTribe">
           <Key>
@@ -240,6 +268,18 @@
             </Principal>
             <Dependent Role="NgpYear">
               <PropertyRef Name="ProjectNameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NgpYear_NgpContractor1">
+          <End Type="WebapidbModel.NgpContractor" Role="NgpContractor" Multiplicity="0..1" />
+          <End Type="WebapidbModel.NgpYear" Role="NgpYear" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NgpContractor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NgpYear">
+              <PropertyRef Name="ContractorNameId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -303,6 +343,8 @@
           <EntitySetMapping Name="NgpUsers">
             <EntityTypeMapping TypeName="WebapidbModel.NgpUser">
               <MappingFragment StoreEntitySet="NgpUser">
+                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
                 <ScalarProperty Name="RoleID" ColumnName="RoleID" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
@@ -315,6 +357,7 @@
           <EntitySetMapping Name="NgpYears">
             <EntityTypeMapping TypeName="WebapidbModel.NgpYear">
               <MappingFragment StoreEntitySet="NgpYear">
+                <ScalarProperty Name="ContractorNameId" ColumnName="ContractorNameId" />
                 <ScalarProperty Name="no_seedlings_year3" ColumnName="no_seedlings_year3" />
                 <ScalarProperty Name="no_seedlings_replanted3" ColumnName="no_seedlings_replanted3" />
                 <ScalarProperty Name="no_seedlings_replanted" ColumnName="no_seedlings_replanted" />
