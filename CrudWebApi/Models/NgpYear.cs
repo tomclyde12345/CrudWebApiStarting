@@ -37,8 +37,5 @@ namespace CrudWebApi.Models
         public string no_seedlings_replanted3 { get; set; }
         public string no_seedlings_year3 { get; set; }
         public Nullable<int> ContractorNameId { get; set; }
-    
-        public virtual NgpContractor NgpContractor { get; set; }
-        public virtual NgpContractor NgpContractor1 { get; set; }
     }
 }

@@ -25,7 +25,17 @@ namespace CrudWebApi.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<NgpContractor> NgpContractors { get; set; }
+        public virtual DbSet<ngp_contract> ngp_contract { get; set; }
+        public virtual DbSet<ngp_contractor> ngp_contractor { get; set; }
+        public virtual DbSet<ngp_dropdown> ngp_dropdown { get; set; }
+        public virtual DbSet<ngp_history> ngp_history { get; set; }
+        public virtual DbSet<ngp_payment> ngp_payment { get; set; }
+        public virtual DbSet<ngp_projects> ngp_projects { get; set; }
+        public virtual DbSet<ngp_sched> ngp_sched { get; set; }
+        public virtual DbSet<ngp_users> ngp_users { get; set; }
+        public virtual DbSet<NgpBarangay> NgpBarangays { get; set; }
+        public virtual DbSet<NgpDropdown> NgpDropdowns { get; set; }
+        public virtual DbSet<NgpMunicipality> NgpMunicipalities { get; set; }
         public virtual DbSet<NgpRole> NgpRoles { get; set; }
         public virtual DbSet<NgpUpload> NgpUploads { get; set; }
         public virtual DbSet<NgpUser> NgpUsers { get; set; }

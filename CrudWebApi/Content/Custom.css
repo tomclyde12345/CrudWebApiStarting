@@ -7,3 +7,13 @@
 .hideThis {
     display: none;
 }
+.pcoded .pcoded-navbar .pcoded-item:after{
+    display:none !important;
+}
+.page-header {
+    background-image: none !important;
+    background-size: cover;
+    position: relative;
+    border-radius: 0;
+    color: #fff;
+}

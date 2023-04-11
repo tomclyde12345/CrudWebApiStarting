@@ -8,8 +8,7 @@ namespace CrudWebApi.ViewModel
 {
     public class YearVM
     {
-        public IEnumerable<NgpContractor> ContractorList { get; set; }
-        public NgpContractor Contractor { get; set; }
+       
 
         public IEnumerable<NgpYear> YearList { get; set; }
         public NgpYear Year { get; set; }

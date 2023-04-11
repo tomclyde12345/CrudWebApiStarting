@@ -1,4 +1,4 @@
-﻿@model CrudWebApi.ViewModel.ContractorVM
+﻿@model CrudWebApi.ViewModel.ProjectVM
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -14,51 +14,64 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Create Contractor</h4>
+                    <h4 class="card-title">Create Project</h4>
                 </div>
                 <div class="text-end m-3">
-                    <button type="button" class="btn btn-primary" style="border-radius:20px;" onclick="location.href ='@Url.Action("Index","Contractor")'">Go to list</button>
+                    <button type="button" class="btn btn-primary" style="border-radius:20px;" onclick="location.href ='@Url.Action("Index","Project")'">Go to list</button>
                 </div>
                 <div class="card-body">
-                    @using (Html.BeginForm("Save", "Contractor"))
+                    @using (Html.BeginForm("Save", "Project"))
                     {
                         <div class="row">
 
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <div class=" tom">
-                                        <label> ContractorName </label>
+                                        <label> SiteCode </label>
                                     </div>
                                 </div>
                                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                @Html.EditorFor(model => model.contractor_name, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(m => m.contractor_name)
+                                @Html.EditorFor(model => model.site_code, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(m => m.site_code)
 
+
+                                <div class="form-group">
+                                    <div class="tom">
+                                        <br />
+                                        <label>Area</label>
+                                    </div>
+                                </div>
+
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.area, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(m => m.area)
 
 
 
                                 <div class="form-group">
                                     <div class="tom">
                                         <br />
-                                        <label>Address Municipality</label>
+                                        <label>Location Municipality</label>
                                     </div>
                                 </div>
 
                                 @if (ViewBag.MunicipalityList != null)
                                 {
-                                    @Html.DropDownListFor(model => model.address_municipality, ViewBag.MunicipalityList as SelectList, "--Select Municipality--", new { @class = "form-control",  required = "required", @id= "MunicipalityId" })
+                                    @Html.DropDownListFor(model => model.MunicipalityId, ViewBag.MunicipalityList as SelectList, "--Select Municipality--", new { @class = "form-control", required = "required" })
                                 }
+
+
 
 
 
                                 <div class="form-group">
                                     <div class="tom">
                                         <br />
-                                        <label>Address Barangay</label>
+                                        <label>Location Barangay</label>
                                     </div>
                                 </div>
 
-                                @Html.DropDownListFor(model => model.address_barangay, new SelectList(" "), "--Select Barangay--", new { @class = "form-control", @id = "BarangayId" })
+                                @Html.DropDownListFor(model => model.BarangayId, new SelectList(" "), "--Select Barangay--", new { @class = "form-control" })
                             </div>
 
 
@@ -85,7 +98,7 @@
 <script>
     $(document).ready(function () {
         $("#MunicipalityId").change(function () {
-            $.get("/Contractor/GetBarangayLList", { MunicipalityId: $("#MunicipalityId").val() }, function (data) {
+            $.get("/Project/GetBarangayLList", { MunicipalityId: $("#MunicipalityId").val() }, function (data) {
                 $("#BarangayId").empty();
                 $.each(data, function (index, row) {
                     $("#BarangayId").append("<option value='" + row.BarangayId + "'>" + row.BarangayName + "</option>")

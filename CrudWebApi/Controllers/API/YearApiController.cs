@@ -20,13 +20,7 @@ namespace CrudWebApi.Controllers.API
         }
 
 
-        [HttpGet]
-        [Route("api/projectdata/getprojectdata")]
-        public IHttpActionResult GeProjectData()
-        {
-            var data = Db.NgpContractors.ToList().Select(Mapper.Map<NgpContractor, ContractorDTO>);
-            return Ok(data);
-        }
+     
 
         [HttpPost]
         [Route("api/saveyear/postsaveyear")]

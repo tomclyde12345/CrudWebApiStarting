@@ -53,7 +53,7 @@ namespace CrudWebApi.Controllers
                 {
                     yearlist = yearlist.
                         Where(x => x.Id.ToString().Contains(searchValue.ToLower()) ||
-                            x.NgpContractor.ProjectName.ToString().Contains(searchValue.ToLower()) ||
+                          
                             x.moa_number.ToLower().Contains(searchValue.ToLower()) ||
                             x.Date_moa.ToString().Contains(searchValue.ToLower()) ||
                             x.Unit_cost.ToString().Contains(searchValue.ToLower()) ||
@@ -86,7 +86,7 @@ namespace CrudWebApi.Controllers
                 {
 
                     Id = user.Id,
-                    ProjectNameId = user.NgpContractor.ProjectName,
+                   
                     moa_number = user.moa_number,
                     Date_moa = user.Date_moa,
                     Unit_cost = user.Unit_cost,

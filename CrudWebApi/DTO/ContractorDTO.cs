@@ -7,20 +7,10 @@ namespace CrudWebApi.DTO
 {
     public class ContractorDTO
     {
-        public int Id { get; set; }
-        public string Year_Estb { get; set; }
-        public string Region { get; set; }
-        public string Penro { get; set; }
-        public string CenroId { get; set; }
-        public Nullable<int> AddressId { get; set; }
-        public string SiteCode { get; set; }
-        public string ContractorName { get; set; }
-        public string ProjectName { get; set; }
-        public string AreaContracted { get; set; }
-        public string AddressMunicipality { get; set; }
-        public string AddressBarangay { get; set; }
-        public string LocationMunicipality { get; set; }
-        public string LocationBarangay { get; set; }
-        public string LocationSitio { get; set; }
+        public int contractorID { get; set; }
+        public string contractor_name { get; set; }
+        public Nullable<int> address_municipality { get; set; }
+        public Nullable<int> address_barangay { get; set; }
+        public Nullable<int> contractor_type { get; set; }
     }
 }

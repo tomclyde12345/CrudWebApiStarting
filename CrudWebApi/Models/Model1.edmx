@@ -5,7 +5,115 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="WebapidbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="NgpContractor">
+        <EntityType Name="ngp_contract">
+          <Key>
+            <PropertyRef Name="contractID" />
+          </Key>
+          <Property Name="contractID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="moa" Type="nvarchar" MaxLength="100" />
+          <Property Name="contractorName" Type="int" />
+          <Property Name="location_municipality" Type="int" />
+          <Property Name="location_barangay" Type="int" />
+          <Property Name="location_sitio" Type="nvarchar" MaxLength="100" />
+          <Property Name="area" Type="nvarchar" MaxLength="100" />
+          <Property Name="commodity" Type="nvarchar" MaxLength="100" />
+          <Property Name="commodity_type" Type="nvarchar" MaxLength="100" />
+          <Property Name="survival_rate" Type="nvarchar" MaxLength="100" />
+          <Property Name="project_name" Type="nvarchar" MaxLength="100" />
+          <Property Name="contract_cost" Type="nvarchar" MaxLength="100" />
+          <Property Name="site_code" Type="int" />
+          <Property Name="year_established" Type="int" />
+          <Property Name="num_seedlings_planted" Type="nvarchar" MaxLength="100" />
+          <Property Name="num_seedlings_produced" Type="nvarchar" MaxLength="100" />
+          <Property Name="num_seedlings_survived" Type="nvarchar" MaxLength="100" />
+          <Property Name="num_seedlings_replanted" Type="nvarchar" MaxLength="100" />
+          <Property Name="num_seedlings_survived_year1" Type="nvarchar" MaxLength="100" />
+          <Property Name="dropdownID" Type="int" />
+        </EntityType>
+        <EntityType Name="ngp_contractor">
+          <Key>
+            <PropertyRef Name="contractorID" />
+          </Key>
+          <Property Name="contractorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="contractor_name" Type="nvarchar" MaxLength="100" />
+          <Property Name="address_municipality" Type="int" />
+          <Property Name="address_barangay" Type="int" />
+          <Property Name="contractor_type" Type="int" />
+        </EntityType>
+        <EntityType Name="ngp_dropdown">
+          <Key>
+            <PropertyRef Name="dropdownID" />
+          </Key>
+          <Property Name="dropdownID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="year_established" Type="int" Nullable="false" />
+          <Property Name="region" Type="int" Nullable="false" />
+          <Property Name="penro" Type="int" Nullable="false" />
+          <Property Name="cenro" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ngp_history">
+          <Key>
+            <PropertyRef Name="historyID" />
+          </Key>
+          <Property Name="historyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_no" Type="int" />
+          <Property Name="contractor_no" Type="int" />
+        </EntityType>
+        <EntityType Name="ngp_payment">
+          <Key>
+            <PropertyRef Name="paymentID" />
+          </Key>
+          <Property Name="paymentID" Type="int" Nullable="false" />
+          <Property Name="contract_no" Type="int" />
+          <Property Name="contractor_no" Type="int" />
+          <Property Name="num_release" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="ngp_projects">
+          <Key>
+            <PropertyRef Name="projectID" />
+          </Key>
+          <Property Name="projectID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="site_code" Type="nvarchar" MaxLength="100" />
+          <Property Name="location_municipality" Type="int" />
+          <Property Name="location_barangay" Type="int" />
+          <Property Name="area" Type="nvarchar" MaxLength="100" />
+          <Property Name="year_form" Type="int" />
+          <Property Name="penro" Type="int" />
+          <Property Name="cenro" Type="int" />
+          <Property Name="region" Type="int" />
+          <Property Name="dropdownID" Type="int" />
+        </EntityType>
+        <EntityType Name="ngp_sched">
+          <Key>
+            <PropertyRef Name="schedID" />
+          </Key>
+          <Property Name="schedID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ors_no" Type="nvarchar" MaxLength="100" />
+          <Property Name="ors_date" Type="nvarchar" MaxLength="100" />
+          <Property Name="dv_no" Type="nvarchar" MaxLength="100" />
+          <Property Name="dv_date" Type="nvarchar" MaxLength="100" />
+          <Property Name="lddap_no" Type="nvarchar" MaxLength="100" />
+          <Property Name="lddap_date" Type="nvarchar" MaxLength="100" />
+          <Property Name="contractor_no" Type="int" />
+          <Property Name="contract_no" Type="int" />
+        </EntityType>
+        <EntityType Name="ngp_users">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="100" />
+          <Property Name="password" Type="nvarchar" MaxLength="100" />
+          <Property Name="roleID" Type="int" />
+        </EntityType>
+        <EntityType Name="NgpBarangay">
+          <Key>
+            <PropertyRef Name="BarangayId" />
+          </Key>
+          <Property Name="BarangayId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BarangayName" Type="nvarchar" MaxLength="100" />
+          <Property Name="MunicipalityId" Type="int" />
+        </EntityType>
+        <EntityType Name="NgpDropdown">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -13,17 +121,19 @@
           <Property Name="Year_Estb" Type="nvarchar" MaxLength="100" />
           <Property Name="Region" Type="nvarchar" MaxLength="100" />
           <Property Name="Penro" Type="nvarchar" MaxLength="100" />
-          <Property Name="AddressId" Type="int" />
-          <Property Name="SiteCode" Type="nvarchar" MaxLength="100" />
-          <Property Name="ContractorName" Type="nvarchar" MaxLength="100" />
-          <Property Name="ProjectName" Type="nvarchar" MaxLength="100" />
-          <Property Name="AreaContracted" Type="nvarchar" MaxLength="100" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" />
           <Property Name="AddressMunicipality" Type="nvarchar" MaxLength="100" />
           <Property Name="AddressBarangay" Type="nvarchar" MaxLength="100" />
           <Property Name="LocationMunicipality" Type="nvarchar" MaxLength="100" />
           <Property Name="LocationBarangay" Type="nvarchar" MaxLength="100" />
-          <Property Name="LocationSitio" Type="nvarchar" MaxLength="100" />
           <Property Name="CenroId" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="NgpMunicipality">
+          <Key>
+            <PropertyRef Name="MunicipalityId" />
+          </Key>
+          <Property Name="MunicipalityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MunicipalityName" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="NgpRole">
           <Key>
@@ -89,6 +199,198 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <Association Name="FK_ngp_contract_ngp_contractor">
+          <End Role="ngp_contractor" Type="Self.ngp_contractor" Multiplicity="0..1" />
+          <End Role="ngp_contract" Type="Self.ngp_contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ngp_contractor">
+              <PropertyRef Name="contractorID" />
+            </Principal>
+            <Dependent Role="ngp_contract">
+              <PropertyRef Name="contractorName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ngp_contract_ngp_dropdown">
+          <End Role="ngp_dropdown" Type="Self.ngp_dropdown" Multiplicity="0..1" />
+          <End Role="ngp_contract" Type="Self.ngp_contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ngp_dropdown">
+              <PropertyRef Name="dropdownID" />
+            </Principal>
+            <Dependent Role="ngp_contract">
+              <PropertyRef Name="dropdownID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ngp_contract_NgpBarangay">
+          <End Role="NgpBarangay" Type="Self.NgpBarangay" Multiplicity="0..1" />
+          <End Role="ngp_contract" Type="Self.ngp_contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NgpBarangay">
+              <PropertyRef Name="BarangayId" />
+            </Principal>
+            <Dependent Role="ngp_contract">
+              <PropertyRef Name="location_barangay" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ngp_contract_NgpMunicipality">
+          <End Role="NgpMunicipality" Type="Self.NgpMunicipality" Multiplicity="0..1" />
+          <End Role="ngp_contract" Type="Self.ngp_contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NgpMunicipality">
+              <PropertyRef Name="MunicipalityId" />
+            </Principal>
+            <Dependent Role="ngp_contract">
+              <PropertyRef Name="location_municipality" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ngp_contractor_NgpBarangay">
+          <End Role="NgpBarangay" Type="Self.NgpBarangay" Multiplicity="0..1" />
+          <End Role="ngp_contractor" Type="Self.ngp_contractor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NgpBarangay">
+              <PropertyRef Name="BarangayId" />
+            </Principal>
+            <Dependent Role="ngp_contractor">
+              <PropertyRef Name="address_barangay" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ngp_contractor_NgpMunicipality">
+          <End Role="NgpMunicipality" Type="Self.NgpMunicipality" Multiplicity="0..1" />
+          <End Role="ngp_contractor" Type="Self.ngp_contractor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NgpMunicipality">
+              <PropertyRef Name="MunicipalityId" />
+            </Principal>
+            <Dependent Role="ngp_contractor">
+              <PropertyRef Name="address_municipality" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ngp_history_ngp_contractor">
+          <End Role="ngp_contractor" Type="Self.ngp_contractor" Multiplicity="0..1" />
+          <End Role="ngp_history" Type="Self.ngp_history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ngp_contractor">
+              <PropertyRef Name="contractorID" />
+            </Principal>
+            <Dependent Role="ngp_history">
+              <PropertyRef Name="contractor_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ngp_history_ngp_users">
+          <End Role="ngp_users" Type="Self.ngp_users" Multiplicity="0..1" />
+          <End Role="ngp_history" Type="Self.ngp_history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ngp_users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="ngp_history">
+              <PropertyRef Name="user_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ngp_payment_ngp_contract">
+          <End Role="ngp_contract" Type="Self.ngp_contract" Multiplicity="0..1" />
+          <End Role="ngp_payment" Type="Self.ngp_payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ngp_contract">
+              <PropertyRef Name="contractID" />
+            </Principal>
+            <Dependent Role="ngp_payment">
+              <PropertyRef Name="contract_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ngp_payment_ngp_contractor">
+          <End Role="ngp_contractor" Type="Self.ngp_contractor" Multiplicity="0..1" />
+          <End Role="ngp_payment" Type="Self.ngp_payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ngp_contractor">
+              <PropertyRef Name="contractorID" />
+            </Principal>
+            <Dependent Role="ngp_payment">
+              <PropertyRef Name="contractor_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ngp_projects_ngp_dropdown">
+          <End Role="ngp_dropdown" Type="Self.ngp_dropdown" Multiplicity="0..1" />
+          <End Role="ngp_projects" Type="Self.ngp_projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ngp_dropdown">
+              <PropertyRef Name="dropdownID" />
+            </Principal>
+            <Dependent Role="ngp_projects">
+              <PropertyRef Name="dropdownID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ngp_projects_NgpBarangay">
+          <End Role="NgpBarangay" Type="Self.NgpBarangay" Multiplicity="0..1" />
+          <End Role="ngp_projects" Type="Self.ngp_projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NgpBarangay">
+              <PropertyRef Name="BarangayId" />
+            </Principal>
+            <Dependent Role="ngp_projects">
+              <PropertyRef Name="location_barangay" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ngp_projects_NgpMunicipality">
+          <End Role="NgpMunicipality" Type="Self.NgpMunicipality" Multiplicity="0..1" />
+          <End Role="ngp_projects" Type="Self.ngp_projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NgpMunicipality">
+              <PropertyRef Name="MunicipalityId" />
+            </Principal>
+            <Dependent Role="ngp_projects">
+              <PropertyRef Name="location_municipality" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ngp_sched_ngp_contract">
+          <End Role="ngp_contract" Type="Self.ngp_contract" Multiplicity="0..1" />
+          <End Role="ngp_sched" Type="Self.ngp_sched" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ngp_contract">
+              <PropertyRef Name="contractID" />
+            </Principal>
+            <Dependent Role="ngp_sched">
+              <PropertyRef Name="contract_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ngp_sched_ngp_contractor">
+          <End Role="ngp_contractor" Type="Self.ngp_contractor" Multiplicity="0..1" />
+          <End Role="ngp_sched" Type="Self.ngp_sched" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ngp_contractor">
+              <PropertyRef Name="contractorID" />
+            </Principal>
+            <Dependent Role="ngp_sched">
+              <PropertyRef Name="contractor_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NgpBarangay_NgpMunicipality">
+          <End Role="NgpMunicipality" Type="Self.NgpMunicipality" Multiplicity="0..1" />
+          <End Role="NgpBarangay" Type="Self.NgpBarangay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NgpMunicipality">
+              <PropertyRef Name="MunicipalityId" />
+            </Principal>
+            <Dependent Role="NgpBarangay">
+              <PropertyRef Name="MunicipalityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_NgpUser_NgpRole">
           <End Role="NgpRole" Type="Self.NgpRole" Multiplicity="0..1" />
           <End Role="NgpUser" Type="Self.NgpUser" Multiplicity="*" />
@@ -101,48 +403,90 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_NgpYear_NgpContractor">
-          <End Role="NgpContractor" Type="Self.NgpContractor" Multiplicity="0..1" />
-          <End Role="NgpYear" Type="Self.NgpYear" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="NgpContractor">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="NgpYear">
-              <PropertyRef Name="ProjectNameId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_NgpYear_NgpContractor1">
-          <End Role="NgpContractor" Type="Self.NgpContractor" Multiplicity="0..1" />
-          <End Role="NgpYear" Type="Self.NgpYear" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="NgpContractor">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="NgpYear">
-              <PropertyRef Name="ContractorNameId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="WebapidbModelStoreContainer">
-          <EntitySet Name="NgpContractor" EntityType="Self.NgpContractor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ngp_contract" EntityType="Self.ngp_contract" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ngp_contractor" EntityType="Self.ngp_contractor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ngp_dropdown" EntityType="Self.ngp_dropdown" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ngp_history" EntityType="Self.ngp_history" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ngp_payment" EntityType="Self.ngp_payment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ngp_projects" EntityType="Self.ngp_projects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ngp_sched" EntityType="Self.ngp_sched" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ngp_users" EntityType="Self.ngp_users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NgpBarangay" EntityType="Self.NgpBarangay" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NgpDropdown" EntityType="Self.NgpDropdown" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NgpMunicipality" EntityType="Self.NgpMunicipality" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NgpRole" EntityType="Self.NgpRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NgpUpload" EntityType="Self.NgpUpload" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NgpUser" EntityType="Self.NgpUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NgpYear" EntityType="Self.NgpYear" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SampleTribe" EntityType="Self.SampleTribe" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ngp_contract_ngp_contractor" Association="Self.FK_ngp_contract_ngp_contractor">
+            <End Role="ngp_contractor" EntitySet="ngp_contractor" />
+            <End Role="ngp_contract" EntitySet="ngp_contract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ngp_contract_ngp_dropdown" Association="Self.FK_ngp_contract_ngp_dropdown">
+            <End Role="ngp_dropdown" EntitySet="ngp_dropdown" />
+            <End Role="ngp_contract" EntitySet="ngp_contract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ngp_contract_NgpBarangay" Association="Self.FK_ngp_contract_NgpBarangay">
+            <End Role="NgpBarangay" EntitySet="NgpBarangay" />
+            <End Role="ngp_contract" EntitySet="ngp_contract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ngp_contract_NgpMunicipality" Association="Self.FK_ngp_contract_NgpMunicipality">
+            <End Role="NgpMunicipality" EntitySet="NgpMunicipality" />
+            <End Role="ngp_contract" EntitySet="ngp_contract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ngp_contractor_NgpBarangay" Association="Self.FK_ngp_contractor_NgpBarangay">
+            <End Role="NgpBarangay" EntitySet="NgpBarangay" />
+            <End Role="ngp_contractor" EntitySet="ngp_contractor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ngp_contractor_NgpMunicipality" Association="Self.FK_ngp_contractor_NgpMunicipality">
+            <End Role="NgpMunicipality" EntitySet="NgpMunicipality" />
+            <End Role="ngp_contractor" EntitySet="ngp_contractor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ngp_history_ngp_contractor" Association="Self.FK_ngp_history_ngp_contractor">
+            <End Role="ngp_contractor" EntitySet="ngp_contractor" />
+            <End Role="ngp_history" EntitySet="ngp_history" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ngp_history_ngp_users" Association="Self.FK_ngp_history_ngp_users">
+            <End Role="ngp_users" EntitySet="ngp_users" />
+            <End Role="ngp_history" EntitySet="ngp_history" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ngp_payment_ngp_contract" Association="Self.FK_ngp_payment_ngp_contract">
+            <End Role="ngp_contract" EntitySet="ngp_contract" />
+            <End Role="ngp_payment" EntitySet="ngp_payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ngp_payment_ngp_contractor" Association="Self.FK_ngp_payment_ngp_contractor">
+            <End Role="ngp_contractor" EntitySet="ngp_contractor" />
+            <End Role="ngp_payment" EntitySet="ngp_payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ngp_projects_ngp_dropdown" Association="Self.FK_ngp_projects_ngp_dropdown">
+            <End Role="ngp_dropdown" EntitySet="ngp_dropdown" />
+            <End Role="ngp_projects" EntitySet="ngp_projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ngp_projects_NgpBarangay" Association="Self.FK_ngp_projects_NgpBarangay">
+            <End Role="NgpBarangay" EntitySet="NgpBarangay" />
+            <End Role="ngp_projects" EntitySet="ngp_projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ngp_projects_NgpMunicipality" Association="Self.FK_ngp_projects_NgpMunicipality">
+            <End Role="NgpMunicipality" EntitySet="NgpMunicipality" />
+            <End Role="ngp_projects" EntitySet="ngp_projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ngp_sched_ngp_contract" Association="Self.FK_ngp_sched_ngp_contract">
+            <End Role="ngp_contract" EntitySet="ngp_contract" />
+            <End Role="ngp_sched" EntitySet="ngp_sched" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ngp_sched_ngp_contractor" Association="Self.FK_ngp_sched_ngp_contractor">
+            <End Role="ngp_contractor" EntitySet="ngp_contractor" />
+            <End Role="ngp_sched" EntitySet="ngp_sched" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NgpBarangay_NgpMunicipality" Association="Self.FK_NgpBarangay_NgpMunicipality">
+            <End Role="NgpMunicipality" EntitySet="NgpMunicipality" />
+            <End Role="NgpBarangay" EntitySet="NgpBarangay" />
+          </AssociationSet>
           <AssociationSet Name="FK_NgpUser_NgpRole" Association="Self.FK_NgpUser_NgpRole">
             <End Role="NgpRole" EntitySet="NgpRole" />
             <End Role="NgpUser" EntitySet="NgpUser" />
-          </AssociationSet>
-          <AssociationSet Name="FK_NgpYear_NgpContractor" Association="Self.FK_NgpYear_NgpContractor">
-            <End Role="NgpContractor" EntitySet="NgpContractor" />
-            <End Role="NgpYear" EntitySet="NgpYear" />
-          </AssociationSet>
-          <AssociationSet Name="FK_NgpYear_NgpContractor1" Association="Self.FK_NgpYear_NgpContractor1">
-            <End Role="NgpContractor" EntitySet="NgpContractor" />
-            <End Role="NgpYear" EntitySet="NgpYear" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -150,26 +494,228 @@
     <edmx:ConceptualModels>
       <Schema Namespace="WebapidbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="WebapidbEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="NgpContractors" EntityType="WebapidbModel.NgpContractor" />
+          <EntitySet Name="ngp_contract" EntityType="WebapidbModel.ngp_contract" />
+          <EntitySet Name="ngp_contractor" EntityType="WebapidbModel.ngp_contractor" />
+          <EntitySet Name="ngp_dropdown" EntityType="WebapidbModel.ngp_dropdown" />
+          <EntitySet Name="ngp_history" EntityType="WebapidbModel.ngp_history" />
+          <EntitySet Name="ngp_payment" EntityType="WebapidbModel.ngp_payment" />
+          <EntitySet Name="ngp_projects" EntityType="WebapidbModel.ngp_projects" />
+          <EntitySet Name="ngp_sched" EntityType="WebapidbModel.ngp_sched" />
+          <EntitySet Name="ngp_users" EntityType="WebapidbModel.ngp_users" />
+          <EntitySet Name="NgpBarangays" EntityType="WebapidbModel.NgpBarangay" />
+          <EntitySet Name="NgpDropdowns" EntityType="WebapidbModel.NgpDropdown" />
+          <EntitySet Name="NgpMunicipalities" EntityType="WebapidbModel.NgpMunicipality" />
           <EntitySet Name="NgpRoles" EntityType="WebapidbModel.NgpRole" />
           <EntitySet Name="NgpUploads" EntityType="WebapidbModel.NgpUpload" />
           <EntitySet Name="NgpUsers" EntityType="WebapidbModel.NgpUser" />
           <EntitySet Name="NgpYears" EntityType="WebapidbModel.NgpYear" />
           <EntitySet Name="SampleTribes" EntityType="WebapidbModel.SampleTribe" />
-          <AssociationSet Name="FK_NgpYear_NgpContractor" Association="WebapidbModel.FK_NgpYear_NgpContractor">
-            <End Role="NgpContractor" EntitySet="NgpContractors" />
-            <End Role="NgpYear" EntitySet="NgpYears" />
+          <AssociationSet Name="FK_ngp_contract_ngp_contractor" Association="WebapidbModel.FK_ngp_contract_ngp_contractor">
+            <End Role="ngp_contractor" EntitySet="ngp_contractor" />
+            <End Role="ngp_contract" EntitySet="ngp_contract" />
           </AssociationSet>
-          <AssociationSet Name="FK_NgpYear_NgpContractor1" Association="WebapidbModel.FK_NgpYear_NgpContractor1">
-            <End Role="NgpContractor" EntitySet="NgpContractors" />
-            <End Role="NgpYear" EntitySet="NgpYears" />
+          <AssociationSet Name="FK_ngp_contract_ngp_dropdown" Association="WebapidbModel.FK_ngp_contract_ngp_dropdown">
+            <End Role="ngp_dropdown" EntitySet="ngp_dropdown" />
+            <End Role="ngp_contract" EntitySet="ngp_contract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ngp_contract_NgpBarangay" Association="WebapidbModel.FK_ngp_contract_NgpBarangay">
+            <End Role="NgpBarangay" EntitySet="NgpBarangays" />
+            <End Role="ngp_contract" EntitySet="ngp_contract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ngp_contract_NgpMunicipality" Association="WebapidbModel.FK_ngp_contract_NgpMunicipality">
+            <End Role="NgpMunicipality" EntitySet="NgpMunicipalities" />
+            <End Role="ngp_contract" EntitySet="ngp_contract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ngp_payment_ngp_contract" Association="WebapidbModel.FK_ngp_payment_ngp_contract">
+            <End Role="ngp_contract" EntitySet="ngp_contract" />
+            <End Role="ngp_payment" EntitySet="ngp_payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ngp_sched_ngp_contract" Association="WebapidbModel.FK_ngp_sched_ngp_contract">
+            <End Role="ngp_contract" EntitySet="ngp_contract" />
+            <End Role="ngp_sched" EntitySet="ngp_sched" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ngp_contractor_NgpBarangay" Association="WebapidbModel.FK_ngp_contractor_NgpBarangay">
+            <End Role="NgpBarangay" EntitySet="NgpBarangays" />
+            <End Role="ngp_contractor" EntitySet="ngp_contractor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ngp_contractor_NgpMunicipality" Association="WebapidbModel.FK_ngp_contractor_NgpMunicipality">
+            <End Role="NgpMunicipality" EntitySet="NgpMunicipalities" />
+            <End Role="ngp_contractor" EntitySet="ngp_contractor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ngp_history_ngp_contractor" Association="WebapidbModel.FK_ngp_history_ngp_contractor">
+            <End Role="ngp_contractor" EntitySet="ngp_contractor" />
+            <End Role="ngp_history" EntitySet="ngp_history" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ngp_payment_ngp_contractor" Association="WebapidbModel.FK_ngp_payment_ngp_contractor">
+            <End Role="ngp_contractor" EntitySet="ngp_contractor" />
+            <End Role="ngp_payment" EntitySet="ngp_payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ngp_sched_ngp_contractor" Association="WebapidbModel.FK_ngp_sched_ngp_contractor">
+            <End Role="ngp_contractor" EntitySet="ngp_contractor" />
+            <End Role="ngp_sched" EntitySet="ngp_sched" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ngp_projects_ngp_dropdown" Association="WebapidbModel.FK_ngp_projects_ngp_dropdown">
+            <End Role="ngp_dropdown" EntitySet="ngp_dropdown" />
+            <End Role="ngp_projects" EntitySet="ngp_projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ngp_history_ngp_users" Association="WebapidbModel.FK_ngp_history_ngp_users">
+            <End Role="ngp_users" EntitySet="ngp_users" />
+            <End Role="ngp_history" EntitySet="ngp_history" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ngp_projects_NgpBarangay" Association="WebapidbModel.FK_ngp_projects_NgpBarangay">
+            <End Role="NgpBarangay" EntitySet="NgpBarangays" />
+            <End Role="ngp_projects" EntitySet="ngp_projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ngp_projects_NgpMunicipality" Association="WebapidbModel.FK_ngp_projects_NgpMunicipality">
+            <End Role="NgpMunicipality" EntitySet="NgpMunicipalities" />
+            <End Role="ngp_projects" EntitySet="ngp_projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NgpBarangay_NgpMunicipality" Association="WebapidbModel.FK_NgpBarangay_NgpMunicipality">
+            <End Role="NgpMunicipality" EntitySet="NgpMunicipalities" />
+            <End Role="NgpBarangay" EntitySet="NgpBarangays" />
           </AssociationSet>
           <AssociationSet Name="FK_NgpUser_NgpRole" Association="WebapidbModel.FK_NgpUser_NgpRole">
             <End Role="NgpRole" EntitySet="NgpRoles" />
             <End Role="NgpUser" EntitySet="NgpUsers" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="NgpContractor">
+        <EntityType Name="ngp_contract">
+          <Key>
+            <PropertyRef Name="contractID" />
+          </Key>
+          <Property Name="contractID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="moa" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="contractorName" Type="Int32" />
+          <Property Name="location_municipality" Type="Int32" />
+          <Property Name="location_barangay" Type="Int32" />
+          <Property Name="location_sitio" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="area" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="commodity" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="commodity_type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="survival_rate" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="project_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="contract_cost" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="site_code" Type="Int32" />
+          <Property Name="year_established" Type="Int32" />
+          <Property Name="num_seedlings_planted" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="num_seedlings_produced" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="num_seedlings_survived" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="num_seedlings_replanted" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="num_seedlings_survived_year1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="dropdownID" Type="Int32" />
+          <NavigationProperty Name="ngp_contractor" Relationship="WebapidbModel.FK_ngp_contract_ngp_contractor" FromRole="ngp_contract" ToRole="ngp_contractor" />
+          <NavigationProperty Name="ngp_dropdown" Relationship="WebapidbModel.FK_ngp_contract_ngp_dropdown" FromRole="ngp_contract" ToRole="ngp_dropdown" />
+          <NavigationProperty Name="NgpBarangay" Relationship="WebapidbModel.FK_ngp_contract_NgpBarangay" FromRole="ngp_contract" ToRole="NgpBarangay" />
+          <NavigationProperty Name="NgpMunicipality" Relationship="WebapidbModel.FK_ngp_contract_NgpMunicipality" FromRole="ngp_contract" ToRole="NgpMunicipality" />
+          <NavigationProperty Name="ngp_payment" Relationship="WebapidbModel.FK_ngp_payment_ngp_contract" FromRole="ngp_contract" ToRole="ngp_payment" />
+          <NavigationProperty Name="ngp_sched" Relationship="WebapidbModel.FK_ngp_sched_ngp_contract" FromRole="ngp_contract" ToRole="ngp_sched" />
+        </EntityType>
+        <EntityType Name="ngp_contractor">
+          <Key>
+            <PropertyRef Name="contractorID" />
+          </Key>
+          <Property Name="contractorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="contractor_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="address_municipality" Type="Int32" />
+          <Property Name="address_barangay" Type="Int32" />
+          <Property Name="contractor_type" Type="Int32" />
+          <NavigationProperty Name="ngp_contract" Relationship="WebapidbModel.FK_ngp_contract_ngp_contractor" FromRole="ngp_contractor" ToRole="ngp_contract" />
+          <NavigationProperty Name="NgpBarangay" Relationship="WebapidbModel.FK_ngp_contractor_NgpBarangay" FromRole="ngp_contractor" ToRole="NgpBarangay" />
+          <NavigationProperty Name="NgpMunicipality" Relationship="WebapidbModel.FK_ngp_contractor_NgpMunicipality" FromRole="ngp_contractor" ToRole="NgpMunicipality" />
+          <NavigationProperty Name="ngp_history" Relationship="WebapidbModel.FK_ngp_history_ngp_contractor" FromRole="ngp_contractor" ToRole="ngp_history" />
+          <NavigationProperty Name="ngp_payment" Relationship="WebapidbModel.FK_ngp_payment_ngp_contractor" FromRole="ngp_contractor" ToRole="ngp_payment" />
+          <NavigationProperty Name="ngp_sched" Relationship="WebapidbModel.FK_ngp_sched_ngp_contractor" FromRole="ngp_contractor" ToRole="ngp_sched" />
+        </EntityType>
+        <EntityType Name="ngp_dropdown">
+          <Key>
+            <PropertyRef Name="dropdownID" />
+          </Key>
+          <Property Name="dropdownID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="year_established" Type="Int32" Nullable="false" />
+          <Property Name="region" Type="Int32" Nullable="false" />
+          <Property Name="penro" Type="Int32" Nullable="false" />
+          <Property Name="cenro" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ngp_contract" Relationship="WebapidbModel.FK_ngp_contract_ngp_dropdown" FromRole="ngp_dropdown" ToRole="ngp_contract" />
+          <NavigationProperty Name="ngp_projects" Relationship="WebapidbModel.FK_ngp_projects_ngp_dropdown" FromRole="ngp_dropdown" ToRole="ngp_projects" />
+        </EntityType>
+        <EntityType Name="ngp_history">
+          <Key>
+            <PropertyRef Name="historyID" />
+          </Key>
+          <Property Name="historyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_no" Type="Int32" />
+          <Property Name="contractor_no" Type="Int32" />
+          <NavigationProperty Name="ngp_contractor" Relationship="WebapidbModel.FK_ngp_history_ngp_contractor" FromRole="ngp_history" ToRole="ngp_contractor" />
+          <NavigationProperty Name="ngp_users" Relationship="WebapidbModel.FK_ngp_history_ngp_users" FromRole="ngp_history" ToRole="ngp_users" />
+        </EntityType>
+        <EntityType Name="ngp_payment">
+          <Key>
+            <PropertyRef Name="paymentID" />
+          </Key>
+          <Property Name="paymentID" Type="Int32" Nullable="false" />
+          <Property Name="contract_no" Type="Int32" />
+          <Property Name="contractor_no" Type="Int32" />
+          <Property Name="num_release" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ngp_contract" Relationship="WebapidbModel.FK_ngp_payment_ngp_contract" FromRole="ngp_payment" ToRole="ngp_contract" />
+          <NavigationProperty Name="ngp_contractor" Relationship="WebapidbModel.FK_ngp_payment_ngp_contractor" FromRole="ngp_payment" ToRole="ngp_contractor" />
+        </EntityType>
+        <EntityType Name="ngp_projects">
+          <Key>
+            <PropertyRef Name="projectID" />
+          </Key>
+          <Property Name="projectID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="site_code" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="location_municipality" Type="Int32" />
+          <Property Name="location_barangay" Type="Int32" />
+          <Property Name="area" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="year_form" Type="Int32" />
+          <Property Name="penro" Type="Int32" />
+          <Property Name="cenro" Type="Int32" />
+          <Property Name="region" Type="Int32" />
+          <Property Name="dropdownID" Type="Int32" />
+          <NavigationProperty Name="ngp_dropdown" Relationship="WebapidbModel.FK_ngp_projects_ngp_dropdown" FromRole="ngp_projects" ToRole="ngp_dropdown" />
+          <NavigationProperty Name="NgpBarangay" Relationship="WebapidbModel.FK_ngp_projects_NgpBarangay" FromRole="ngp_projects" ToRole="NgpBarangay" />
+          <NavigationProperty Name="NgpMunicipality" Relationship="WebapidbModel.FK_ngp_projects_NgpMunicipality" FromRole="ngp_projects" ToRole="NgpMunicipality" />
+        </EntityType>
+        <EntityType Name="ngp_sched">
+          <Key>
+            <PropertyRef Name="schedID" />
+          </Key>
+          <Property Name="schedID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ors_no" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ors_date" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="dv_no" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="dv_date" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="lddap_no" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="lddap_date" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="contractor_no" Type="Int32" />
+          <Property Name="contract_no" Type="Int32" />
+          <NavigationProperty Name="ngp_contract" Relationship="WebapidbModel.FK_ngp_sched_ngp_contract" FromRole="ngp_sched" ToRole="ngp_contract" />
+          <NavigationProperty Name="ngp_contractor" Relationship="WebapidbModel.FK_ngp_sched_ngp_contractor" FromRole="ngp_sched" ToRole="ngp_contractor" />
+        </EntityType>
+        <EntityType Name="ngp_users">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="roleID" Type="Int32" />
+          <NavigationProperty Name="ngp_history" Relationship="WebapidbModel.FK_ngp_history_ngp_users" FromRole="ngp_users" ToRole="ngp_history" />
+        </EntityType>
+        <EntityType Name="NgpBarangay">
+          <Key>
+            <PropertyRef Name="BarangayId" />
+          </Key>
+          <Property Name="BarangayId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BarangayName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MunicipalityId" Type="Int32" />
+          <NavigationProperty Name="ngp_contract" Relationship="WebapidbModel.FK_ngp_contract_NgpBarangay" FromRole="NgpBarangay" ToRole="ngp_contract" />
+          <NavigationProperty Name="ngp_contractor" Relationship="WebapidbModel.FK_ngp_contractor_NgpBarangay" FromRole="NgpBarangay" ToRole="ngp_contractor" />
+          <NavigationProperty Name="ngp_projects" Relationship="WebapidbModel.FK_ngp_projects_NgpBarangay" FromRole="NgpBarangay" ToRole="ngp_projects" />
+          <NavigationProperty Name="NgpMunicipality" Relationship="WebapidbModel.FK_NgpBarangay_NgpMunicipality" FromRole="NgpBarangay" ToRole="NgpMunicipality" />
+        </EntityType>
+        <EntityType Name="NgpDropdown">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -177,19 +723,23 @@
           <Property Name="Year_Estb" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Region" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Penro" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="AddressId" Type="Int32" />
-          <Property Name="SiteCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ContractorName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ProjectName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="AreaContracted" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="AddressMunicipality" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="AddressBarangay" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="LocationMunicipality" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="LocationBarangay" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="LocationSitio" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="CenroId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="NgpYears" Relationship="WebapidbModel.FK_NgpYear_NgpContractor" FromRole="NgpContractor" ToRole="NgpYear" />
-          <NavigationProperty Name="NgpYears1" Relationship="WebapidbModel.FK_NgpYear_NgpContractor1" FromRole="NgpContractor" ToRole="NgpYear" />
+        </EntityType>
+        <EntityType Name="NgpMunicipality">
+          <Key>
+            <PropertyRef Name="MunicipalityId" />
+          </Key>
+          <Property Name="MunicipalityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MunicipalityName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ngp_contract" Relationship="WebapidbModel.FK_ngp_contract_NgpMunicipality" FromRole="NgpMunicipality" ToRole="ngp_contract" />
+          <NavigationProperty Name="ngp_contractor" Relationship="WebapidbModel.FK_ngp_contractor_NgpMunicipality" FromRole="NgpMunicipality" ToRole="ngp_contractor" />
+          <NavigationProperty Name="ngp_projects" Relationship="WebapidbModel.FK_ngp_projects_NgpMunicipality" FromRole="NgpMunicipality" ToRole="ngp_projects" />
+          <NavigationProperty Name="NgpBarangays" Relationship="WebapidbModel.FK_NgpBarangay_NgpMunicipality" FromRole="NgpMunicipality" ToRole="NgpBarangay" />
         </EntityType>
         <EntityType Name="NgpRole">
           <Key>
@@ -249,8 +799,6 @@
           <Property Name="no_seedlings_replanted3" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="no_seedlings_year3" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="ContractorNameId" Type="Int32" />
-          <NavigationProperty Name="NgpContractor" Relationship="WebapidbModel.FK_NgpYear_NgpContractor" FromRole="NgpYear" ToRole="NgpContractor" />
-          <NavigationProperty Name="NgpContractor1" Relationship="WebapidbModel.FK_NgpYear_NgpContractor1" FromRole="NgpYear" ToRole="NgpContractor" />
         </EntityType>
         <EntityType Name="SampleTribe">
           <Key>
@@ -259,27 +807,195 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <Association Name="FK_NgpYear_NgpContractor">
-          <End Type="WebapidbModel.NgpContractor" Role="NgpContractor" Multiplicity="0..1" />
-          <End Type="WebapidbModel.NgpYear" Role="NgpYear" Multiplicity="*" />
+        <Association Name="FK_ngp_contract_ngp_contractor">
+          <End Type="WebapidbModel.ngp_contractor" Role="ngp_contractor" Multiplicity="0..1" />
+          <End Type="WebapidbModel.ngp_contract" Role="ngp_contract" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="NgpContractor">
-              <PropertyRef Name="Id" />
+            <Principal Role="ngp_contractor">
+              <PropertyRef Name="contractorID" />
             </Principal>
-            <Dependent Role="NgpYear">
-              <PropertyRef Name="ProjectNameId" />
+            <Dependent Role="ngp_contract">
+              <PropertyRef Name="contractorName" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_NgpYear_NgpContractor1">
-          <End Type="WebapidbModel.NgpContractor" Role="NgpContractor" Multiplicity="0..1" />
-          <End Type="WebapidbModel.NgpYear" Role="NgpYear" Multiplicity="*" />
+        <Association Name="FK_ngp_contract_ngp_dropdown">
+          <End Type="WebapidbModel.ngp_dropdown" Role="ngp_dropdown" Multiplicity="0..1" />
+          <End Type="WebapidbModel.ngp_contract" Role="ngp_contract" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="NgpContractor">
-              <PropertyRef Name="Id" />
+            <Principal Role="ngp_dropdown">
+              <PropertyRef Name="dropdownID" />
             </Principal>
-            <Dependent Role="NgpYear">
-              <PropertyRef Name="ContractorNameId" />
+            <Dependent Role="ngp_contract">
+              <PropertyRef Name="dropdownID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ngp_contract_NgpBarangay">
+          <End Type="WebapidbModel.NgpBarangay" Role="NgpBarangay" Multiplicity="0..1" />
+          <End Type="WebapidbModel.ngp_contract" Role="ngp_contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NgpBarangay">
+              <PropertyRef Name="BarangayId" />
+            </Principal>
+            <Dependent Role="ngp_contract">
+              <PropertyRef Name="location_barangay" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ngp_contract_NgpMunicipality">
+          <End Type="WebapidbModel.NgpMunicipality" Role="NgpMunicipality" Multiplicity="0..1" />
+          <End Type="WebapidbModel.ngp_contract" Role="ngp_contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NgpMunicipality">
+              <PropertyRef Name="MunicipalityId" />
+            </Principal>
+            <Dependent Role="ngp_contract">
+              <PropertyRef Name="location_municipality" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ngp_payment_ngp_contract">
+          <End Type="WebapidbModel.ngp_contract" Role="ngp_contract" Multiplicity="0..1" />
+          <End Type="WebapidbModel.ngp_payment" Role="ngp_payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ngp_contract">
+              <PropertyRef Name="contractID" />
+            </Principal>
+            <Dependent Role="ngp_payment">
+              <PropertyRef Name="contract_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ngp_sched_ngp_contract">
+          <End Type="WebapidbModel.ngp_contract" Role="ngp_contract" Multiplicity="0..1" />
+          <End Type="WebapidbModel.ngp_sched" Role="ngp_sched" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ngp_contract">
+              <PropertyRef Name="contractID" />
+            </Principal>
+            <Dependent Role="ngp_sched">
+              <PropertyRef Name="contract_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ngp_contractor_NgpBarangay">
+          <End Type="WebapidbModel.NgpBarangay" Role="NgpBarangay" Multiplicity="0..1" />
+          <End Type="WebapidbModel.ngp_contractor" Role="ngp_contractor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NgpBarangay">
+              <PropertyRef Name="BarangayId" />
+            </Principal>
+            <Dependent Role="ngp_contractor">
+              <PropertyRef Name="address_barangay" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ngp_contractor_NgpMunicipality">
+          <End Type="WebapidbModel.NgpMunicipality" Role="NgpMunicipality" Multiplicity="0..1" />
+          <End Type="WebapidbModel.ngp_contractor" Role="ngp_contractor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NgpMunicipality">
+              <PropertyRef Name="MunicipalityId" />
+            </Principal>
+            <Dependent Role="ngp_contractor">
+              <PropertyRef Name="address_municipality" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ngp_history_ngp_contractor">
+          <End Type="WebapidbModel.ngp_contractor" Role="ngp_contractor" Multiplicity="0..1" />
+          <End Type="WebapidbModel.ngp_history" Role="ngp_history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ngp_contractor">
+              <PropertyRef Name="contractorID" />
+            </Principal>
+            <Dependent Role="ngp_history">
+              <PropertyRef Name="contractor_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ngp_payment_ngp_contractor">
+          <End Type="WebapidbModel.ngp_contractor" Role="ngp_contractor" Multiplicity="0..1" />
+          <End Type="WebapidbModel.ngp_payment" Role="ngp_payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ngp_contractor">
+              <PropertyRef Name="contractorID" />
+            </Principal>
+            <Dependent Role="ngp_payment">
+              <PropertyRef Name="contractor_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ngp_sched_ngp_contractor">
+          <End Type="WebapidbModel.ngp_contractor" Role="ngp_contractor" Multiplicity="0..1" />
+          <End Type="WebapidbModel.ngp_sched" Role="ngp_sched" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ngp_contractor">
+              <PropertyRef Name="contractorID" />
+            </Principal>
+            <Dependent Role="ngp_sched">
+              <PropertyRef Name="contractor_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ngp_projects_ngp_dropdown">
+          <End Type="WebapidbModel.ngp_dropdown" Role="ngp_dropdown" Multiplicity="0..1" />
+          <End Type="WebapidbModel.ngp_projects" Role="ngp_projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ngp_dropdown">
+              <PropertyRef Name="dropdownID" />
+            </Principal>
+            <Dependent Role="ngp_projects">
+              <PropertyRef Name="dropdownID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ngp_history_ngp_users">
+          <End Type="WebapidbModel.ngp_users" Role="ngp_users" Multiplicity="0..1" />
+          <End Type="WebapidbModel.ngp_history" Role="ngp_history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ngp_users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="ngp_history">
+              <PropertyRef Name="user_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ngp_projects_NgpBarangay">
+          <End Type="WebapidbModel.NgpBarangay" Role="NgpBarangay" Multiplicity="0..1" />
+          <End Type="WebapidbModel.ngp_projects" Role="ngp_projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NgpBarangay">
+              <PropertyRef Name="BarangayId" />
+            </Principal>
+            <Dependent Role="ngp_projects">
+              <PropertyRef Name="location_barangay" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ngp_projects_NgpMunicipality">
+          <End Type="WebapidbModel.NgpMunicipality" Role="NgpMunicipality" Multiplicity="0..1" />
+          <End Type="WebapidbModel.ngp_projects" Role="ngp_projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NgpMunicipality">
+              <PropertyRef Name="MunicipalityId" />
+            </Principal>
+            <Dependent Role="ngp_projects">
+              <PropertyRef Name="location_municipality" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NgpBarangay_NgpMunicipality">
+          <End Type="WebapidbModel.NgpMunicipality" Role="NgpMunicipality" Multiplicity="0..1" />
+          <End Type="WebapidbModel.NgpBarangay" Role="NgpBarangay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NgpMunicipality">
+              <PropertyRef Name="MunicipalityId" />
+            </Principal>
+            <Dependent Role="NgpBarangay">
+              <PropertyRef Name="MunicipalityId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -301,24 +1017,144 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="WebapidbModelStoreContainer" CdmEntityContainer="WebapidbEntities">
-          <EntitySetMapping Name="NgpContractors">
-            <EntityTypeMapping TypeName="WebapidbModel.NgpContractor">
-              <MappingFragment StoreEntitySet="NgpContractor">
+          <EntitySetMapping Name="ngp_contract">
+            <EntityTypeMapping TypeName="WebapidbModel.ngp_contract">
+              <MappingFragment StoreEntitySet="ngp_contract">
+                <ScalarProperty Name="dropdownID" ColumnName="dropdownID" />
+                <ScalarProperty Name="num_seedlings_survived_year1" ColumnName="num_seedlings_survived_year1" />
+                <ScalarProperty Name="num_seedlings_replanted" ColumnName="num_seedlings_replanted" />
+                <ScalarProperty Name="num_seedlings_survived" ColumnName="num_seedlings_survived" />
+                <ScalarProperty Name="num_seedlings_produced" ColumnName="num_seedlings_produced" />
+                <ScalarProperty Name="num_seedlings_planted" ColumnName="num_seedlings_planted" />
+                <ScalarProperty Name="year_established" ColumnName="year_established" />
+                <ScalarProperty Name="site_code" ColumnName="site_code" />
+                <ScalarProperty Name="contract_cost" ColumnName="contract_cost" />
+                <ScalarProperty Name="project_name" ColumnName="project_name" />
+                <ScalarProperty Name="survival_rate" ColumnName="survival_rate" />
+                <ScalarProperty Name="commodity_type" ColumnName="commodity_type" />
+                <ScalarProperty Name="commodity" ColumnName="commodity" />
+                <ScalarProperty Name="area" ColumnName="area" />
+                <ScalarProperty Name="location_sitio" ColumnName="location_sitio" />
+                <ScalarProperty Name="location_barangay" ColumnName="location_barangay" />
+                <ScalarProperty Name="location_municipality" ColumnName="location_municipality" />
+                <ScalarProperty Name="contractorName" ColumnName="contractorName" />
+                <ScalarProperty Name="moa" ColumnName="moa" />
+                <ScalarProperty Name="contractID" ColumnName="contractID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ngp_contractor">
+            <EntityTypeMapping TypeName="WebapidbModel.ngp_contractor">
+              <MappingFragment StoreEntitySet="ngp_contractor">
+                <ScalarProperty Name="contractor_type" ColumnName="contractor_type" />
+                <ScalarProperty Name="address_barangay" ColumnName="address_barangay" />
+                <ScalarProperty Name="address_municipality" ColumnName="address_municipality" />
+                <ScalarProperty Name="contractor_name" ColumnName="contractor_name" />
+                <ScalarProperty Name="contractorID" ColumnName="contractorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ngp_dropdown">
+            <EntityTypeMapping TypeName="WebapidbModel.ngp_dropdown">
+              <MappingFragment StoreEntitySet="ngp_dropdown">
+                <ScalarProperty Name="cenro" ColumnName="cenro" />
+                <ScalarProperty Name="penro" ColumnName="penro" />
+                <ScalarProperty Name="region" ColumnName="region" />
+                <ScalarProperty Name="year_established" ColumnName="year_established" />
+                <ScalarProperty Name="dropdownID" ColumnName="dropdownID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ngp_history">
+            <EntityTypeMapping TypeName="WebapidbModel.ngp_history">
+              <MappingFragment StoreEntitySet="ngp_history">
+                <ScalarProperty Name="contractor_no" ColumnName="contractor_no" />
+                <ScalarProperty Name="user_no" ColumnName="user_no" />
+                <ScalarProperty Name="historyID" ColumnName="historyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ngp_payment">
+            <EntityTypeMapping TypeName="WebapidbModel.ngp_payment">
+              <MappingFragment StoreEntitySet="ngp_payment">
+                <ScalarProperty Name="num_release" ColumnName="num_release" />
+                <ScalarProperty Name="contractor_no" ColumnName="contractor_no" />
+                <ScalarProperty Name="contract_no" ColumnName="contract_no" />
+                <ScalarProperty Name="paymentID" ColumnName="paymentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ngp_projects">
+            <EntityTypeMapping TypeName="WebapidbModel.ngp_projects">
+              <MappingFragment StoreEntitySet="ngp_projects">
+                <ScalarProperty Name="dropdownID" ColumnName="dropdownID" />
+                <ScalarProperty Name="region" ColumnName="region" />
+                <ScalarProperty Name="cenro" ColumnName="cenro" />
+                <ScalarProperty Name="penro" ColumnName="penro" />
+                <ScalarProperty Name="year_form" ColumnName="year_form" />
+                <ScalarProperty Name="area" ColumnName="area" />
+                <ScalarProperty Name="location_barangay" ColumnName="location_barangay" />
+                <ScalarProperty Name="location_municipality" ColumnName="location_municipality" />
+                <ScalarProperty Name="site_code" ColumnName="site_code" />
+                <ScalarProperty Name="projectID" ColumnName="projectID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ngp_sched">
+            <EntityTypeMapping TypeName="WebapidbModel.ngp_sched">
+              <MappingFragment StoreEntitySet="ngp_sched">
+                <ScalarProperty Name="contract_no" ColumnName="contract_no" />
+                <ScalarProperty Name="contractor_no" ColumnName="contractor_no" />
+                <ScalarProperty Name="lddap_date" ColumnName="lddap_date" />
+                <ScalarProperty Name="lddap_no" ColumnName="lddap_no" />
+                <ScalarProperty Name="dv_date" ColumnName="dv_date" />
+                <ScalarProperty Name="dv_no" ColumnName="dv_no" />
+                <ScalarProperty Name="ors_date" ColumnName="ors_date" />
+                <ScalarProperty Name="ors_no" ColumnName="ors_no" />
+                <ScalarProperty Name="schedID" ColumnName="schedID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ngp_users">
+            <EntityTypeMapping TypeName="WebapidbModel.ngp_users">
+              <MappingFragment StoreEntitySet="ngp_users">
+                <ScalarProperty Name="roleID" ColumnName="roleID" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NgpBarangays">
+            <EntityTypeMapping TypeName="WebapidbModel.NgpBarangay">
+              <MappingFragment StoreEntitySet="NgpBarangay">
+                <ScalarProperty Name="MunicipalityId" ColumnName="MunicipalityId" />
+                <ScalarProperty Name="BarangayName" ColumnName="BarangayName" />
+                <ScalarProperty Name="BarangayId" ColumnName="BarangayId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NgpDropdowns">
+            <EntityTypeMapping TypeName="WebapidbModel.NgpDropdown">
+              <MappingFragment StoreEntitySet="NgpDropdown">
                 <ScalarProperty Name="CenroId" ColumnName="CenroId" />
-                <ScalarProperty Name="LocationSitio" ColumnName="LocationSitio" />
                 <ScalarProperty Name="LocationBarangay" ColumnName="LocationBarangay" />
                 <ScalarProperty Name="LocationMunicipality" ColumnName="LocationMunicipality" />
                 <ScalarProperty Name="AddressBarangay" ColumnName="AddressBarangay" />
                 <ScalarProperty Name="AddressMunicipality" ColumnName="AddressMunicipality" />
-                <ScalarProperty Name="AreaContracted" ColumnName="AreaContracted" />
-                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
-                <ScalarProperty Name="ContractorName" ColumnName="ContractorName" />
-                <ScalarProperty Name="SiteCode" ColumnName="SiteCode" />
-                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Penro" ColumnName="Penro" />
                 <ScalarProperty Name="Region" ColumnName="Region" />
                 <ScalarProperty Name="Year_Estb" ColumnName="Year_Estb" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NgpMunicipalities">
+            <EntityTypeMapping TypeName="WebapidbModel.NgpMunicipality">
+              <MappingFragment StoreEntitySet="NgpMunicipality">
+                <ScalarProperty Name="MunicipalityName" ColumnName="MunicipalityName" />
+                <ScalarProperty Name="MunicipalityId" ColumnName="MunicipalityId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

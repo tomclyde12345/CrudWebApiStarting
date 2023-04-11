@@ -4,15 +4,39 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7d7d8b55466545debacb829ef93da69c" Name="Diagram1" ZoomLevel="95">
-        <EntityTypeShape EntityType="WebapidbModel.NgpContractor" Width="1.5" PointX="0.75" PointY="1.875" />
-        <EntityTypeShape EntityType="WebapidbModel.NgpRole" Width="1.5" PointX="5.75" PointY="1.5" />
-        <EntityTypeShape EntityType="WebapidbModel.NgpUpload" Width="1.5" PointX="5.75" PointY="4.75" />
-        <EntityTypeShape EntityType="WebapidbModel.NgpUser" Width="1.5" PointX="8" PointY="1" />
-        <EntityTypeShape EntityType="WebapidbModel.NgpYear" Width="1.5" PointX="3" PointY="1.125" />
-        <EntityTypeShape EntityType="WebapidbModel.SampleTribe" Width="1.5" PointX="0.75" PointY="7.75" />
-        <AssociationConnector Association="WebapidbModel.FK_NgpYear_NgpContractor" />
-        <AssociationConnector Association="WebapidbModel.FK_NgpYear_NgpContractor1" />
+      <Diagram DiagramId="a90464392ccd49dca4c5275eed81996c" Name="Diagram1">
+        <EntityTypeShape EntityType="WebapidbModel.ngp_contract" Width="1.5" PointX="7.5" PointY="14.875" />
+        <EntityTypeShape EntityType="WebapidbModel.ngp_contractor" Width="1.5" PointX="5.25" PointY="16.25" />
+        <EntityTypeShape EntityType="WebapidbModel.ngp_dropdown" Width="1.5" PointX="3" PointY="11.625" />
+        <EntityTypeShape EntityType="WebapidbModel.ngp_history" Width="1.5" PointX="10.5" PointY="12.875" />
+        <EntityTypeShape EntityType="WebapidbModel.ngp_payment" Width="1.5" PointX="12.75" PointY="16.75" />
+        <EntityTypeShape EntityType="WebapidbModel.ngp_projects" Width="1.5" PointX="5.25" PointY="11.125" />
+        <EntityTypeShape EntityType="WebapidbModel.ngp_sched" Width="1.5" PointX="9.75" PointY="16.25" />
+        <EntityTypeShape EntityType="WebapidbModel.ngp_users" Width="1.5" PointX="8.25" PointY="11.875" />
+        <EntityTypeShape EntityType="WebapidbModel.NgpBarangay" Width="1.5" PointX="3" PointY="24.125" />
+        <EntityTypeShape EntityType="WebapidbModel.NgpDropdown" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="WebapidbModel.NgpMunicipality" Width="1.5" PointX="0.75" PointY="9.25" />
+        <EntityTypeShape EntityType="WebapidbModel.NgpRole" Width="1.5" PointX="0.75" PointY="1.5" />
+        <EntityTypeShape EntityType="WebapidbModel.NgpUpload" Width="1.5" PointX="2.75" PointY="4.75" />
+        <EntityTypeShape EntityType="WebapidbModel.NgpUser" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="WebapidbModel.NgpYear" Width="1.5" PointX="4.75" PointY="4.75" />
+        <EntityTypeShape EntityType="WebapidbModel.SampleTribe" Width="1.5" PointX="5.75" PointY="0.75" />
+        <AssociationConnector Association="WebapidbModel.FK_ngp_contract_ngp_contractor" />
+        <AssociationConnector Association="WebapidbModel.FK_ngp_contract_ngp_dropdown" />
+        <AssociationConnector Association="WebapidbModel.FK_ngp_contract_NgpBarangay" />
+        <AssociationConnector Association="WebapidbModel.FK_ngp_contract_NgpMunicipality" />
+        <AssociationConnector Association="WebapidbModel.FK_ngp_payment_ngp_contract" />
+        <AssociationConnector Association="WebapidbModel.FK_ngp_sched_ngp_contract" />
+        <AssociationConnector Association="WebapidbModel.FK_ngp_contractor_NgpBarangay" />
+        <AssociationConnector Association="WebapidbModel.FK_ngp_contractor_NgpMunicipality" />
+        <AssociationConnector Association="WebapidbModel.FK_ngp_history_ngp_contractor" />
+        <AssociationConnector Association="WebapidbModel.FK_ngp_payment_ngp_contractor" />
+        <AssociationConnector Association="WebapidbModel.FK_ngp_sched_ngp_contractor" />
+        <AssociationConnector Association="WebapidbModel.FK_ngp_projects_ngp_dropdown" />
+        <AssociationConnector Association="WebapidbModel.FK_ngp_history_ngp_users" />
+        <AssociationConnector Association="WebapidbModel.FK_ngp_projects_NgpBarangay" />
+        <AssociationConnector Association="WebapidbModel.FK_ngp_projects_NgpMunicipality" />
+        <AssociationConnector Association="WebapidbModel.FK_NgpBarangay_NgpMunicipality" />
         <AssociationConnector Association="WebapidbModel.FK_NgpUser_NgpRole" />
       </Diagram>
     </edmx:Diagrams>

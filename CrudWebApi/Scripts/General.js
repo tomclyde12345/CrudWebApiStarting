@@ -1,5 +1,167 @@
-﻿
+﻿function Contract() {
 
+
+
+    //get data for Phonebook
+    $.ajax({
+        type: 'GET',
+        url: '/api/contractordata/getcontractordata',
+        success: function (data) {
+            $.each(data, function (index, value) {
+                $('select[name=contractorName]').append('<option value="' + value.contractorID + '">' + value.contractor_name + ' </option>');
+            })
+        }
+    });
+    var conracttables =  $("#contracttable").DataTable({
+        "ajax": {
+            "url": "/Contract/GetContractTable",
+            "type": "POST",
+            "datatype": "json", dataSrc: "data"
+        },
+
+        "processing": "true",
+        "serverSide": "true",
+        "serverSide": "true",
+
+
+        "columns": [
+
+            {
+                "data": "contractID", "name": "contractID", "className": "hideThis"
+            },
+            {
+                "data": "contractorName", "name": "contractorName",
+            },
+            {
+                "data": "location_municipality", "name": "location_municipality",
+            },
+            {
+                "data": "location_barangay", "name": "location_barangay",
+            },
+            {
+                "data": "location_sitio", "name": "location_sitio",
+            },
+            {
+                "data": "area", "name": "area",
+            },
+            {
+                "data": "survival_rate", "name": "survival_rate",
+            },
+
+        ],
+
+
+        "processing": "true",
+        "language": {
+            "processing": "processing... please wait"
+        },
+
+        "fnInitComplete": function (oSettings, json) {
+            addSearchControl(json);
+        },
+
+
+    });
+    function addSearchControl(json) {
+        var LocationMunicipalitydropdown = $('<select/>').addClass("js-example-basic-single");
+        LocationMunicipalitydropdown.append($('<option/>').attr('value', '').text('Select Municipality'));
+        var municipalitylist = [];
+        $(json.data).each(function (index, element) {
+            if ($.inArray(element.location_municipality, municipalitylist) == -1) {
+                municipalitylist.push(element.location_municipality);
+                LocationMunicipalitydropdown.append($('<option/>').attr('value', element.location_municipality).text(element.location_municipality));
+            }
+        });
+        $("#locationmunicipalitylist").append(LocationMunicipalitydropdown).children("select").select2();
+        $("#locationmunicipalitylist").on('change', 'select', function () {
+            conracttables.column(1).search($(this).val()).draw();
+        });
+    }
+}
+
+
+
+
+
+function Contractor() {
+   $("#projecttable").DataTable({
+        "ajax": {
+            "url": "/Contractor/GetContractortable",
+            "type": "POST",
+            "datatype": "json", dataSrc: "data"
+        },
+
+        "processing": "true",
+        "serverSide": "true",
+        "serverSide": "true",
+       
+
+        "columns": [
+
+            {
+                "data": "contractor_name", "name": "contractor_name",
+            },
+            {
+                "data": "address_municipality", "name": "address_municipality",
+            },
+            {
+                "data": "address_barangay", "name": "address_barangay",
+            },
+        
+        ],
+
+
+        "processing": "true",
+        "language": {
+            "processing": "processing... please wait"
+        },
+
+      
+
+
+    });
+
+    
+}
+
+function Project() {
+    $("#projecttable").DataTable({
+        "ajax": {
+            "url": "/Project/GetProjecttable",
+            "type": "POST",
+            "datatype": "json", dataSrc: "data"
+        },
+
+        "processing": "true",
+        "serverSide": "true",
+        "serverSide": "true",
+        "order": [[1, "desc"]],
+
+        "columns": [
+          
+            {
+                "data": "area", "name": "area",
+            },
+            {
+                "data": "site_code", "name": "site_code"
+            },
+
+
+        ],
+
+
+        "processing": "true",
+        "language": {
+            "processing": "processing... please wait"
+        },
+
+        "fnInitComplete": function (oSettings, json) {
+
+        }
+
+
+    });
+}
 function CreateYear() {
 
     $.ajax({

@@ -1,0 +1,366 @@
+﻿
+@model CrudWebApi.Models.ngp_contract
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+
+
+
+<section id="input-with-icons">
+    <div class="row match-height">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Create Contract</h4>
+                </div>
+                <div class="text-end m-3">
+                    <button type="button" class="btn btn-primary" style="border-radius:20px;" onclick="location.href ='@Url.Action("Index","Contract")'">Go to list</button>
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm("Save", "Contract"))
+                    {
+                        <div class="row">
+
+
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+
+                                    <br />
+                                    <label>ContractorName</label>
+
+                                </div>
+                                <select class="js-example-basic-single" name="contractorName" style="width:100%">
+                                    <option value=" ">Select Contractor Name </option>
+                                </select>
+
+                            </div>
+
+                            <div class="col-md-6">
+
+                                <div class="form-group">
+
+                                    <br />
+                                    <label>moa</label>
+
+                                </div>
+
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.moa, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(m => m.moa)
+                            </div>
+
+
+
+                            <div class="col-md-6">
+
+                                <div class="form-group">
+                                    <div class="tom">
+                                        <br />
+                                        <label>Location Municipality</label>
+                                    </div>
+                                </div>
+
+                                @if (ViewBag.MunicipalityList != null)
+                                {
+                                    @Html.DropDownListFor(model => model.location_municipality, ViewBag.MunicipalityList as SelectList, "--Select Municipality--", new { @class = "form-control", required = "required", @id = "MunicipalityId" })
+                                }
+
+
+
+
+
+                                <div class="form-group">
+                                    <div class="tom">
+                                        <br />
+                                        <label>Location Barangay</label>
+                                    </div>
+                                </div>
+
+
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                @Html.DropDownListFor(model => model.location_barangay, new SelectList(" "), "--Select Barangay--", new { @class = "form-control", @id = "BarangayId" })
+                                @Html.ValidationMessageFor(m => m.location_barangay)
+
+                                 </div>
+
+                                <div class="col-md-6">
+
+
+
+                                    <div class="form-group">
+
+                                        <br />
+                                        <label>commodity </label>
+
+                                    </div>
+
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.commodity, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(m => m.commodity)
+
+
+
+
+
+
+                                    <div class="form-group">
+                                        <div class="tom">
+                                            <br />
+                                            <label>commodity_type</label>
+                                        </div>
+                                    </div>
+
+
+
+                                    <select class="form-control" style="width:100%" name="commodity_type" id="commodity_type">
+                                        <option value="">Please Select a commodity_type</option>
+                                        <option value="forest trees">forest trees</option>
+                                        <option value="fruit trees">fruit trees</option>
+                                        <option value="bamboo">bamboo</option>
+                                    </select>
+
+
+
+
+
+                                </div>
+
+                                <div class="col-md-3">
+
+
+
+                                    <div class="form-group">
+
+                                        <br />
+                                        <label>Area</label>
+
+                                    </div>
+
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.area, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(m => m.area)
+
+
+                                    <div class="form-group">
+
+                                        <br />
+                                        <label>Location Sitio</label>
+
+                                    </div>
+
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.location_sitio, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(m => m.location_sitio)
+
+
+
+
+                                    <div class="form-group">
+
+                                        <br />
+                                        <label>project_name</label>
+
+                                    </div>
+
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.project_name, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(m => m.project_name)
+
+
+
+                                </div>
+
+
+
+
+                                <div class="col-md-3">
+
+
+                                    <div class="form-group">
+
+                                        <br />
+                                        <label>contract_cost</label>
+
+                                    </div>
+
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.contract_cost, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(m => m.contract_cost)
+
+
+                                    <div class="form-group">
+
+                                        <br />
+                                        <label>site_code</label>
+
+                                    </div>
+
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.site_code, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(m => m.site_code)
+
+
+                                    <div class="form-group">
+
+                                        <br />
+                                        <label>year_established</label>
+
+                                    </div>
+
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.year_established, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(m => m.year_established)
+
+
+                                </div>
+
+
+                                <div class="col-md-3">
+
+
+                                    <div class="form-group">
+
+                                        <br />
+                                        <label>Survival Rate</label>
+
+                                    </div>
+
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.survival_rate, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(m => m.survival_rate)
+
+
+
+                                    <div class="form-group">
+
+                                        <br />
+                                        <label>num_seedlings_produced</label>
+
+                                    </div>
+
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.num_seedlings_produced, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(m => m.num_seedlings_produced)
+
+
+
+
+                                    <div class="form-group">
+
+                                        <br />
+                                        <label>num_seedlings_survived</label>
+
+                                    </div>
+
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.num_seedlings_survived, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(m => m.num_seedlings_survived)
+
+
+
+                                </div>
+
+
+
+                                <div class="col-md-3">
+
+
+                                    <div class="form-group">
+
+                                        <br />
+                                        <label>num_seedlings_replanted</label>
+
+                                    </div>
+
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.num_seedlings_replanted, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(m => m.num_seedlings_replanted)
+
+
+                                    <div class="form-group">
+
+                                        <br />
+                                        <label>num_seedlings_survived_year1</label>
+
+                                    </div>
+
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.num_seedlings_survived_year1, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(m => m.num_seedlings_survived_year1)
+
+
+
+
+
+
+
+                                    <div class="form-group">
+
+                                        <br />
+                                        <label>num_seedlings_planted</label>
+
+                                    </div>
+
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.num_seedlings_planted, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(m => m.num_seedlings_planted)
+
+                                </div>
+
+
+
+
+                            </div>
+
+
+
+
+                            <div style="padding: 2% 0;">
+                                <div class="text-center">
+
+                                    <input type="submit" value="CREATE" class="btn btn-primary m-1" />
+                                </div>
+                            </div>
+                            }
+                        </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#MunicipalityId").change(function () {
+            $.get("/Project/GetBarangayLList", { MunicipalityId: $("#MunicipalityId").val() }, function (data) {
+                $("#BarangayId").empty();
+                $.each(data, function (index, row) {
+                    $("#BarangayId").append("<option value='" + row.BarangayId + "'>" + row.BarangayName + "</option>")
+                });
+            });
+        })
+    });
+</script>
+
+
+
+<script>
+    $(window).ready(function () {
+
+        Contract();
+    });
+    $('.js-example-basic-single').select2();
+</script>
+
+
+
+

@@ -334,7 +334,7 @@ b, strong {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg); } }
 .page-header {
-  background-image: url("../images/breadcrumb-bg.jpg");
+  background-image: none !important;
   background-size: cover;
   position: relative;
   border-radius: 0;

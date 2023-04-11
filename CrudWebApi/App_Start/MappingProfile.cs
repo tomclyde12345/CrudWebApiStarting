@@ -17,7 +17,7 @@ namespace CrudWebApi.App_Start
             Mapper.CreateMap<NgpRole, RoleDTO>().ReverseMap();
             Mapper.CreateMap<NgpUser, AccountDTO>().ReverseMap();
             Mapper.CreateMap<NgpUpload, UploadDTO>().ReverseMap();
-            Mapper.CreateMap<NgpContractor, ContractorDTO>().ReverseMap();
+            Mapper.CreateMap<ngp_contractor, ContractorDTO>().ReverseMap();
             Mapper.CreateMap<NgpYear, YearDTO>().ReverseMap();
         }
     }
