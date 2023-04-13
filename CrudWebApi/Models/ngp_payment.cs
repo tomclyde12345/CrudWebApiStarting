@@ -16,10 +16,9 @@ namespace CrudWebApi.Models
     {
         public int paymentID { get; set; }
         public Nullable<int> contract_no { get; set; }
-        public Nullable<int> contractor_no { get; set; }
+        public string contractorName { get; set; }
         public string num_release { get; set; }
     
         public virtual ngp_contract ngp_contract { get; set; }
-        public virtual ngp_contractor ngp_contractor { get; set; }
     }
 }

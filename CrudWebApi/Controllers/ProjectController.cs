@@ -63,6 +63,12 @@ namespace CrudWebApi.Controllers
 
                 project.site_code = project.site_code;
                 project.area = project.area;
+                project.location_barangay = project.location_barangay;
+                project.location_municipality = project.location_municipality;
+                project.year_form = project.year_form;
+                project.penro = project.penro;
+                project.cenro = project.cenro;
+                project.region = project.region;
                 //project.NgpBarangay.BarangayName = project.NgpBarangay.BarangayName;
                 //project.NgpMunicipality.MunicipalityName = project.NgpMunicipality.MunicipalityName;
 
@@ -125,7 +131,13 @@ namespace CrudWebApi.Controllers
                     projectID = projectdata.projectID,
                     area = projectdata.area,
                     site_code = projectdata.site_code,
-                 
+                    location_barangay = projectdata.NgpBarangay.BarangayName,
+                    location_municipality = projectdata.NgpMunicipality.MunicipalityName,
+                    penro = projectdata.penro,
+                    cenro = projectdata.cenro,
+                    region = projectdata.region,
+                    year_form = projectdata.year_form,
+
 
                 }).ToList();
 

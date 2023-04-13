@@ -23,7 +23,7 @@ namespace CrudWebApi.Models
     
         public int contractID { get; set; }
         public string moa { get; set; }
-        public Nullable<int> contractorName { get; set; }
+        public Nullable<int> contractorId { get; set; }
         public Nullable<int> location_municipality { get; set; }
         public Nullable<int> location_barangay { get; set; }
         public string location_sitio { get; set; }
@@ -33,8 +33,8 @@ namespace CrudWebApi.Models
         public string survival_rate { get; set; }
         public string project_name { get; set; }
         public string contract_cost { get; set; }
-        public Nullable<int> site_code { get; set; }
-        public Nullable<int> year_established { get; set; }
+        public string site_code { get; set; }
+        public string year_established { get; set; }
         public string num_seedlings_planted { get; set; }
         public string num_seedlings_produced { get; set; }
         public string num_seedlings_survived { get; set; }

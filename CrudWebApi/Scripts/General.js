@@ -1,17 +1,36 @@
-﻿function Contract() {
+﻿//function Payments() {
+//    $.ajax({
+//        type: 'GET',
+//        url: '/api/contractdata/getcontractdata',
+//        success: function (data) {
+//            $.each(data, function (index, value) {
+//                $('select[name=contract_no]').append('<option value="' + value.contractorName + '">' + value.contractorName + ' </option>');
+//            })
+//        }
+//    });
+//}
 
 
 
-    //get data for Phonebook
+function GetContractorData() {
+
+    
     $.ajax({
         type: 'GET',
-        url: '/api/contractordata/getcontractordata',
+        url: '/api/contractor/getcontractor',
         success: function (data) {
             $.each(data, function (index, value) {
-                $('select[name=contractorName]').append('<option value="' + value.contractorID + '">' + value.contractor_name + ' </option>');
+                $('select[name=contractorId]').append('<option value="' + value.contractor_name + '">' + value.contractor_name + ' </option>');
             })
         }
     });
+}
+
+
+function Contract() {
+
+
+
     var conracttables =  $("#contracttable").DataTable({
         "ajax": {
             "url": "/Contract/GetContractTable",
@@ -107,6 +126,9 @@ function Contractor() {
             {
                 "data": "address_barangay", "name": "address_barangay",
             },
+            {
+                "data": "contractor_type", "name": "contractor_type",
+            },
         
         ],
 
@@ -144,6 +166,24 @@ function Project() {
             },
             {
                 "data": "site_code", "name": "site_code"
+            },
+            {
+                "data": "location_municipality", "name": "location_municipality"
+            },
+            {
+                "data": "location_barangay", "name": "location_barangay"
+            },
+            {
+                "data": "year_form", "name": "year_form"
+            },
+            {
+                "data": "penro", "name": "penro"
+            },
+            {
+                "data": "cenro", "name": "cenro"
+            },
+            {
+                "data": "region", "name": "region"
             },
 
 

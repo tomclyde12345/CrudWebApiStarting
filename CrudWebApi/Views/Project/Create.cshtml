@@ -26,67 +26,119 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <div class=" tom">
-                                        <label> SiteCode </label>
-                                    </div>
-                                </div>
-                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                @Html.EditorFor(model => model.site_code, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(m => m.site_code)
 
+                                    <label> SiteCode </label>
+
+
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.site_code, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(m => m.site_code)
+
+                                </div>
+                                <div class="form-group">
+
+                                    <label>Area</label>
+
+
+
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.area, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(m => m.area)
+
+                                </div>
 
                                 <div class="form-group">
-                                    <div class="tom">
-                                        <br />
-                                        <label>Area</label>
-                                    </div>
+
+                                    <label>Location Municipality</label>
+
+
+
+                                    @if (ViewBag.MunicipalityList != null)
+                                    {
+                                        @Html.DropDownListFor(model => model.location_municipality, ViewBag.MunicipalityList as SelectList, "--Select Municipality--", new { @class = "form-control", required = "required", @id = "MunicipalityId" })
+                                    }
+
                                 </div>
-
-                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                @Html.EditorFor(model => model.area, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(m => m.area)
-
-
-
-                                <div class="form-group">
-                                    <div class="tom">
-                                        <br />
-                                        <label>Location Municipality</label>
-                                    </div>
-                                </div>
-
-                                @if (ViewBag.MunicipalityList != null)
-                                {
-                                    @Html.DropDownListFor(model => model.MunicipalityId, ViewBag.MunicipalityList as SelectList, "--Select Municipality--", new { @class = "form-control", required = "required" })
-                                }
-
-
 
 
 
                                 <div class="form-group">
-                                    <div class="tom">
-                                        <br />
-                                        <label>Location Barangay</label>
-                                    </div>
+
+                                    <label>Location Barangay</label>
+
+
+
+                                    @Html.DropDownListFor(model => model.location_barangay, new SelectList(" "), "--Select Barangay--", new { @class = "form-control", @id = "BarangayId" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+
+                                    <label> year_form </label>
+
+                                    <select class="form-control" style="width:100%" name="year_form" id="year_form">
+                                        <option value="">Please Select a year_form</option>
+                                        <option value="2002">2002</option>
+                                        <option value="2003">2003</option>
+                                        <option value="2004">2004</option>
+
+                                    </select>
                                 </div>
 
-                                @Html.DropDownListFor(model => model.BarangayId, new SelectList(" "), "--Select Barangay--", new { @class = "form-control" })
+                                <div class="form-group">
+
+                                    <label> penro </label>
+
+
+
+                                    <select class="form-control" style="width:100%" name="penro" id="penro">
+                                        <option value="">Please Select a penro</option>
+                                        <option value="Penro">Penro</option>
+
+
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label> region </label>
+
+                                    <select class="form-control" style="width:100%" name="region" id="region">
+                                        <option value="">Please Select a region</option>
+                                        <option value="RegionIV-B">RegionIV-B</option>
+
+
+                                    </select>
+
+                                </div>
+
+
+                                <div class="form-group">
+
+                                    <label> cenro </label>
+                                    <select class="form-control" style="width:100%" name="cenro" id="cenro">
+                                        <option value="">
+                                            Please Select a cenro
+                                        </option>
+                                        <option value="Cenro brookes point">Cenro brookes point</option>
+                                        <option value="cenro ppc">cenro ppc</option>
+                                        <option value="cenro roxas">cenro roxas</option>
+                                        <option value="cenro quezon">cenro quezon</option>
+
+                                    </select>
+                                </div>
+                                </div>
                             </div>
 
 
+                            <div style="padding: 2% 0;">
+                                <div class="text-center">
 
-                        </div>
-
-
-                        <div style="padding: 2% 0;">
-                            <div class="text-center">
-
-                                <input type="submit" value="CREATE" class="btn btn-primary m-1" />
+                                    <input type="submit" value="CREATE" class="btn btn-primary m-1" />
+                                </div>
                             </div>
+                            }
                         </div>
-                    }
-                </div>
             </div>
         </div>
     </div>

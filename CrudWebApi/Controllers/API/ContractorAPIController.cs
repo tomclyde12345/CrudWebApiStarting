@@ -20,11 +20,19 @@ namespace CrudWebApi.Controllers.API
             Db.Dispose();
         }
         [HttpGet]
-        [Route("api/contractordata/getcontractordata")]
+        [Route("api/contractdata/getcontractdata")]
+        public IHttpActionResult GetContractData()
+        {
+            var NGPCONTRACT = Db.ngp_contract.ToList().Select(Mapper.Map<ngp_contract, ContractDTO>);
+            return Ok(NGPCONTRACT);
+        }
+
+        [HttpGet]
+        [Route("api/contractor/getcontractor")]
         public IHttpActionResult GetContractorData()
         {
-            var contractor = Db.ngp_contractor.ToList().Select(Mapper.Map<ngp_contractor, ContractorDTO>);
-            return Ok(contractor);
+            var NGPCONTRACTOR = Db.ngp_contractor.ToList().Select(Mapper.Map<ngp_contractor, ContractorDTO>);
+            return Ok(NGPCONTRACTOR);
         }
     }
 }

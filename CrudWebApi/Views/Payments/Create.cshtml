@@ -1,0 +1,75 @@
+﻿@model CrudWebApi.ViewModel.PaymentsVM
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+<section id="input-with-icons">
+    <div class="row match-height">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Create Payments</h4>
+                </div>
+                <div class="text-end m-3">
+                    <button type="button" class="btn btn-primary" style="border-radius:20px;" onclick="location.href ='@Url.Action("Index","Payments")'">Go to list</button>
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm("Save", "Payments"))
+                    {
+                        <div class="row">
+
+                            <div class="col-md-6">
+
+                                <div class="form-group">
+
+                                    <label> contract_no </label>
+
+
+
+                                    <select class="form-control" style="width:100%" name="contract_no" id="contract_no">
+                                        <option value="">Please Select a contract_no</option>
+
+                                    </select>
+
+                                </div>
+
+
+                                <div class="form-group">
+
+                                    <label> NumberRelease </label>
+
+
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.num_release, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(m => m.num_release)
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <div style="padding: 2% 0;">
+                            <div class="text-center">
+
+                                <input type="submit" value="CREATE" class="btn btn-primary m-1" />
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script>
+    $(window).ready(function () {
+        Payments();
+    });
+</script>

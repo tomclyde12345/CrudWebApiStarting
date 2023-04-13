@@ -35,7 +35,7 @@
                                     <label>ContractorName</label>
 
                                 </div>
-                                <select class="js-example-basic-single" name="contractorName" style="width:100%">
+                                <select class="js-example-basic-single" name="contractorId" id="contractorId" style="width:100%">
                                     <option value=" ">Select Contractor Name </option>
                                 </select>
 
@@ -357,6 +357,7 @@
     $(window).ready(function () {
 
         Contract();
+        GetContractorData();
     });
     $('.js-example-basic-single').select2();
 </script>

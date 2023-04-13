@@ -26,43 +26,53 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <div class=" tom">
-                                        <label> ContractorName </label>
-                                    </div>
+
+                                    <label> ContractorName </label>
+
+
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.contractor_name, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(m => m.contractor_name)
+
                                 </div>
-                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                @Html.EditorFor(model => model.contractor_name, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(m => m.contractor_name)
-
-
-
-
                                 <div class="form-group">
-                                    <div class="tom">
-                                        <br />
-                                        <label>Address Municipality</label>
-                                    </div>
+
+                                    <label> contractor_type </label>
+
+
+
+                                    <select class="form-control" style="width:100%" name="contractor_type" id="contractor_type">
+                                        <option value="">Please Select a contractor_type</option>
+                                        <option value="Individual">Individual</option>
+                                        <option value="Group">Group</option>
+
+                                    </select>
                                 </div>
-
-                                @if (ViewBag.MunicipalityList != null)
-                                {
-                                    @Html.DropDownListFor(model => model.address_municipality, ViewBag.MunicipalityList as SelectList, "--Select Municipality--", new { @class = "form-control",  required = "required", @id= "MunicipalityId" })
-                                }
-
-
-
-                                <div class="form-group">
-                                    <div class="tom">
-                                        <br />
-                                        <label>Address Barangay</label>
-                                    </div>
-                                </div>
-
-                                @Html.DropDownListFor(model => model.address_barangay, new SelectList(" "), "--Select Barangay--", new { @class = "form-control", @id = "BarangayId" })
                             </div>
 
+                            <div class="col-md-6">
+                                <div class="form-group">
+
+                                    <label>Address Municipality</label>
 
 
+                                    @if (ViewBag.MunicipalityList != null)
+                                    {
+                                        @Html.DropDownListFor(model => model.address_municipality, ViewBag.MunicipalityList as SelectList, "--Select Municipality--", new { @class = "form-control", required = "required", @id = "MunicipalityId" })
+                                    }
+                                </div>
+
+
+
+                                <div class="form-group">
+
+                                    <label>Address Barangay</label>
+
+
+
+                                    @Html.DropDownListFor(model => model.address_barangay, new SelectList(" "), "--Select Barangay--", new { @class = "form-control", @id = "BarangayId" })
+                                </div>
+                            </div>
                         </div>
 
 

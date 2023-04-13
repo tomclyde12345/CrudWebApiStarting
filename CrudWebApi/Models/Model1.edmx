@@ -11,7 +11,7 @@
           </Key>
           <Property Name="contractID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="moa" Type="nvarchar" MaxLength="100" />
-          <Property Name="contractorName" Type="int" />
+          <Property Name="contractorId" Type="int" />
           <Property Name="location_municipality" Type="int" />
           <Property Name="location_barangay" Type="int" />
           <Property Name="location_sitio" Type="nvarchar" MaxLength="100" />
@@ -21,8 +21,8 @@
           <Property Name="survival_rate" Type="nvarchar" MaxLength="100" />
           <Property Name="project_name" Type="nvarchar" MaxLength="100" />
           <Property Name="contract_cost" Type="nvarchar" MaxLength="100" />
-          <Property Name="site_code" Type="int" />
-          <Property Name="year_established" Type="int" />
+          <Property Name="site_code" Type="nvarchar" MaxLength="100" />
+          <Property Name="year_established" Type="nvarchar" MaxLength="100" />
           <Property Name="num_seedlings_planted" Type="nvarchar" MaxLength="100" />
           <Property Name="num_seedlings_produced" Type="nvarchar" MaxLength="100" />
           <Property Name="num_seedlings_survived" Type="nvarchar" MaxLength="100" />
@@ -34,11 +34,11 @@
           <Key>
             <PropertyRef Name="contractorID" />
           </Key>
-          <Property Name="contractorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="contractorID" Type="int" Nullable="false" />
           <Property Name="contractor_name" Type="nvarchar" MaxLength="100" />
           <Property Name="address_municipality" Type="int" />
           <Property Name="address_barangay" Type="int" />
-          <Property Name="contractor_type" Type="int" />
+          <Property Name="contractor_type" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="ngp_dropdown">
           <Key>
@@ -64,7 +64,7 @@
           </Key>
           <Property Name="paymentID" Type="int" Nullable="false" />
           <Property Name="contract_no" Type="int" />
-          <Property Name="contractor_no" Type="int" />
+          <Property Name="contractorName" Type="nvarchar" MaxLength="100" />
           <Property Name="num_release" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="ngp_projects">
@@ -76,10 +76,10 @@
           <Property Name="location_municipality" Type="int" />
           <Property Name="location_barangay" Type="int" />
           <Property Name="area" Type="nvarchar" MaxLength="100" />
-          <Property Name="year_form" Type="int" />
-          <Property Name="penro" Type="int" />
-          <Property Name="cenro" Type="int" />
-          <Property Name="region" Type="int" />
+          <Property Name="year_form" Type="nvarchar" MaxLength="100" />
+          <Property Name="penro" Type="nvarchar" MaxLength="100" />
+          <Property Name="cenro" Type="nvarchar" MaxLength="100" />
+          <Property Name="region" Type="nvarchar" MaxLength="100" />
           <Property Name="dropdownID" Type="int" />
         </EntityType>
         <EntityType Name="ngp_sched">
@@ -207,7 +207,7 @@
               <PropertyRef Name="contractorID" />
             </Principal>
             <Dependent Role="ngp_contract">
-              <PropertyRef Name="contractorName" />
+              <PropertyRef Name="contractorId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -304,18 +304,6 @@
             </Principal>
             <Dependent Role="ngp_payment">
               <PropertyRef Name="contract_no" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ngp_payment_ngp_contractor">
-          <End Role="ngp_contractor" Type="Self.ngp_contractor" Multiplicity="0..1" />
-          <End Role="ngp_payment" Type="Self.ngp_payment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ngp_contractor">
-              <PropertyRef Name="contractorID" />
-            </Principal>
-            <Dependent Role="ngp_payment">
-              <PropertyRef Name="contractor_no" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -456,10 +444,6 @@
             <End Role="ngp_contract" EntitySet="ngp_contract" />
             <End Role="ngp_payment" EntitySet="ngp_payment" />
           </AssociationSet>
-          <AssociationSet Name="FK_ngp_payment_ngp_contractor" Association="Self.FK_ngp_payment_ngp_contractor">
-            <End Role="ngp_contractor" EntitySet="ngp_contractor" />
-            <End Role="ngp_payment" EntitySet="ngp_payment" />
-          </AssociationSet>
           <AssociationSet Name="FK_ngp_projects_ngp_dropdown" Association="Self.FK_ngp_projects_ngp_dropdown">
             <End Role="ngp_dropdown" EntitySet="ngp_dropdown" />
             <End Role="ngp_projects" EntitySet="ngp_projects" />
@@ -546,10 +530,6 @@
             <End Role="ngp_contractor" EntitySet="ngp_contractor" />
             <End Role="ngp_history" EntitySet="ngp_history" />
           </AssociationSet>
-          <AssociationSet Name="FK_ngp_payment_ngp_contractor" Association="WebapidbModel.FK_ngp_payment_ngp_contractor">
-            <End Role="ngp_contractor" EntitySet="ngp_contractor" />
-            <End Role="ngp_payment" EntitySet="ngp_payment" />
-          </AssociationSet>
           <AssociationSet Name="FK_ngp_sched_ngp_contractor" Association="WebapidbModel.FK_ngp_sched_ngp_contractor">
             <End Role="ngp_contractor" EntitySet="ngp_contractor" />
             <End Role="ngp_sched" EntitySet="ngp_sched" />
@@ -585,7 +565,7 @@
           </Key>
           <Property Name="contractID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="moa" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="contractorName" Type="Int32" />
+          <Property Name="contractorId" Type="Int32" />
           <Property Name="location_municipality" Type="Int32" />
           <Property Name="location_barangay" Type="Int32" />
           <Property Name="location_sitio" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -595,8 +575,8 @@
           <Property Name="survival_rate" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="project_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="contract_cost" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="site_code" Type="Int32" />
-          <Property Name="year_established" Type="Int32" />
+          <Property Name="site_code" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="year_established" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="num_seedlings_planted" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="num_seedlings_produced" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="num_seedlings_survived" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -614,16 +594,15 @@
           <Key>
             <PropertyRef Name="contractorID" />
           </Key>
-          <Property Name="contractorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="contractorID" Type="Int32" Nullable="false" />
           <Property Name="contractor_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="address_municipality" Type="Int32" />
           <Property Name="address_barangay" Type="Int32" />
-          <Property Name="contractor_type" Type="Int32" />
+          <Property Name="contractor_type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ngp_contract" Relationship="WebapidbModel.FK_ngp_contract_ngp_contractor" FromRole="ngp_contractor" ToRole="ngp_contract" />
           <NavigationProperty Name="NgpBarangay" Relationship="WebapidbModel.FK_ngp_contractor_NgpBarangay" FromRole="ngp_contractor" ToRole="NgpBarangay" />
           <NavigationProperty Name="NgpMunicipality" Relationship="WebapidbModel.FK_ngp_contractor_NgpMunicipality" FromRole="ngp_contractor" ToRole="NgpMunicipality" />
           <NavigationProperty Name="ngp_history" Relationship="WebapidbModel.FK_ngp_history_ngp_contractor" FromRole="ngp_contractor" ToRole="ngp_history" />
-          <NavigationProperty Name="ngp_payment" Relationship="WebapidbModel.FK_ngp_payment_ngp_contractor" FromRole="ngp_contractor" ToRole="ngp_payment" />
           <NavigationProperty Name="ngp_sched" Relationship="WebapidbModel.FK_ngp_sched_ngp_contractor" FromRole="ngp_contractor" ToRole="ngp_sched" />
         </EntityType>
         <EntityType Name="ngp_dropdown">
@@ -654,10 +633,9 @@
           </Key>
           <Property Name="paymentID" Type="Int32" Nullable="false" />
           <Property Name="contract_no" Type="Int32" />
-          <Property Name="contractor_no" Type="Int32" />
+          <Property Name="contractorName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="num_release" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ngp_contract" Relationship="WebapidbModel.FK_ngp_payment_ngp_contract" FromRole="ngp_payment" ToRole="ngp_contract" />
-          <NavigationProperty Name="ngp_contractor" Relationship="WebapidbModel.FK_ngp_payment_ngp_contractor" FromRole="ngp_payment" ToRole="ngp_contractor" />
         </EntityType>
         <EntityType Name="ngp_projects">
           <Key>
@@ -668,10 +646,10 @@
           <Property Name="location_municipality" Type="Int32" />
           <Property Name="location_barangay" Type="Int32" />
           <Property Name="area" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="year_form" Type="Int32" />
-          <Property Name="penro" Type="Int32" />
-          <Property Name="cenro" Type="Int32" />
-          <Property Name="region" Type="Int32" />
+          <Property Name="year_form" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="penro" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="cenro" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="region" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="dropdownID" Type="Int32" />
           <NavigationProperty Name="ngp_dropdown" Relationship="WebapidbModel.FK_ngp_projects_ngp_dropdown" FromRole="ngp_projects" ToRole="ngp_dropdown" />
           <NavigationProperty Name="NgpBarangay" Relationship="WebapidbModel.FK_ngp_projects_NgpBarangay" FromRole="ngp_projects" ToRole="NgpBarangay" />
@@ -815,7 +793,7 @@
               <PropertyRef Name="contractorID" />
             </Principal>
             <Dependent Role="ngp_contract">
-              <PropertyRef Name="contractorName" />
+              <PropertyRef Name="contractorId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -911,18 +889,6 @@
               <PropertyRef Name="contractorID" />
             </Principal>
             <Dependent Role="ngp_history">
-              <PropertyRef Name="contractor_no" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ngp_payment_ngp_contractor">
-          <End Type="WebapidbModel.ngp_contractor" Role="ngp_contractor" Multiplicity="0..1" />
-          <End Type="WebapidbModel.ngp_payment" Role="ngp_payment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ngp_contractor">
-              <PropertyRef Name="contractorID" />
-            </Principal>
-            <Dependent Role="ngp_payment">
               <PropertyRef Name="contractor_no" />
             </Dependent>
           </ReferentialConstraint>
@@ -1037,7 +1003,7 @@
                 <ScalarProperty Name="location_sitio" ColumnName="location_sitio" />
                 <ScalarProperty Name="location_barangay" ColumnName="location_barangay" />
                 <ScalarProperty Name="location_municipality" ColumnName="location_municipality" />
-                <ScalarProperty Name="contractorName" ColumnName="contractorName" />
+                <ScalarProperty Name="contractorId" ColumnName="contractorId" />
                 <ScalarProperty Name="moa" ColumnName="moa" />
                 <ScalarProperty Name="contractID" ColumnName="contractID" />
               </MappingFragment>
@@ -1078,7 +1044,7 @@
             <EntityTypeMapping TypeName="WebapidbModel.ngp_payment">
               <MappingFragment StoreEntitySet="ngp_payment">
                 <ScalarProperty Name="num_release" ColumnName="num_release" />
-                <ScalarProperty Name="contractor_no" ColumnName="contractor_no" />
+                <ScalarProperty Name="contractorName" ColumnName="contractorName" />
                 <ScalarProperty Name="contract_no" ColumnName="contract_no" />
                 <ScalarProperty Name="paymentID" ColumnName="paymentID" />
               </MappingFragment>

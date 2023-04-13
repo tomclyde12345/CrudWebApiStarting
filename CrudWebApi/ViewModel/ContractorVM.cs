@@ -15,7 +15,7 @@ namespace CrudWebApi.ViewModel
         public string contractor_name { get; set; }
         public string address_municipality { get; set; }
         public string address_barangay { get; set; }
-        public Nullable<int> contractor_type { get; set; }
+        public string contractor_type { get; set; }
 
 
         public int MunicipalityId { get; set; }

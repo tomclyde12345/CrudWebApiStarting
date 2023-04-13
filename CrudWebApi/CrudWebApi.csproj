@@ -176,6 +176,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\API\AccountApiController.cs" />
     <Compile Include="Controllers\API\ContractorApiController.cs" />
+    <Compile Include="Controllers\API\PaymentsAPIController.cs" />
     <Compile Include="Controllers\API\RoleApiController.cs" />
     <Compile Include="Controllers\API\TribeAPIController.cs" />
     <Compile Include="Controllers\API\YearApiController.cs" />
@@ -184,6 +185,7 @@
     <Compile Include="Controllers\ContractorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\PaymentsController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SuperAdminController.cs" />
@@ -192,7 +194,9 @@
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\YearController.cs" />
     <Compile Include="DTO\AccountDTO.cs" />
+    <Compile Include="DTO\ContractDTO.cs" />
     <Compile Include="DTO\ContractorDTO.cs" />
+    <Compile Include="DTO\PaymentsDTO.cs" />
     <Compile Include="DTO\RoleDTO.cs" />
     <Compile Include="DTO\TribeDTO.cs" />
     <Compile Include="DTO\UploadDTO.cs" />
@@ -269,6 +273,7 @@
     <Compile Include="ViewModel\AccountVM.cs" />
     <Compile Include="ViewModel\ContractorVM.cs" />
     <Compile Include="ViewModel\ContractVM.cs" />
+    <Compile Include="ViewModel\PaymentsVM.cs" />
     <Compile Include="ViewModel\ProjectVM.cs" />
     <Compile Include="ViewModel\UserListVM.cs" />
     <Compile Include="ViewModel\YearVM.cs" />
@@ -684,6 +689,8 @@
     <Content Include="Views\Contractor\Create.cshtml" />
     <Content Include="Views\Contract\Index.cshtml" />
     <Content Include="Views\Contract\Create.cshtml" />
+    <Content Include="Views\Payments\Index.cshtml" />
+    <Content Include="Views\Payments\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

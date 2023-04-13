@@ -62,7 +62,7 @@ namespace CrudWebApi.Controllers
                 contracrt.survival_rate = contracrt.survival_rate;
                 contracrt.location_municipality = contracrt.location_municipality;
                 contracrt.location_barangay = contracrt.location_barangay;
-                contracrt.contractorName = contracrt.contractorName;
+                contracrt.contractorId = contracrt.contractorId;
                 contracrt.commodity_type = contracrt.commodity_type;
                 contracrt.commodity = contracrt.commodity;
                 contracrt.survival_rate = contracrt.survival_rate;

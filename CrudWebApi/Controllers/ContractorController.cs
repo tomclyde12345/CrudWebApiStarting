@@ -66,6 +66,7 @@ namespace CrudWebApi.Controllers
                 contractor.contractor_name = contractor.contractor_name;
                 contractor.address_municipality = contractor.address_municipality;
                 contractor.address_barangay = contractor.address_barangay;
+                contractor.contractor_type = contractor.contractor_type;
                 //project.area = project.area;
 
 
@@ -104,6 +105,7 @@ namespace CrudWebApi.Controllers
                         Where(x => x.contractorID.ToString().Contains(searchValue.ToLower()) ||
                           x.contractor_name.ToString().Contains(searchValue.ToLower()) ||
                             x.NgpMunicipality.MunicipalityName.ToString().Contains(searchValue.ToLower()) ||
+                              x.contractor_type.ToString().Contains(searchValue.ToLower()) ||
                             x.NgpBarangay.BarangayName.ToString().Contains(searchValue.ToLower()));
 
 
@@ -125,7 +127,8 @@ namespace CrudWebApi.Controllers
                     contractor_name = projectdata.contractor_name,
                     address_barangay= projectdata.NgpBarangay.BarangayName,
                     address_municipality = projectdata.NgpMunicipality.MunicipalityName,
-                 
+                    contractor_type = projectdata.contractor_type,
+
 
 
                 }).ToList();

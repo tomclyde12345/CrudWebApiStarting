@@ -18,14 +18,14 @@ namespace CrudWebApi.ViewModel
         public NgpMunicipality Municipality { get; set; }
         public int projectID { get; set; }
         public string site_code { get; set; }
-        public Nullable<int> location_municipality { get; set; }
-        public Nullable<int> location_barangay { get; set; }
+        public string location_municipality { get; set; }
+        public string location_barangay { get; set; }
         public string area { get; set; }
-        public Nullable<int> year_form { get; set; }
-        public Nullable<int> penro { get; set; }
-        public Nullable<int> cenro { get; set; }
-        public Nullable<int> region { get; set; }
-        public Nullable<int> dropdownID { get; set; }
+        public string year_form { get; set; }
+        public string penro { get; set; }
+        public string  cenro { get; set; }
+        public string region { get; set; }
+        public string dropdownID { get; set; }
 
 
         public int MunicipalityId { get; set; }
